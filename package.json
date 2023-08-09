@@ -6,7 +6,8 @@
   "scripts": {
     "server-dev": "",
     "client-dev": "npx webpack --watch",
-    "build": "npx webpack"
+    "build": "npx webpack",
+    "test": "jest --coverage"
   },
   "author": "Mosaic Webworks",
   "homepage": "https://github.com/MosaicWebworks/FEC#readme",
