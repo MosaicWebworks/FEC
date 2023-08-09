@@ -44,4 +44,7 @@ Once the PR is approved, it gets merged into the main branch.
 - git pull
 After your feature has been merged, or when any other feature is merged, ensure you sync your local main branch.
 
+### other issues may encounter:
+message when add .: fatal:  CRLF would be replaced by LF in node_modules/@babel/code-frame/node_modules/color-name/.npmignore
+solution: $ git config --global core.autocrlf false
 
