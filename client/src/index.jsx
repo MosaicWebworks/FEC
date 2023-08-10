@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
-import { RatingsReviews } from './components/RatingsReviews.jsx';
+import RatingsReviews from './components/rr/RatingsReviews.jsx';
+import QuestionList from './components/qa/QuestionList.jsx';
 
 
 const theme = {
@@ -41,7 +42,6 @@ const Heading2 = styled.h2`
   color: ${(props) => props.theme.colors.secondary};
 `;
 
-
 const App = () => {
 
   return (
@@ -55,11 +55,11 @@ const App = () => {
       </Section>
       <Section>
         <Heading2>Questions & Answers</Heading2>
-        {/* <QuestionsAnswers /> */}
+        <QuestionList />
       </Section>
       <Section>
         <Heading2>Ratings & Reviews</Heading2>
-        {/* <RatingsReviews /> */}
+        <RatingsReviews />
       </Section>
     </Container>
   </ThemeProvider>
