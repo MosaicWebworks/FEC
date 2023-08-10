@@ -59,7 +59,7 @@ const App = () => {
       </Section>
       <Section>
         <Heading2>Ratings & Reviews</Heading2>
-        {/* <RatingsReviews /> */}
+        <RatingsReviews />
       </Section>
     </Container>
   </ThemeProvider>

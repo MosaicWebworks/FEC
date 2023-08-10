@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ReviewList = () => (
   <div>
     <li>
-      review list
+      THIS IS THE LIST
     </li>
   </div>
 
