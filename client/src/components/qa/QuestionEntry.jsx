@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import exampleData from './exampleData.js'
+import Answer from './Answer.jsx'
 const Border = styled.div`
   display: grid;
   grid-template-areas: "question"
@@ -13,7 +15,7 @@ const Border = styled.div`
 const Question = styled.div`
 grid-area: question;`
 
-const Answer = styled.div`
+const AnswerDesign = styled.div`
 grid-area: answer;
 display: flex;
 flex-direction: column;`
@@ -27,20 +29,33 @@ justify-content: flex-end;`
 
 
 const QuestionEntry = () => {
+  const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
+  console.log(answersID)
+  let answersArray = [];
+  for (let i = 0; i < answersID.length;i++) {
+    answersArray.push(exampleData.results[0].answers[answersID[i]])
+  }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
 
   return (
     <>
     <Border>
-      <Question>Question goes here</Question>
-      <Answer>
-        <div>Answer1 goes here</div>
-        <div>Answer2 goes here</div>
-      </Answer>
-      <Button>
+      <Question>Q: {exampleData.results[0].question_body}</Question>
+      <AnswerDesign>
+        {
+          answersArray.map((answer) => (
+            <Answer answer={answer}/>
+          ))
+        }
+      </AnswerDesign>
+      <form onSubmit={handleSubmit}>
           <input type="submit" value="see more answers" />
-      </Button>
+      </form>
+
 
     </Border>
     </>
