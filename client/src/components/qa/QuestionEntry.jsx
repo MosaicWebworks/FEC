@@ -31,26 +31,24 @@ justify-content: flex-end;`
 const QuestionEntry = () => {
   const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
   const [answersToRender, setAnswersToRender] = useState([]);
-  let i;
-  let initialRender = 2;
-  // useEffect(() => {
-    for (i = 0; i < 2;i++) {
-    console.log('i is: ', i);
-    answersToRender.push(exampleData.results[0].answers[answersID[i]])
+  // let i;
+  const [numberToRender, setNumberToRender] = useState(2);
+  let answers = [];
+  for (let i = 0; i < answersID.length; i++) {
+    answers.push(exampleData.results[0].answers[answersID[i]]);
   }
 
-  // }, [])
+  console.log('answers to render:  ',answers)
+
+  useEffect(() => {
+    setAnswersToRender(answers.slice(0, numberToRender));
+  }, [numberToRender])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    initialRender += 2;
+    setNumberToRender(numberToRender + 2);
+    console.log('btn clicked. toRender is:',numberToRender);
   }
-
-  //inital rendering, show first two answers. use effect would be useful here
-
-  //on button click, disable page reset
-  //add two more answers
-    //can add to more to criteria
 
   return (
     <>
