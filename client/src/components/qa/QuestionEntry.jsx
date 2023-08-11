@@ -38,7 +38,6 @@ const QuestionEntry = () => {
     answers.push(exampleData.results[0].answers[answersID[i]]);
   }
 
-  console.log('answers to render:  ',answers)
 
   useEffect(() => {
     setAnswersToRender(answers.slice(0, numberToRender));
@@ -47,7 +46,6 @@ const QuestionEntry = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setNumberToRender(numberToRender + 2);
-    console.log('btn clicked. toRender is:',numberToRender);
   }
 
   return (
