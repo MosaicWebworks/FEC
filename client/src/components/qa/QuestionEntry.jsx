@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
-import styled from 'styled-components';
-import exampleData from './exampleData.js'
-import Answer from './Answer.jsx'
-=======
-import React, {useState} from 'react';
 import styled from 'styled-components';
 import exampleData from './exampleData.js';
 import Answer from './Answer.jsx';
->>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
 const Border = styled.div`
   display: grid;
   grid-template-areas: "question"
@@ -22,11 +15,7 @@ const Border = styled.div`
 const Question = styled.div`
 grid-area: question;`
 
-<<<<<<< HEAD
 const AnswerDesign = styled.div`
-=======
-const Answers = styled.div`
->>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
 grid-area: answer;
 display: flex;
 flex-direction: column;`
@@ -40,51 +29,41 @@ justify-content: flex-end;`
 
 
 const QuestionEntry = () => {
-<<<<<<< HEAD
   const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
-  console.log(answersID)
-  let answersArray = [];
-  for (let i = 0; i < answersID.length;i++) {
-    answersArray.push(exampleData.results[0].answers[answersID[i]])
+  const [answersToRender, setAnswersToRender] = useState([]);
+  let i;
+  let initialRender = 2;
+  // useEffect(() => {
+    for (i = 0; i < 2;i++) {
+    console.log('i is: ', i);
+    answersToRender.push(exampleData.results[0].answers[answersID[i]])
   }
+
+  // }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    initialRender += 2;
   }
 
-=======
-  const [answerID, setAnswerID] = useState(Object.keys(exampleData.results[0].answers))
-  console.log(answerID);
-  let answerArray = [];
-  for (let i = 0; i < answerID.length; i++) {
-    answerArray.push(exampleData.results[0].answers[answerID[i]])
-  }
-  console.log('answers:   ',answerArray);
->>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
+  //inital rendering, show first two answers. use effect would be useful here
+
+  //on button click, disable page reset
+  //add two more answers
+    //can add to more to criteria
 
   return (
     <>
     <Border>
       <Question>Q: {exampleData.results[0].question_body}</Question>
-<<<<<<< HEAD
       <AnswerDesign>
         {
-          answersArray.map((answer) => (
-            <Answer answer={answer}/>
+          answersToRender.map((answer,index) => (
+            <Answer answer={answer} key={answersID[index]}/>
           ))
         }
       </AnswerDesign>
       <form onSubmit={handleSubmit}>
-=======
-      <Answers>
-        {
-          answerArray.map((answer) => (
-            <Answer answer={answer} />
-          ))
-        }
-      </Answers>
-      <Button>
->>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
           <input type="submit" value="see more answers" />
       </form>
 
