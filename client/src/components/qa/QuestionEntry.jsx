@@ -18,7 +18,8 @@ grid-area: question;`
 const AnswerDesign = styled.div`
 grid-area: answer;
 display: flex;
-flex-direction: column;`
+flex-direction: column;
+overflow-y: auto`
 
 const Button = styled.form`
 grid-area: button;
@@ -46,12 +47,23 @@ const QuestionEntry = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setNumberToRender(numberToRender + 2);
+    console.log('number to render: ', numberToRender)
+  }
+
+  const displayButton = () => {
+    if (numberToRender < answersID.length) {
+      return (
+        <input type="submit" value="see more answers" />
+        )
+      } else {
+        <div></div>
+    }
   }
 
   return (
     <>
     <Border>
-      <Question>Q: {exampleData.results[0].question_body}</Question>
+      <Question><b>Q:</b> {exampleData.results[0].question_body}</Question>
       <AnswerDesign>
         {
           answersToRender.map((answer,index) => (
@@ -60,7 +72,7 @@ const QuestionEntry = () => {
         }
       </AnswerDesign>
       <form onSubmit={handleSubmit}>
-          <input type="submit" value="see more answers" />
+          {displayButton()}
       </form>
 
 
