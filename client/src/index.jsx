@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import RatingsReviews from './components/rr/RatingsReviews.jsx';
 import QuestionList from './components/qa/QuestionList.jsx';
-
+import { Overview } from './components/Overview/Overview.jsx'
 
 const theme = {
   colors: {
@@ -51,7 +51,7 @@ const App = () => {
     <Container>
       <Section>
         <Heading1>Overview</Heading1>
-        {/* Overview /> */}
+        <Overview/>
       </Section>
       <Section>
         <Heading2>Questions & Answers</Heading2>
