@@ -7,9 +7,10 @@ const Container = styled.div`
   height: 100vh;
   border: 1px solid red;
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: 3fr 1fr;
-  grid-template-areas: "one two" "three three";
+  grid-template-areas: "one     two"
+                       "three three";
   column-gap: 15px;
   row-gap: 15px;
 `
