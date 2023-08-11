@@ -30,16 +30,27 @@ justify-content: flex-end;`
 
 const QuestionEntry = () => {
   const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
-  console.log(answersID)
-  let answersArray = [];
-  for (let i = 0; i < answersID.length;i++) {
-    answersArray.push(exampleData.results[0].answers[answersID[i]])
+  const [answersToRender, setAnswersToRender] = useState([]);
+  let i;
+  let initialRender = 2;
+  // useEffect(() => {
+    for (i = 0; i < 2;i++) {
+    console.log('i is: ', i);
+    answersToRender.push(exampleData.results[0].answers[answersID[i]])
   }
+
+  // }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    initialRender += 2;
   }
 
+  //inital rendering, show first two answers. use effect would be useful here
+
+  //on button click, disable page reset
+  //add two more answers
+    //can add to more to criteria
 
   return (
     <>
@@ -47,8 +58,8 @@ const QuestionEntry = () => {
       <Question>Q: {exampleData.results[0].question_body}</Question>
       <AnswerDesign>
         {
-          answersArray.map((answer) => (
-            <Answer answer={answer}/>
+          answersToRender.map((answer,index) => (
+            <Answer answer={answer} key={answersID[index]}/>
           ))
         }
       </AnswerDesign>
