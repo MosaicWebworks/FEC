@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useReviews} from './ReviewsContext.jsx';
 import { ReviewsProvider } from './ReviewsContext.jsx';
 import ReviewTile from './ReviewTile.jsx';
+import exampleDataList from './exampleDataList';
 
 const Container = styled.div`
 display: flex;
@@ -24,13 +25,13 @@ const ReviewList = () => {
 
   return (
     <Container>
-      {reviews.slice(0, loadedReviewsCount).map((review) => (
-        <ReviewTile key={review.id} review={review} />
+      {exampleDataList.results.map((review) => (
+        <ReviewTile key={review.review_id} review={review} />
       ))}
       {loadedReviewsCount < reviews.length && (
-        <Button>
-        <input type="submit" value="see more reviews" />
-    </Button>
+        <button onClick={handleLoadMoreReviews}>
+        See More Reviews
+      </button>
       )}
     </Container>
   );

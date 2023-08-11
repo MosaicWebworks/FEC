@@ -60,7 +60,7 @@ const ReviewTile = ({ review }) => {
       <Summary>{summary}</Summary>
       <Recommend>{recommend ? 'Recommended' : 'Not Recommended'}</Recommend>
       <Body>{body}</Body>
-      <Date>Reviewed on {new Date(date).toLocaleDateString()}</Date>
+      <Date>Reviewed on {date}</Date>
       <Reviewer>{reviewer_name}</Reviewer>
       <Helpfulness>{helpfulness} people found this helpful</Helpfulness>
       {photos.map((photo) => (

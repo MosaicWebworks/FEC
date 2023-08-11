@@ -29,7 +29,7 @@ const RatingsReviews = () => {
     <Container>
       <LeftSection>
         <RatingBreakdown />
-        <ReviewList />
+        <ProductBreakdown />
       </LeftSection>
       <RightSection>
         <ReviewList />
