@@ -7,7 +7,7 @@ const Answer = ({answer}) => (
 
   <div>
     <div>
-    A: {answer.body}
+    <b>A:</b> {answer.body}
     </div>
     <div className="username"><b>{answer.answerer_name}</b></div>
     <small className="data-answered">{answer.date}</small>
