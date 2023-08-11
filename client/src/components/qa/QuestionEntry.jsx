@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import exampleData from './exampleData.js'
 import Answer from './Answer.jsx'
+=======
+import React, {useState} from 'react';
+import styled from 'styled-components';
+import exampleData from './exampleData.js';
+import Answer from './Answer.jsx';
+>>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
 const Border = styled.div`
   display: grid;
   grid-template-areas: "question"
@@ -15,7 +22,11 @@ const Border = styled.div`
 const Question = styled.div`
 grid-area: question;`
 
+<<<<<<< HEAD
 const AnswerDesign = styled.div`
+=======
+const Answers = styled.div`
+>>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
 grid-area: answer;
 display: flex;
 flex-direction: column;`
@@ -29,6 +40,7 @@ justify-content: flex-end;`
 
 
 const QuestionEntry = () => {
+<<<<<<< HEAD
   const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
   console.log(answersID)
   let answersArray = [];
@@ -40,11 +52,21 @@ const QuestionEntry = () => {
     e.preventDefault();
   }
 
+=======
+  const [answerID, setAnswerID] = useState(Object.keys(exampleData.results[0].answers))
+  console.log(answerID);
+  let answerArray = [];
+  for (let i = 0; i < answerID.length; i++) {
+    answerArray.push(exampleData.results[0].answers[answerID[i]])
+  }
+  console.log('answers:   ',answerArray);
+>>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
 
   return (
     <>
     <Border>
       <Question>Q: {exampleData.results[0].question_body}</Question>
+<<<<<<< HEAD
       <AnswerDesign>
         {
           answersArray.map((answer) => (
@@ -53,6 +75,16 @@ const QuestionEntry = () => {
         }
       </AnswerDesign>
       <form onSubmit={handleSubmit}>
+=======
+      <Answers>
+        {
+          answerArray.map((answer) => (
+            <Answer answer={answer} />
+          ))
+        }
+      </Answers>
+      <Button>
+>>>>>>> 1cbbee599b4624b39e54c476828eb34a599b054c
           <input type="submit" value="see more answers" />
       </form>
 
