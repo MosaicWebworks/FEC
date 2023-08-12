@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { sampleProduct, sampleStyles } from './sampleData.js';
+import { ImageGallery } from './ImageGallery.jsx';
 
 const Text = styled.div`color: red;`
 const Container = styled.div`
@@ -7,8 +9,8 @@ const Container = styled.div`
   height: 100vh;
   border: 1px solid red;
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 3fr 1fr;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
   grid-template-areas: "one     two"
                        "three three";
   column-gap: 15px;
@@ -31,7 +33,7 @@ const Overview = () => {
 
   return(
     <Container>
-      <One>Overview Image</One>
+      <One><ImageGallery/></One>
       <Two>Product Info</Two>
       <Three>Product Information details</Three>
     </Container>

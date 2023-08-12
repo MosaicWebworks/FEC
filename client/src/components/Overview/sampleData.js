@@ -379,3 +379,5 @@ const sampleStyles = {
       }
   ]
 }
+
+export { sampleProduct, sampleStyles }
