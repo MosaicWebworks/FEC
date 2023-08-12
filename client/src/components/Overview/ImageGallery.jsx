@@ -8,24 +8,24 @@ import { sampleProduct, sampleStyles } from './sampleData.js';
 //   object-fit: contain;
 //   justify-content: center;
 // `
-const Gallery = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-  border: 1px dotted black;
-  object-fit: contain;
-`
+// const Gallery = styled.div`
+//   display: flex;
+//   height: 100%;
+//   width: 100%;
+//   border: 1px dotted black;
+//   justify-content: center;
+// `
 
 const StyledImg = styled.img`
-  max-height: 100%;
   max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 `
 
 const ImageGallery = () => {
   return(
-    <Gallery><StyledImg src={sampleStyles.results[0].photos[0].url}/></Gallery>
-
-
+    <StyledImg src={sampleStyles.results[0].photos[1].url} />
 )
 }
 

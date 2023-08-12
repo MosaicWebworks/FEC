@@ -11,14 +11,20 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
-  grid-template-areas: "one     two"
+  grid-template-areas: "gallery two"
                        "three three";
   column-gap: 15px;
   row-gap: 15px;
 `
-const One = styled.div`
-  grid-area: one;
+const Gallery = styled.div`
+  grid-area: gallery;
+  display: flex;
   border: 1px solid red;
+  max-height: 100%;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 `
 const Two = styled.div`
   grid-area: two;
@@ -33,7 +39,7 @@ const Overview = () => {
 
   return(
     <Container>
-      <One><ImageGallery/></One>
+      <Gallery><ImageGallery/></Gallery>
       <Two>Product Info</Two>
       <Three>Product Information details</Three>
     </Container>
