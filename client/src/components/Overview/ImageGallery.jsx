@@ -21,11 +21,12 @@ const StyledImg = styled.img`
   max-height: 100%;
   width: auto;
   height: auto;
+  position: absolute;
 `
 
-const ImageGallery = () => {
+const ImageGallery = ({ selectedThumbnail }) => {
   return(
-    <StyledImg src={sampleStyles.results[0].photos[1].url} />
+    <StyledImg src={sampleStyles.results[0].photos[selectedThumbnail].url} />
 )
 }
 
