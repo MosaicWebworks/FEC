@@ -18,7 +18,6 @@ const Answer = ({answer}) => (
     <small className="data-answered">{answer.date}</small>
     <StyledButton>
       <button className="btn-helpfulness">Helpful?({answer.helpfulness})</button>
-      {/* {answer.helpfulness} */}
       <button className="btn-report">Report</button>
     </StyledButton>
   </div>

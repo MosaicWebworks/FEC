@@ -12,7 +12,8 @@ const Border = styled.div`
   height: 200px
 `
 const Question = styled.div`
-grid-area: question;`
+grid-area: question;
+margin-bottom: 20px;`
 
 const AnswerDesign = styled.div`
 grid-area: answer;
@@ -24,6 +25,8 @@ const Button = styled.form`
 grid-area: button;
 display: flex;
 justify-content: flex-end;`
+
+
 
 
 
@@ -47,6 +50,7 @@ const QuestionEntry = () => {
     setAnswersToRender(answers.slice(0, numberToRender));
   }, [numberToRender])
 
+  //handle submit of clicking on see more answers
   const handleSubmit = (e) => {
     e.preventDefault();
     setNumberToRender(numberToRender + 2);
