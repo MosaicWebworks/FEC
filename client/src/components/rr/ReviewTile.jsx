@@ -23,7 +23,7 @@ const Star = styled.span`
 const StarRating = ({ rating, totalStars }) => {
   return (
     <StarContainer>
-      {[...Array(totalStars)].map((_, index) => {
+      {[...Array(totalStars)].map((star, index) => {
         const isActive = index < Math.floor(rating);
 
         return (
