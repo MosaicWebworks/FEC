@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import exampleDataList from './exampleDataList.js';
+//import StarRating from './StarRating.jsx';
 
 const Tile = styled.div`
   /* Styles for the review tile container */
@@ -9,9 +10,35 @@ const Tile = styled.div`
   margin-bottom: 20px;
 `;
 
-const Rating = styled.div`
-  /* Styles for the rating display */
+
+const StarContainer = styled.div`
+  display: inline-block;
+  font-size: 24px;
 `;
+
+const Star = styled.span`
+  color: ${({ isActive }) => (isActive ? 'gold' : 'gray')};
+`;
+
+const StarRating = ({ rating, totalStars }) => {
+  return (
+    <StarContainer>
+      {[...Array(totalStars)].map((_, index) => {
+        const isActive = index < Math.floor(rating);
+
+        return (
+          <Star
+            key={index}
+            isActive={isActive}
+          >
+            &#9733;
+          </Star>
+        );
+      })}
+    </StarContainer>
+  );
+};
+
 
 const Summary = styled.div`
   /* Styles for the summary text */
@@ -56,7 +83,7 @@ const ReviewTile = ({ review }) => {
 
   return (
     <Tile>
-      <Rating>{rating} Stars</Rating>
+      <StarRating rating={rating} totalStars={5} />
       <Summary>{summary}</Summary>
       <Recommend>{recommend ? 'Recommended' : 'Not Recommended'}</Recommend>
       <Body>{body}</Body>
