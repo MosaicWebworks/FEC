@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import exampleData from './exampleData.js';
-import Answer from './Answer.jsx';
+import exampleData from './exampleData.js'
+import Answer from './Answer.jsx'
+
 const Border = styled.div`
   display: grid;
   grid-template-areas: "question"
@@ -9,16 +11,18 @@ const Border = styled.div`
                        "answer"
                        "button";
   border: solid black;
-  width: 600px;
   height: 200px
 `
 const Question = styled.div`
-grid-area: question;`
+grid-area: question;
+margin-bottom: 20px;`
 
-const Answers = styled.div`
+
+const AnswerDesign = styled.div`
 grid-area: answer;
 display: flex;
-flex-direction: column;`
+flex-direction: column;
+overflow-y: auto;`
 
 const Button = styled.form`
 grid-area: button;
@@ -28,30 +32,60 @@ justify-content: flex-end;`
 
 
 
+
+
 const QuestionEntry = () => {
-  const [answerID, setAnswerID] = useState(Object.keys(exampleData.results[0].answers))
-  console.log(answerID);
-  let answerArray = [];
-  for (let i = 0; i < answerID.length; i++) {
-    answerArray.push(exampleData.results[0].answers[answerID[i]])
+
+  const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
+  const [answersToRender, setAnswersToRender] = useState([]);
+  const [numberToRender, setNumberToRender] = useState(2);
+
+  //creates an array of object
+  let answers = Object.entries(exampleData.results[0].answers);
+
+  //sorting function to sort by helpfulness with most helpful being at the top/front
+  const compareHelpfulness = (a, b) => {
+    return b[1].helpfulness - a[1].helpfulness;
   }
-  console.log('answers:   ',answerArray);
+  answers.sort(compareHelpfulness);
+
+  //intiailly renders 2 answers for the question
+  useEffect(() => {
+    setAnswersToRender(answers.slice(0, numberToRender));
+  }, [numberToRender])
+
+  //handle submit of clicking on see more answers
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setNumberToRender(numberToRender + 2);
+    console.log('number to render: ', numberToRender)
+  }
+
+  const displayButton = () => {
+    if (numberToRender < answersID.length) {
+      return (
+        <input type="submit" value="see more answers" />
+        )
+      } else {
+        <div></div>
+    }
+  }
+
 
   return (
     <>
     <Border>
-      <Question>Q: {exampleData.results[0].question_body}</Question>
-      <Answers>
+      <Question><b>Q:</b> {exampleData.results[0].question_body}</Question>
+      <AnswerDesign>
         {
-          answerArray.map((answer) => (
-            <Answer answer={answer} />
+          answersToRender.map((answer,index) => (
+            <Answer answer={answer[1]} key={answersID[index]}/>
           ))
         }
-      </Answers>
-      <Button>
-          <input type="submit" value="see more answers" />
-      </Button>
-
+      </AnswerDesign>
+      <form onSubmit={handleSubmit}>
+          {displayButton()}
+      </form>
     </Border>
     </>
   )
