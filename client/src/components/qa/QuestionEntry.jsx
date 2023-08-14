@@ -9,7 +9,6 @@ const Border = styled.div`
                        "answer"
                        "button";
   border: solid black;
-  width: 600px;
   height: 200px
 `
 const Question = styled.div`
@@ -19,7 +18,7 @@ const AnswerDesign = styled.div`
 grid-area: answer;
 display: flex;
 flex-direction: column;
-overflow-y: auto`
+overflow-y: auto;`
 
 const Button = styled.form`
 grid-area: button;
@@ -32,14 +31,18 @@ justify-content: flex-end;`
 const QuestionEntry = () => {
   const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
   const [answersToRender, setAnswersToRender] = useState([]);
-  // let i;
   const [numberToRender, setNumberToRender] = useState(2);
-  let answers = [];
-  for (let i = 0; i < answersID.length; i++) {
-    answers.push(exampleData.results[0].answers[answersID[i]]);
+
+  //creates an array of object
+  let answers = Object.entries(exampleData.results[0].answers);
+
+  //sorting function to sort by helpfulness with most helpful being at the top/front
+  const compareHelpfulness = (a,b) => {
+    return b[1].helpfulness - a[1].helpfulness;
   }
+  answers.sort(compareHelpfulness);
 
-
+  //intiailly renders 2 answers for the question
   useEffect(() => {
     setAnswersToRender(answers.slice(0, numberToRender));
   }, [numberToRender])
@@ -67,7 +70,7 @@ const QuestionEntry = () => {
       <AnswerDesign>
         {
           answersToRender.map((answer,index) => (
-            <Answer answer={answer} key={answersID[index]}/>
+            <Answer answer={answer[1]} key={answersID[index]}/>
           ))
         }
       </AnswerDesign>
