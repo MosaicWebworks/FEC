@@ -41,7 +41,7 @@ const Overview = () => {
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
   return(
     <Container>
-      <Gallery><ImageGallery selectedThumbnail={selectedThumbnail} /><GalleryOverlay setSelectedThumbnail={setSelectedThumbnail} /></Gallery>
+      <Gallery><ImageGallery selectedThumbnail={selectedThumbnail} /><GalleryOverlay setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} /></Gallery>
       <Two>Product Info</Two>
       <Three>Product Information details</Three>
     </Container>

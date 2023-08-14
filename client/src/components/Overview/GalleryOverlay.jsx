@@ -12,13 +12,11 @@ const StyledOverlay = styled.div`
   align-items: center;
 `
 const StyledThumbnails = styled.div`
-  width: 15%;
-  height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(227, 227, 227, 0.47);
+  background-color: rgba(227, 227, 227, 0.5);
   border-radius: 15px;
   margin: 10px;
 `
@@ -29,26 +27,29 @@ const Thumbnail = styled.img`
   margin: 10px;
   object-fit: cover;
   border-radius: 5px;
-  border: 1px solid white;
 `
 
-const RenderThumbnails = ({ setSelectedThumbnail }) => {
+const RenderThumbnails = ({ setSelectedThumbnail, selectedThumbnail }) => {
   var index = 0;
   return(
   <StyledThumbnails>
     {
     photos.map((photo) => {
       var thumbnailIndex = index;
+      var thumbnailBorder = "white";
+      if (thumbnailIndex === selectedThumbnail) {
+        thumbnailBorder = "blue";
+      }
       index++
-      return (<Thumbnail onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url}/>)
+      return (<Thumbnail  onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: `1px solid ${thumbnailBorder}`}} />)
     }
       )}
   </StyledThumbnails>);
 }
 
-const GalleryOverlay = ( {setSelectedThumbnail} ) => {
+const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail} ) => {
 
-  return(<StyledOverlay><RenderThumbnails setSelectedThumbnail={setSelectedThumbnail} /></StyledOverlay>);
+  return(<StyledOverlay><RenderThumbnails setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} /></StyledOverlay>);
 }
 
 export { GalleryOverlay };
