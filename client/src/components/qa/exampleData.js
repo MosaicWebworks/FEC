@@ -254,5 +254,5 @@ const exampleData = {
 }
 
 // console.log('example data:',exampleData.results[0].answers)
-// console.log('ids of answers:', Object.keys(exampleData.results[0].answers))
+// console.log('ids of answers:', Object.entries(exampleData.results))
 export default exampleData;
