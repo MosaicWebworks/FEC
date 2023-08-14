@@ -28,8 +28,31 @@ const Thumbnail = styled.img`
   object-fit: cover;
   border-radius: 5px;
 `
+const ArrowStyle = styled.div`
+  border-left: 0.5rem solid steelBlue;
+  border-bottom: 0.5rem solid steelBlue;
+  width: 2rem;
+  height: 2rem;
+  margin: 10px;
+`
+const ArrowContainer = styled.div`
+  display: flex;
+  height: 30px;
+  width: 100%;
+  justify-content: space-between;
+`
 
-const RenderThumbnails = ({ setSelectedThumbnail, selectedThumbnail }) => {
+const LeftArrow = ({setSelectedThumbnail, selectedThumbnail}) => {
+  if (selectedThumbnail === 0) {return <div></div>};
+  return <ArrowStyle onClick={(e) => {setSelectedThumbnail(selectedThumbnail - 1)}} style={{transform: "rotate(45deg)"}}/>
+}
+
+const RightArrow = ({setSelectedThumbnail, selectedThumbnail}) => {
+  if (selectedThumbnail === photos.length - 1) {return <div></div>};
+  return <ArrowStyle onClick={(e) => {setSelectedThumbnail(selectedThumbnail + 1)}} style={{transform: "rotate(225deg)"}}/>
+}
+
+const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail}) => {
   var index = 0;
   return(
   <StyledThumbnails>
@@ -41,7 +64,7 @@ const RenderThumbnails = ({ setSelectedThumbnail, selectedThumbnail }) => {
         thumbnailBorder = "2px solid steelBlue";
       }
       index++
-      return (<Thumbnail  onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: thumbnailBorder}} />)
+      return (<Thumbnail onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: thumbnailBorder}} />)
     }
       )}
   </StyledThumbnails>);
@@ -49,7 +72,14 @@ const RenderThumbnails = ({ setSelectedThumbnail, selectedThumbnail }) => {
 
 const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail} ) => {
 
-  return(<StyledOverlay><RenderThumbnails setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} /></StyledOverlay>);
+  return(
+    <StyledOverlay>
+      <RenderThumbnails setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} />
+      <ArrowContainer>
+        <LeftArrow setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} />
+        <RightArrow setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail}/>
+      </ArrowContainer>
+    </StyledOverlay>);
 }
 
 export { GalleryOverlay };
