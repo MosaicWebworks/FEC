@@ -1,7 +1,9 @@
+
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import exampleData from './exampleData.js';
-import Answer from './Answer.jsx';
+import exampleData from './exampleData.js'
+import Answer from './Answer.jsx'
+
 const Border = styled.div`
   display: grid;
   grid-template-areas: "question"
@@ -9,16 +11,18 @@ const Border = styled.div`
                        "answer"
                        "button";
   border: solid black;
-  width: 600px;
   height: 200px
 `
 const Question = styled.div`
-grid-area: question;`
+grid-area: question;
+margin-bottom: 20px;`
+
 
 const AnswerDesign = styled.div`
 grid-area: answer;
 display: flex;
-flex-direction: column;`
+flex-direction: column;
+overflow-y: auto;`
 
 const Button = styled.form`
 grid-area: button;
@@ -28,46 +32,70 @@ justify-content: flex-end;`
 
 
 
+
+
 const QuestionEntry = () => {
+
   const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
   const [answersToRender, setAnswersToRender] = useState([]);
-  let i;
-  let initialRender = 2;
-  // useEffect(() => {
-    for (i = 0; i < 2;i++) {
-    console.log('i is: ', i);
-    answersToRender.push(exampleData.results[0].answers[answersID[i]])
+  const [numberToRender, setNumberToRender] = useState(2);
+
+  //creates an array of object
+  let answers = Object.entries(exampleData.results[0].answers);
+
+  //sorting function to sort by helpfulness with most helpful being at the top/front
+  const compareHelpfulness = (a, b) => {
+    return b[1].helpfulness - a[1].helpfulness;
   }
+  answers.sort(compareHelpfulness);
 
-  // }, [])
+  //intiailly renders 2 answers for the question
+  useEffect(() => {
+    setAnswersToRender(answers.slice(0, numberToRender));
+  }, [numberToRender])
 
+  //handle submit of clicking on see more answers
   const handleSubmit = (e) => {
     e.preventDefault();
-    initialRender += 2;
+    setNumberToRender(numberToRender + 2);
+    console.log('number to render: ', numberToRender)
   }
 
-  //inital rendering, show first two answers. use effect would be useful here
+  const displayButton = () => {
+    if (numberToRender < answersID.length) {
+      return (
+        <input type="submit" value="see more answers" />
+        )
+      } else {
+        <div></div>
+    }
+  }
 
-  //on button click, disable page reset
-  //add two more answers
-    //can add to more to criteria
 
   return (
     <>
     <Border>
-      <Question>Q: {exampleData.results[0].question_body}</Question>
+      <Question><b>Q:</b> {exampleData.results[0].question_body}</Question>
       <AnswerDesign>
         {
-          answersToRender.map((answer,index) => (
-            <Answer answer={answer} key={answersID[index]}/>
+          answersArray.map((answer) => (
+            <Answer answer={answer}/>
           ))
         }
       </AnswerDesign>
       <form onSubmit={handleSubmit}>
+=========
+      <Answers>
+        {
+          answerArray.map((answer) => (
+            <Answer answer={answer} />
+          ))
+        }
+      </Answers>
+      <Button>
+>>>>>>>>> Temporary merge branch 2
           <input type="submit" value="see more answers" />
       </form>
-
-
     </Border>
     </>
   )
