@@ -36,12 +36,12 @@ const RenderThumbnails = ({ setSelectedThumbnail, selectedThumbnail }) => {
     {
     photos.map((photo) => {
       var thumbnailIndex = index;
-      var thumbnailBorder = "white";
+      var thumbnailBorder = "1px solid white";
       if (thumbnailIndex === selectedThumbnail) {
-        thumbnailBorder = "blue";
+        thumbnailBorder = "2px solid steelBlue";
       }
       index++
-      return (<Thumbnail  onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: `1px solid ${thumbnailBorder}`}} />)
+      return (<Thumbnail  onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: thumbnailBorder}} />)
     }
       )}
   </StyledThumbnails>);
