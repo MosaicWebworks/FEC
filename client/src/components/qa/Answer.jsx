@@ -8,6 +8,7 @@ justify-content: flex-end;
 `
 
 
+
 const Answer = ({answer}) => (
 
   <div>

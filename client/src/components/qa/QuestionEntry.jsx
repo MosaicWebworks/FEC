@@ -1,7 +1,9 @@
+
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import exampleData from './exampleData.js'
 import Answer from './Answer.jsx'
+
 const Border = styled.div`
   display: grid;
   grid-template-areas: "question"
@@ -14,6 +16,7 @@ const Border = styled.div`
 const Question = styled.div`
 grid-area: question;
 margin-bottom: 20px;`
+
 
 const AnswerDesign = styled.div`
 grid-area: answer;
@@ -32,6 +35,7 @@ justify-content: flex-end;`
 
 
 const QuestionEntry = () => {
+
   const [answersID, setAnswersID] = useState(Object.keys(exampleData.results[0].answers))
   const [answersToRender, setAnswersToRender] = useState([]);
   const [numberToRender, setNumberToRender] = useState(2);
@@ -40,7 +44,7 @@ const QuestionEntry = () => {
   let answers = Object.entries(exampleData.results[0].answers);
 
   //sorting function to sort by helpfulness with most helpful being at the top/front
-  const compareHelpfulness = (a,b) => {
+  const compareHelpfulness = (a, b) => {
     return b[1].helpfulness - a[1].helpfulness;
   }
   answers.sort(compareHelpfulness);
@@ -67,6 +71,7 @@ const QuestionEntry = () => {
     }
   }
 
+
   return (
     <>
     <Border>
@@ -81,8 +86,6 @@ const QuestionEntry = () => {
       <form onSubmit={handleSubmit}>
           {displayButton()}
       </form>
-
-
     </Border>
     </>
   )
