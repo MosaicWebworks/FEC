@@ -1,7 +1,9 @@
+
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import exampleData from './exampleData.js'
 import Answer from './Answer.jsx'
+
 const Border = styled.div`
   display: grid;
   grid-template-areas: "question"
@@ -14,6 +16,7 @@ const Border = styled.div`
 const Question = styled.div`
 grid-area: question;
 margin-bottom: 20px;`
+
 
 const AnswerDesign = styled.div`
 grid-area: answer;
@@ -72,6 +75,7 @@ const QuestionEntry = ({qaObject}) => {
     }
   }
 
+
   return (
     <>
     <Border>
@@ -86,8 +90,6 @@ const QuestionEntry = ({qaObject}) => {
       <form onSubmit={handleSubmit}>
           {displayButton()}
       </form>
-
-
     </Border>
     </>
   )
