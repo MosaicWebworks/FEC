@@ -9,7 +9,7 @@ const Border = styled.div`
                        "answer"
                        "button";
   border: solid black;
-  height: 200px
+  height: 210px
 `
 const Question = styled.div`
 grid-area: question;
