@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { sampleProduct, sampleStyles } from './sampleData.js';
+import {sampleProduct, sampleStyles} from './sampleData.js';
 
 const photos = sampleStyles.results[0].photos;
 
 const StyledOverlay = styled.div`
   width: 100%;
   height: 100%;
-  z-index: 1;
   display: flex;
   align-items: center;
 `
@@ -19,6 +18,7 @@ const StyledThumbnails = styled.div`
   background-color: rgba(227, 227, 227, 0.5);
   border-radius: 15px;
   margin: 10px;
+  z-index: 1;
 `
 
 const Thumbnail = styled.img`
@@ -33,7 +33,7 @@ const ArrowStyle = styled.div`
   border-bottom: 0.5rem solid steelBlue;
   width: 2rem;
   height: 2rem;
-  margin: 10px;
+  margin: 15px;
 `
 const ArrowContainer = styled.div`
   display: flex;
@@ -82,4 +82,4 @@ const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail} ) => {
     </StyledOverlay>);
 }
 
-export { GalleryOverlay };
+export {GalleryOverlay};
