@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1691620773598" clover="3.2.0">
-  <project timestamp="1691620773598" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1692143546707" clover="3.2.0">
+  <project timestamp="1692143546707" name="All files">
+    <metrics statements="48" coveredstatements="48" conditionals="4" coveredconditionals="4" methods="12" coveredmethods="12" elements="64" coveredelements="64" complexity="0" loc="48" ncloc="48" packages="1" files="4" classes="4"/>
+    <file name="Answer.jsx" path="/home/frankasoto/hackreactor/front_end_capstone/FEC/client/src/components/qa/Answer.jsx">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="15" count="103" type="stmt"/>
+      <line num="16" count="103" type="stmt"/>
+      <line num="17" count="103" type="stmt"/>
+      <line num="19" count="103" type="stmt"/>
+      <line num="21" count="103" type="stmt"/>
+      <line num="24" count="103" type="stmt"/>
+    </file>
+    <file name="QuestionEntry.jsx" path="/home/frankasoto/hackreactor/front_end_capstone/FEC/client/src/components/qa/QuestionEntry.jsx">
+      <metrics statements="24" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="6" coveredmethods="6"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="42" count="1" type="stmt"/>
+      <line num="44" count="78" type="stmt"/>
+      <line num="46" count="78" type="stmt"/>
+      <line num="48" count="78" type="stmt"/>
+      <line num="52" count="78" type="stmt"/>
+      <line num="56" count="78" type="stmt"/>
+      <line num="57" count="480" type="stmt"/>
+      <line num="62" count="78" type="stmt"/>
+      <line num="66" count="78" type="stmt"/>
+      <line num="67" count="25" type="stmt"/>
+      <line num="72" count="78" type="stmt"/>
+      <line num="73" count="1" type="stmt"/>
+      <line num="74" count="1" type="stmt"/>
+      <line num="75" count="1" type="stmt"/>
+      <line num="79" count="78" type="stmt"/>
+      <line num="80" count="78" type="cond" truecount="2" falsecount="0"/>
+      <line num="81" count="68" type="stmt"/>
+      <line num="85" count="10" type="stmt"/>
+      <line num="90" count="78" type="stmt"/>
+      <line num="97" count="103" type="stmt"/>
+    </file>
+    <file name="QuestionList.jsx" path="/home/frankasoto/hackreactor/front_end_capstone/FEC/client/src/components/qa/QuestionList.jsx">
+      <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="5"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="9" count="26" type="stmt"/>
+      <line num="11" count="26" type="stmt"/>
+      <line num="13" count="26" type="stmt"/>
+      <line num="16" count="26" type="stmt"/>
+      <line num="17" count="13" type="stmt"/>
+      <line num="21" count="26" type="stmt"/>
+      <line num="23" count="26" type="cond" truecount="2" falsecount="0"/>
+      <line num="24" count="22" type="stmt"/>
+      <line num="28" count="4" type="stmt"/>
+      <line num="32" count="26" type="stmt"/>
+      <line num="33" count="5" type="stmt"/>
+      <line num="34" count="5" type="stmt"/>
+      <line num="36" count="26" type="stmt"/>
+      <line num="39" count="52" type="stmt"/>
+    </file>
+    <file name="exampleData.js" path="/home/frankasoto/hackreactor/front_end_capstone/FEC/client/src/components/qa/exampleData.js">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="2" count="1" type="stmt"/>
+    </file>
   </project>
 </coverage>

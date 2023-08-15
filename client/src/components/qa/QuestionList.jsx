@@ -4,7 +4,7 @@ import exampleData from './exampleData.js'
 
 
 
-const QuestionList = () => {
+const QuestionList = ({productID}) => {
   //contains an array of question objects
   const [questionsObject, setQuestionsObject] = useState(Object.entries(exampleData.results));
   //determines how many questions to render
