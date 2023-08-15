@@ -12,8 +12,12 @@ export const ReviewsProvider = ({ children }) => {
     setLoadedReviewsCount(prevCount => prevCount + 2);
   };
 
+  const updateReviews = (updatedReviews) => {
+    setReviews(updatedReviews);
+  };
+
   return (
-    <ReviewsContext.Provider value={{ reviews, loadedReviewsCount, handleLoadMoreReviews }}>
+    <ReviewsContext.Provider value={{ reviews, loadedReviewsCount, handleLoadMoreReviews, updateReviews }}>
       {children}
     </ReviewsContext.Provider>
   );

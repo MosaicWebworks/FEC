@@ -4,7 +4,6 @@ import exampleDataList from './exampleDataList.js';
 //import StarRating from './StarRating.jsx';
 
 const Tile = styled.div`
-  /* Styles for the review tile container */
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 20px;
@@ -41,31 +40,34 @@ const StarRating = ({ rating, totalStars }) => {
 
 
 const Summary = styled.div`
-  /* Styles for the summary text */
+  font-weight: bold;
 `;
 
 const Recommend = styled.div`
-  /* Styles for the recommend status */
+
 `;
 
 const Body = styled.div`
-  /* Styles for the review body text */
+  margin-top: 10px;
 `;
 
 const Date = styled.div`
-  /* Styles for the review date */
+
 `;
 
 const Reviewer = styled.div`
-  /* Styles for the reviewer's name */
+
 `;
 
 const Helpfulness = styled.div`
-  /* Styles for the helpfulness count */
+
 `;
 
 const Photo = styled.img`
-  /* Styles for the review photo */
+  max-width: 100px;
+  max-height: 100px;
+  margin-top: 10px;
+  cursor: pointer;
 `;
 
 
@@ -85,7 +87,7 @@ const ReviewTile = ({ review }) => {
     <Tile>
       <StarRating rating={rating} totalStars={5} />
       <Summary>{summary}</Summary>
-      <Recommend>{recommend ? 'Recommended' : 'Not Recommended'}</Recommend>
+      <Recommend>{recommend ? 'I recommend this product' : ''}</Recommend>
       <Body>{body}</Body>
       <Date>Reviewed on {date}</Date>
       <Reviewer>{reviewer_name}</Reviewer>
