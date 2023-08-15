@@ -11,7 +11,6 @@ const Container = styled.div`
   align-items: flex-start;
   border: solid black;
   width: 100%;
-  height: 100vh;
 `;
 
 const LeftSection = styled.div`
