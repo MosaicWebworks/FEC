@@ -14,23 +14,7 @@ const StyledBigImage = styled.div`
 `
 
 const BigImage = ({selectedThumbnail, setEnlargeImage, coords, setCoords}) => {
-
   const [relativeCoords, setRelativeCoords] = React.useState({x: 0, y: 0});
-  React.useEffect(() => {
-    const handleWindowMouseMove = (e) => {
-      setCoords({
-        x: (event.clientX - e.target.getBoundingClientRect().x) / e.target.getBoundingClientRect().width,
-        y: (event.clientY - e.target.getBoundingClientRect().y) / e.target.getBoundingClientRect().height,
-      });
-    };
-    window.addEventListener('mousemove', handleWindowMouseMove);
-    return () => {
-      window.removeEventListener(
-        'mousemove',
-        handleWindowMouseMove,
-      );
-    };
-  }, []);
   return(<StyledBigImage
     onClick={(e) => {setEnlargeImage(false)}}
     style={
