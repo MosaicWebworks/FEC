@@ -25,7 +25,7 @@ const StarRating = ({ totalStars }) => {
   return (
     <div>
       <StarContainer>
-        {[...Array(totalStars)].map((_, index) => {
+        {[...Array(totalStars)].map((star, index) => {
           const isActive = index < Math.floor(rating);
 
           return (
