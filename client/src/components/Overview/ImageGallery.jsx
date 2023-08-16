@@ -19,7 +19,7 @@ const ImageGallery = ({ selectedThumbnail }) => {
     return <BigImage style={{backgroundPosition: `${coords.x * 100}% ${coords.y * 100}%`}} selectedThumbnail={selectedThumbnail} setEnlargeImage={setEnlargeImage} coords={coords} setCoords={setCoords}/>
   }
   return(
-    <StyledImg onClick={(e) => {console.log('image clicked')
+    <StyledImg data-testid="main-image" onClick={(e) => {console.log('image clicked')
   setEnlargeImage(true)}} src={sampleStyles.results[0].photos[selectedThumbnail].url} />
 )
 }

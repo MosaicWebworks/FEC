@@ -32,7 +32,8 @@ const BigImage = ({selectedThumbnail, setEnlargeImage, coords, setCoords}) => {
     };
   }, []);
   return(<StyledBigImage
-    onClick={(e) => {setEnlargeImage(false)}} style={
+    onClick={(e) => {setEnlargeImage(false)}}
+    style={
     {backgroundImage: `url(${sampleStyles.results[0].photos[selectedThumbnail].url})`,
     backgroundPosition: `${coords.x * 100}% ${coords.y * 100}%`
   }} onMouseLeave={(e) => {setEnlargeImage(false)}}/>);
