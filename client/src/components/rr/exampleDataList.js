@@ -43,7 +43,7 @@ const exampleDataList = {
         },
         {
             "review_id": 1277920,
-            "rating": 5,
+            "rating": 4.6,
             "summary": "I like beans",
             "recommend": true,
             "response": null,
@@ -68,7 +68,7 @@ const exampleDataList = {
         },
         {
             "review_id": 1277923,
-            "rating": 4,
+            "rating": 4.3,
             "summary": "In and Out is OP",
             "recommend": true,
             "response": null,
@@ -97,7 +97,7 @@ const exampleDataList = {
         },
         {
             "review_id": 1278030,
-            "rating": 4,
+            "rating": 4.4,
             "summary": "I actually like them now",
             "recommend": true,
             "response": null,
