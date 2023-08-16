@@ -33,7 +33,6 @@ const ReviewList = () => {
   const [selectedSort, setSelectedSort] = useState('relevant');
 
   useEffect(() => {
-    console.log('Reviews updated:', reviews);
   }, [reviews]);
 
   const handleSortChange = (event) => {
@@ -73,12 +72,7 @@ const ReviewList = () => {
     });
   }
 
-
-    //console.log(sortedReviews);
-
     updateReviews(sortedReviews);
-
-    console.log('Reviews updated:', sortedReviews)
   }
 
   return (

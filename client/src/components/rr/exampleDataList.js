@@ -7,7 +7,7 @@ const exampleDataList = {
             "review_id": 1275838,
             "rating": 1,
             "summary": "gives you wings",
-            "recommend": true,
+            "recommend": false,
             "response": null,
             "body": "these shoes are not only stylish but also comfortable. in fact, i sprouted 4 pairs of sentient wings that lifted me away.",
             "date": "2022-07-22T00:00:00.000Z",
