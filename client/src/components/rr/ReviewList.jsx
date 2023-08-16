@@ -40,7 +40,7 @@ const ReviewList = () => {
     const newSelectedSort = event.target.value;
     setSelectedSort(newSelectedSort);
 
-     const sortedReviews = [...reviews];
+    const sortedReviews = [...reviews];
 
     if (newSelectedSort === 'helpful') {
       sortedReviews.sort ((a, b) => {
@@ -48,15 +48,31 @@ const ReviewList = () => {
         const helpfulB = b.helpfulness;
         return helpfulB - helpfulA;
       });
-    }
+    };
 
-      if (newSelectedSort === 'newest') {
+    if (newSelectedSort === 'newest') {
         sortedReviews.sort ((a, b) => {
           const dateA = new Date(a.date).getTime();
           const dateB = new Date(b.date).getTime();
           return dateB - dateA;
-        })
+      });
     };
+
+    if (newSelectedSort === 'relevant') {
+      sortedReviews.sort((a, b) => {
+        const helpfulA = a.helpfulness;
+        const helpfulB = b.helpfulness;
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+
+        //relevance score is calculated by taking into account two main factors: helpful and datetime submitted
+        //more helpful(larger helpful number) and more recent the date(larger timestamps), more relevant
+        const relevanceA = helpfulA + dateA;
+        const relevanceB = helpfulB + dateB;
+        return relevanceB - relevanceA;
+    });
+  }
+
 
     //console.log(sortedReviews);
 
