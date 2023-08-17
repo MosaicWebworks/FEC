@@ -4,7 +4,8 @@ import { useReviews} from './ReviewsContext.jsx';
 import { ReviewsProvider } from './ReviewsContext.jsx';
 //import { handleLoadMoreReviews } from './ReviewsContext.jsx';
 import ReviewTile from './ReviewTile.jsx';
-import exampleDataList from './exampleDataList';
+//import exampleDataList from './exampleDataList';
+import RatingBreakdown from './RatingBreakdown.jsx';
 
 const Container = styled.div`
 border: 1px solid #ccc;
@@ -29,11 +30,13 @@ const SortingDropdown = ({ selectedSort, onChange }) => {
 };
 
 const ReviewList = () => {
-  const { reviews, loadedReviewsCount, handleLoadMoreReviews, updateReviews } = useReviews();
+  const { reviews, loadedReviewsCount, handleLoadMoreReviews, updateReviews, filteredReviews } = useReviews();
   const [selectedSort, setSelectedSort] = useState('relevant');
 
+  // Reapply the sorting when reviews or filters change
   useEffect(() => {
-  }, [reviews]);
+      handleSortChange({ target: { value: selectedSort } });
+    }, [filteredReviews]);
 
   const handleSortChange = (event) => {
     const newSelectedSort = event.target.value;
@@ -78,10 +81,10 @@ const ReviewList = () => {
   return (
     <Container data-testid="reviewList-component">
       <SortingDropdown selectedSort={selectedSort} onChange={handleSortChange} />
-      {reviews.slice(0, loadedReviewsCount).map((review) => (
+      {filteredReviews.slice(0, loadedReviewsCount).map((review) => (
         <ReviewTile key={review.review_id} review={review} />
       ))}
-      {loadedReviewsCount <reviews.length && (
+      {loadedReviewsCount <filteredReviews.length && (
         <Button onClick={handleLoadMoreReviews}>
           See More Reviews
         </Button>

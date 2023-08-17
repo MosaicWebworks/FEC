@@ -16,11 +16,26 @@ export const ReviewsProvider = ({ children }) => {
     setReviews(updatedReviews);
   };
 
+  //ratingsdetail click filter:
+  const [filteredReviews, setFilteredReviews] = useState(reviews);
+
+  const updateFilteredReviews = (rating) => {
+    if (Array.isArray(rating) || !rating) {
+      // If an array is passed or no rating is provided, reset the filtered reviews
+      setFilteredReviews(reviews);
+    } else {
+      // Filter the reviews by the provided rating
+      const newFilteredReviews = reviews.filter((review) => review.rating === rating);
+      setFilteredReviews(newFilteredReviews);
+    }
+  };
+
   return (
-    <ReviewsContext.Provider value={{ reviews, loadedReviewsCount, handleLoadMoreReviews, updateReviews }}>
+    <ReviewsContext.Provider value={{ reviews, loadedReviewsCount, handleLoadMoreReviews, updateReviews, filteredReviews, updateFilteredReviews }}>
       {children}
     </ReviewsContext.Provider>
   );
 };
+
 
 export const useReviews = () => useContext(ReviewsContext);
