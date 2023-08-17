@@ -10,6 +10,7 @@ const StyledImg = styled.img`
   height: auto;
   position: absolute;
   overflow: hidden;
+  cursor: zoom-in;
 `
 
 const ImageGallery = ({ selectedThumbnail }) => {

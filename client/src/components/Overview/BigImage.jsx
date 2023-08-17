@@ -11,15 +11,17 @@ const StyledBigImage = styled.div`
   overflow: hidden;
   background-repeat: no-repeat;
   z-index: 2;
+  cursor: crosshair;
 `
 
 const BigImage = ({selectedThumbnail, setEnlargeImage, coords, setCoords}) => {
   const [relativeCoords, setRelativeCoords] = React.useState({x: 0, y: 0});
+  const [reallyBig, setReallyBig] = React.useState(false);
   return(<StyledBigImage
     onClick={(e) => {setEnlargeImage(false)}}
     style={
     {backgroundImage: `url(${sampleStyles.results[0].photos[selectedThumbnail].url})`,
-    backgroundPosition: `${coords.x * 100}% ${coords.y * 100}%`
+    backgroundPosition: `${coords.x * 100}% ${coords.y * 100}%`,
   }} onMouseLeave={(e) => {setEnlargeImage(false)}}/>);
 }
 
