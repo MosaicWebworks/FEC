@@ -7,7 +7,7 @@ const exampleDataList = {
             "review_id": 1275838,
             "rating": 1,
             "summary": "gives you wings",
-            "recommend": true,
+            "recommend": false,
             "response": null,
             "body": "these shoes are not only stylish but also comfortable. in fact, i sprouted 4 pairs of sentient wings that lifted me away.",
             "date": "2022-07-22T00:00:00.000Z",
@@ -22,7 +22,7 @@ const exampleDataList = {
         },
         {
             "review_id": 1277922,
-            "rating": 4,
+            "rating": 5,
             "summary": "In and out is the best",
             "recommend": true,
             "response": null,
@@ -43,7 +43,7 @@ const exampleDataList = {
         },
         {
             "review_id": 1277920,
-            "rating": 4.6,
+            "rating": 4,
             "summary": "I like beans",
             "recommend": true,
             "response": null,
@@ -68,7 +68,7 @@ const exampleDataList = {
         },
         {
             "review_id": 1277923,
-            "rating": 4.3,
+            "rating": 4,
             "summary": "In and Out is OP",
             "recommend": true,
             "response": null,
@@ -97,7 +97,7 @@ const exampleDataList = {
         },
         {
             "review_id": 1278030,
-            "rating": 4.4,
+            "rating": 4,
             "summary": "I actually like them now",
             "recommend": true,
             "response": null,

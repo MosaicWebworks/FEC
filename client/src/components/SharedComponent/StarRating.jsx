@@ -35,13 +35,7 @@ const StarRating = ({ rating }) => {
   const fullStars = Math.floor(rating);
   const decimalPart = rating - fullStars;
 
-   //console.log('rating is: ', rating);
-  //  console.log(fullStar);
-  //  console.log(decimalPart);
-
   const renderStar = (index) => {
-
-    console.log('index:', index, 'fullStars:', fullStars, 'decimalPart:', decimalPart);
 
     if (index < fullStars) {
       return <FullStar key={index} isActive>&#9733;</FullStar>;
