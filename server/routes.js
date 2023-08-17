@@ -15,4 +15,14 @@ router.get("/reviews*", function (req, res)
   .then((data) => res.send(data.data));
 });
 
+router.get('/qa*', (req, res) => {
+  console.log('url: ', req.url.split('/qa'));
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/${req.url.split('/qa')[1]})`, {headers:
+  {Authorization: `${process.env.REACT_APP_API_KEY}`}})
+    .then((results) => {
+      console.log('results are:              ', results.data);
+      res.send(results.data)
+    })
+    .catch((err) => console.log(err));
+})
 module.exports = router;
