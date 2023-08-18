@@ -8,8 +8,9 @@ const Border = styled.div`
                        "answer"
                        "answer"
                        "button";
-  border: solid black;
-  height: 210px
+  border-bottom: solid black;
+  height: 210px;
+  max-height: 50%;
 `
 const Question = styled.div`
 grid-area: question;
@@ -71,18 +72,23 @@ const QuestionEntry = ({qaObject}) => {
   //handle submit of clicking on see more answers
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNumberToRender(numberToRender + 2);
-    console.log('number to render: ', numberToRender)
+    if (numberToRender === 2) {
+      setNumberToRender(answersID.length);
+    } else {
+      setNumberToRender(2)
+    }
   }
 
 
-  const displayButton = () => {
+  const answersShownButton = () => {
     if (numberToRender < answersID.length) {
       return (
         <input type="submit" value="see more answers" />
         )
       } else {
-        <div></div>
+        return(
+          <input type="submit" value="collapse answers" />
+        )
     }
   }
 
@@ -99,12 +105,11 @@ const QuestionEntry = ({qaObject}) => {
         }
       </AnswerDesign>
       <form onSubmit={handleSubmit}>
-          {displayButton()}
+          {answersShownButton()}
       </form>
-
-
-
-
+      <form>
+        <input type="submit" value="add an answer"/>
+      </form>
     </Border>
     </>
   )
