@@ -3,8 +3,11 @@ import styled from 'styled-components';
 import { sampleProduct, sampleStyles } from './sampleData.js';
 import { ImageGallery } from './ImageGallery.jsx';
 import { GalleryOverlay } from './GalleryOverlay.jsx';
+import {ProductInfo} from './ProductInfo.jsx';
+import axios from 'axios';
 
-const Text = styled.div`color: red;`
+
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -12,8 +15,8 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
-  grid-template-areas: "gallery two"
-                       "three three";
+  grid-template-areas: "gallery info"
+                       "three  three";
   column-gap: 15px;
   row-gap: 15px;
 `
@@ -27,8 +30,10 @@ const Gallery = styled.div`
   align-items: center;
   overflow: hidden;
 `
-const Two = styled.div`
-  grid-area: two;
+const Info = styled.div`
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
   border: 1px solid blue;
 `
 const Three = styled.div`
@@ -38,12 +43,23 @@ const Three = styled.div`
 
 const Overview = () => {
   const [styles, setStyles] = React.useState(sampleStyles);
+  const [product, setProduct] = React.useState(sampleProduct);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
   return(
     <Container>
-      <Gallery><ImageGallery selectedThumbnail={selectedThumbnail} /><GalleryOverlay setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} /></Gallery>
-      <Two>Product Info</Two>
+      <Gallery><ImageGallery styles={styles} selectedThumbnail={selectedThumbnail} /><GalleryOverlay styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} /></Gallery>
+      <Info><ProductInfo product={product} styles={styles}/></Info>
       <Three>Product Information details</Three>
+      <button onClick={(e) => {
+        axios.get(`http://localhost:3000/data/products/403${Math.floor(Math.random() * 10) + 44}/styles`)
+        .then((res) => {
+          setStyles(res.data);
+          axios.get(`http://localhost:3000/data/products/${res.data.product_id}`)
+          .then((res) => {
+            setProduct(res.data);
+          })
+        });
+        }}>Random Style</button>
     </Container>
 
   )
