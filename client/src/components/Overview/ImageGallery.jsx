@@ -13,7 +13,7 @@ const StyledImg = styled.img`
   cursor: zoom-in;
 `
 
-const ImageGallery = ({ selectedThumbnail, styles }) => {
+const ImageGallery = ({ selectedThumbnail, styles, selectedStyle, setSelectedStyle }) => {
   const [enlargeImage, setEnlargeImage] = React.useState(false);
   const [coords, setCoords] = React.useState({x: 0, y: 0});
   React.useEffect(() => {
@@ -32,11 +32,11 @@ const ImageGallery = ({ selectedThumbnail, styles }) => {
     };
   }, []);
   if (enlargeImage) {
-    return <BigImage styles={styles} selectedThumbnail={selectedThumbnail} setEnlargeImage={setEnlargeImage} coords={coords} setCoords={setCoords}/>
+    return <BigImage styles={styles} selectedThumbnail={selectedThumbnail} setEnlargeImage={setEnlargeImage} coords={coords} setCoords={setCoords} selectedStyle={selectedStyle} />
   }
   return(
     <StyledImg data-testid="main-image" onClick={(e) => {console.log('image clicked')
-  setEnlargeImage(true)}} src={styles.results[0].photos[selectedThumbnail].url} />
+  setEnlargeImage(true)}} src={styles.results[selectedStyle].photos[selectedThumbnail].url} />
 )
 }
 

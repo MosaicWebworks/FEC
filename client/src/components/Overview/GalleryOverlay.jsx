@@ -56,12 +56,12 @@ const RightArrow = ({setSelectedThumbnail, selectedThumbnail, styles}) => {
   return <ArrowStyle onClick={(e) => {setSelectedThumbnail(selectedThumbnail + 1)}} style={{transform: "rotate(225deg)"}}/>
 }
 
-const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles}) => {
+const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles, selectedStyle}) => {
   var index = 0;
   return(
   <StyledThumbnails>
     {
-    styles.results[0].photos.map((photo) => {
+    styles.results[selectedStyle].photos.map((photo) => {
       var thumbnailIndex = index;
       var thumbnailBorder = "1px solid white";
       if (thumbnailIndex === selectedThumbnail) {
@@ -74,11 +74,11 @@ const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles}) => 
   </StyledThumbnails>);
 }
 
-const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail, styles} ) => {
+const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail, styles, selectedStyle} ) => {
 
   return(
     <StyledOverlay>
-      <RenderThumbnails styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} />
+      <RenderThumbnails styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle}/>
       <ArrowContainer>
         <LeftArrow setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} />
         <RightArrow styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail}/>

@@ -43,12 +43,16 @@ const Three = styled.div`
 
 const Overview = () => {
   const [styles, setStyles] = React.useState(sampleStyles);
+  const [selectedStyle, setSelectedStyle] = React.useState(0);
   const [product, setProduct] = React.useState(sampleProduct);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
   return(
     <Container>
-      <Gallery><ImageGallery styles={styles} selectedThumbnail={selectedThumbnail} /><GalleryOverlay styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} /></Gallery>
-      <Info><ProductInfo product={product} styles={styles}/></Info>
+      <Gallery>
+        <ImageGallery styles={styles} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle} />
+        <GalleryOverlay styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle} />
+      </Gallery>
+      <Info><ProductInfo product={product} styles={styles} setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle}/></Info>
       <Three>Product Information details</Three>
       <button onClick={(e) => {
         axios.get(`http://localhost:3000/data/products/403${Math.floor(Math.random() * 10) + 44}/styles`)
