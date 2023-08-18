@@ -1,11 +1,31 @@
-import React, { createContext, useContext, useState } from 'react';
-import exampleDataList from './exampleDataList';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+//import exampleDataList from './exampleDataList';
+import axios from 'axios';
 
 const ReviewsContext = createContext();
 
 export const ReviewsProvider = ({ children }) => {
-  const [reviews, setReviews] = useState(exampleDataList.results);
+  const [reviews, setReviews] = useState([]);
+  const [reviewMeta, setReviewMeta] = useState({});
   const [loadedReviewsCount, setLoadedReviewsCount] = useState(2); // Initial value is 2
+
+  useEffect(() => {
+    //Fetch reviews
+    axios.get('http://localhost:3000/data/reviews?product_id=40350')
+      .then((response) => {
+        setReviews(response.data.results);
+        setFilteredReviews(response.data.results);
+      })
+      .catch((error) => console.error('An error occurred while fetching reviews:', error));
+
+    //Fetch review meta
+    axios.get('http://localhost:3000/data/reviews/meta?product_id=40350')
+      .then((response) =>{
+        console.log('Review meta response:', response);
+        setReviewMeta(response.data)
+      })
+      .catch((error) => console.error('An error occurred while fetching review meta:', error));
+  }, []);
 
   const handleLoadMoreReviews = () => {
     // Increment the loadedReviewsCount by 2 each time the button is clicked
@@ -31,7 +51,7 @@ export const ReviewsProvider = ({ children }) => {
   };
 
   return (
-    <ReviewsContext.Provider value={{ reviews, loadedReviewsCount, handleLoadMoreReviews, updateReviews, filteredReviews, updateFilteredReviews }}>
+    <ReviewsContext.Provider value={{ reviews, reviewMeta, loadedReviewsCount, handleLoadMoreReviews, updateReviews, filteredReviews, updateFilteredReviews }}>
       {children}
     </ReviewsContext.Provider>
   );
