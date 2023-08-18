@@ -18,19 +18,16 @@ const QuestionList = ({productID}) => {
   //contains the questions that will be rendered
   const [questionsToRender, setQuestionsToRender] = useState([]);
 
-  productID = 40340 || productID;
-  console.log('product id', productID);
+  productID = 40347 || productID;
   //makes initial api call and stores fetched info into different states
     //can refactor to use one less state?
   useEffect(() => {
     axios.get(`data/qa/questions?product_id=${productID}`)
       .then((results) => {
-        console.log('no error');
         setQuestionsObject(Object.entries(results.data.results))
         setQuestionsToRender(Object.entries(results.data.results).slice(0, toRender));
       })
       .catch((err) => {
-        console.log('error present');
         console.log(err)});
 
     }, [])

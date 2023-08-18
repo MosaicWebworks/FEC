@@ -30,8 +30,8 @@ router.get("/qa*", function (req, res)
 });
 
 router.put("/qa*", (req, res) => {
-  // console.log('req url:', req.url.split('/qa')[1]);
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/5992814/helpful`, {}, {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}} )
+  console.log('req url:', req.url.split('/qa')[1]);
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa${req.url.split('/qa')[1]}`, {}, {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}} )
     .then(() => {
 
       res.sendStatus(204);
