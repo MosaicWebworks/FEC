@@ -12,7 +12,6 @@ justify-content: flex-end;
 
 
 const Answer = ({answer}) =>{
-  console.log('answers id:', answer.id)
   //separate date added into mon,day,year components
   const year = answer.date.slice(0,4);
   const month = answer.date.slice(5,7);
@@ -23,18 +22,44 @@ const Answer = ({answer}) =>{
   const formattedDate = format(dateAdded, 'MMM-dd-yyyy');
 
   const [isHelpful, setIsHelpful] = useState(false);
+  const [helpfulness, setHelpfulness] = useState(answer.helpfulness)
   const [isReported, setIsReported] = useState(false);
 
   //create button to increment helpful on button Click
-  const changeHelpful = (e) => {
-    e.preventDefault();
+  const changeHelpful = () => {
+    // e.preventDefault();
     if (!isHelpful) {
       setIsHelpful(true);
-      axios.put(`/qa/answers/:${answer.id}/helpful`)
-        .then(() => console.log('marked as helpful'))
+      axios.put(`data/qa/answers/${answer.id}/helpful`)
+        .then(() => {
+          console.log('marked as helpful');
+          setHelpfulness(helpfulness + 1);
+      })
         .catch((err) => console.log(err));
     } else {
       console.log('already marked as helpful')
+    }
+  }
+
+  const reportButton = () => {
+    if (!isReported) {
+      return (
+        <button className="btn-report">Report</button>
+      )
+    } else {
+      return (
+        <button className="btn-report">Already Reported</button>
+      )
+    }
+  }
+
+
+  const reportAnswer = (e) => {
+    e.preventDefault();
+    if (!isReported) {
+      setIsReported(true);
+    } else {
+      console.log('already reported');
     }
   }
 
@@ -46,10 +71,8 @@ const Answer = ({answer}) =>{
       <div className="username"><b>{answer.answerer_name}</b></div>
       <small className="data-answered">{formattedDate}</small>
       <StyledButton>
-        <form onSubmit={changeHelpful}>
-          <button className="btn-helpfulness">Helpful? Yes({answer.helpfulness})</button>
-        </form>
-        <button className="btn-report">Report</button>
+        <button className="btn-helpfulness" onClick={changeHelpful}>Helpful? Yes({helpfulness})</button>
+        {reportButton()}
       </StyledButton>
     </div>
   )

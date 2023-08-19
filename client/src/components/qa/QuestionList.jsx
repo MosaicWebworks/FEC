@@ -21,8 +21,9 @@ const QuestionList = ({productID}) => {
   productID = 40347 || productID;
   //makes initial api call and stores fetched info into different states
     //can refactor to use one less state?
+
   useEffect(() => {
-    axios.get(`data/qa/questions?product_id=${productID}`)
+    axios.get(`data/qa/questions?product_id=${productID}&count=30`)
       .then((results) => {
         setQuestionsObject(Object.entries(results.data.results))
         setQuestionsToRender(Object.entries(results.data.results).slice(0, toRender));
@@ -41,11 +42,10 @@ const QuestionList = ({productID}) => {
 
 
   //will display more buttons when clicked on. Will disappear if no more questions available
-  const renderMoreQuestions = (e) => {
-
+  const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
-        <input type="submit" value="see more questions"/>
+        <button onClick={handleSubmit}>See more questions</button>
       )
     } else {
       return <div></div>
@@ -55,18 +55,18 @@ const QuestionList = ({productID}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setToRender(toRender + 2);
+    console.log(toRender);
   }
   return (
     <div>
         <MaxHeight>
         {questionsToRender && questionsToRender.map((question) => (
-            <QuestionEntry qaObject={question[1]} key={question[0]}/>
+            <QuestionEntry id={productID} qObject={question[1]} key={question[0]}/>
           ))
         }
         </MaxHeight>
-      <form onSubmit={handleSubmit}>
           {renderMoreQuestions()}
-      </form>
+
     </div>
   )
 

@@ -20,7 +20,7 @@ router.get("/reviews*", function (req, res)
 router.get("/qa*", function (req, res)
 {
   //split the url of the req to get whichever url the client needs
-  console.log('req is:', req.url);
+  console.log('req is:', req);
 
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa${req.url.split('/qa')[1]}`, {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}})
   .then((data) => {
@@ -30,13 +30,27 @@ router.get("/qa*", function (req, res)
 });
 
 router.put("/qa*", (req, res) => {
-  console.log('req url:', req.url.split('/qa')[1]);
   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa${req.url.split('/qa')[1]}`, {}, {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}} )
     .then(() => {
-
       res.sendStatus(204);
     })
-    .catch((err) => res.sendStatus(401));
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404)
+    });
+})
+
+router.post("/qa*", (req, res) => {
+  console.log(req.body);
+
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa${req.url.split('/qa')[1]}`, req.body , {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}} )
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404)
+    });
 })
 
 module.exports = router;
