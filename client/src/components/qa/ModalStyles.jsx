@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const ModalContainer = styled.div`
 display: grid;
-grid-template-areas: 'productName question'
+grid-template-areas: 'productName productName'
+                      'question question'
                      'form form'
                      'photos submit';
 position: fixed;

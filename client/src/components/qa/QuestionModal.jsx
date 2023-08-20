@@ -5,22 +5,23 @@ import {ModalContainer, ModalForm, CloseModal, Product, Question, Warning, Submi
 import {QuestionContext} from './QuestionEntry.jsx';
 
 
-const AnswerModal = ({product_id}) => {
+const QuestionModal = ({product_id,setIsModalShown}) => {
   const [productName, setProductName] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
 
-  const [qObject, setIsModalShown] = useContext(QuestionContext)
-  const {question_id, question_body} = qObject;
+
 
   const [isInvalid, setIsInvalid] = useState(false)
-  useEffect( () => {
+  useEffect(() => {
     axios.get(`data/products/${product_id}`)
       .then((results) => {
+        console.log('question submitted');
         setProductName(results.data.name);
       })
       .catch((err) => console.log(err));
+
   }, [])
 
 
@@ -29,19 +30,20 @@ const AnswerModal = ({product_id}) => {
   }
 
   const handleSubmit = () => {
-    axios.post(`data/qa/questions/${question_id}/answers`, {
+    axios.post(`data/qa/questions`, {
       name: name,
       email: email,
       body: body,
-      photos: []
+      product_id: product_id
     })
     .then((results) => {
       setIsModalShown(false);
-      console.log('answer submitted')
+      console.log('results posted')
     })
-    .catch(() => {
+    .catch((err) => {
       setIsInvalid(true);
       console.log('Invalid Submission');
+      console.log(err);
     })
   }
 
@@ -53,7 +55,6 @@ const AnswerModal = ({product_id}) => {
           <ol>
             <li>A mandatory field is blank</li>
             <li>The email address provided is not in correct email format</li>
-            <li>The images selected are invalid or unable to be uploaded.</li>
           </ol>
         </small>
       </Warning>
@@ -66,14 +67,14 @@ const AnswerModal = ({product_id}) => {
   return (
     <ModalContainer onClick={(e) => e.stopPropagation()}>
       <Product>
-        {productName}
+        <h1>Ask your question</h1>
+          <small>
+            About the {productName}
+            </small>
       </Product>
-      <Question>
-        <b>Q:</b>{question_body}
-      </Question>
       <ModalForm>
         <form>
-          <label>Answer:<textarea  name="body" placeholder="type answer here..." required onChange={(e) => setBody(e.target.value)}/></label><br/>
+          <label>Question:<textarea  name="body" placeholder="type answer here..." required onChange={(e) => setBody(e.target.value)}/></label><br/>
           <label>Username:<input name="name" type="text" placeholder="username" required onChange={(e) => setName(e.target.value)}/></label><br/>
           <label>email:<input name="email" type="text" placeholder="email@domain.com" required onChange={(e) => setEmail(e.target.value)}/></label>
         </form>
@@ -89,6 +90,6 @@ const AnswerModal = ({product_id}) => {
   )
 }
 
-export default AnswerModal;
+export default QuestionModal;
 
 

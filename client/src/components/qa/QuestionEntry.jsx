@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import styled from 'styled-components';
 import exampleData from './exampleData.js'
 import Answer from './Answer.jsx';
@@ -36,7 +36,7 @@ justify-content: flex-end;`
 
 
 
-
+export const QuestionContext = createContext();
 
 
 
@@ -52,7 +52,6 @@ const QuestionEntry = ({id, qObject}) => {
   const [addAnswer, setAddAnswer] = useState(true);
   //creates an array of object. contains an array of arrays [0] = id and [1] = answer
   let answers = Object.entries(qObject.answers);
-
   //sorting function to sort by helpfulness with most helpful being at the top/front
   const compareHelpfulness = (a, b) => {
     return b[1].helpfulness - a[1].helpfulness;
@@ -103,19 +102,29 @@ const QuestionEntry = ({id, qObject}) => {
     }
   }
 
+  //need to create a useContext for the setIsModalShown
   const displayModal = () => {
     if (isModalShown) {
       return (
-          <AnswerModal question_id={qObject.question_id} product_id={id} question={qObject.question_body}setIsModalShown={setIsModalShown}/>
+        <QuestionContext.Provider value={[qObject, setIsModalShown]}>
+          <AnswerModal product_id={id}/>
+        </QuestionContext.Provider>
 
       )
     }
   }
+  //create context for this that is passed from index
+  const closeModal = () => {
+    if (isModalShown) {
+      console.log('modal being closed');
+      setIsModalShown(false)
+    }
+  }
 
-
+  //onCLick needs to be called on root of index
 
   return (
-    <Border>
+    <Border onClick={closeModal}>
       <Question>
         <b>Q:</b> {qObject.question_body}
         <button onClick={toggleModal}>add answer</button>
