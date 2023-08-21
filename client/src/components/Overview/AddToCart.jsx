@@ -10,11 +10,15 @@ const DropDownContainer = styled.div`
 `
 const DropDownButton = styled.div`
   position: absolute;
+  width: 100%;
+  background-color: white:
 `
 
 const DropDownContent = styled.ul`
   position: absolute;
   visibility: hidden;
+  width: 100%;
+  background-color: white;
 `
 const AddToCartLayout = styled.div`
   display: grid;
@@ -54,7 +58,6 @@ const AddToCart =
     sizes.push(skus[sku].size);
     numberInStock.push(skus[sku].quantity);
   }
-  console.log(sizes);
   var quantity = [];
   var index = 0;
   for (let i = 1; i <= (numberInStock[sizeIndex] > 15 ? 15 : numberInStock[sizeIndex]); i++){
