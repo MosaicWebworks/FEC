@@ -11,8 +11,9 @@ max-height: 500px;
 overflow-y: auto`
 
 
-export const AddQuestionContext = createContext();
+
 export const QuestionListContext = createContext();
+export const ReportContext = createContext();
 
 
 const QuestionList = ({productID}) => {
@@ -24,7 +25,6 @@ const QuestionList = ({productID}) => {
   const [questionsToRender, setQuestionsToRender] = useState([]);
 
   const [isModalShown, setIsModalShown] = useState(false);
-
 
   productID = 40347 || productID;
   //makes initial api call and stores fetched info into different states
@@ -53,7 +53,7 @@ const QuestionList = ({productID}) => {
   const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
-        <button onClick={handleSubmit}>see more questions</button>
+        <button onClick={handleSubmit}>More answered questions</button>
       )
     } else {
       return <div></div>
@@ -69,10 +69,8 @@ const QuestionList = ({productID}) => {
 
   const toggleModal = () => {
     if (!isModalShown) {
-      console.log('modal now shown');
       setIsModalShown(true);
     } else {
-      console.log('modal no longer being shown');
       setIsModalShown(false);
     }
   }
@@ -80,7 +78,6 @@ const QuestionList = ({productID}) => {
   //need to create a useContext for the setIsModalShown
   const displayModal = () => {
     if (isModalShown) {
-      console.log('question modal should appear')
       return (
         <QuestionModal product_id={productID} setIsModalShown={setIsModalShown}/>
       )
@@ -89,7 +86,6 @@ const QuestionList = ({productID}) => {
   //create context for this that is passed from index
   const closeModal = () => {
     if (isModalShown) {
-      console.log('modal being closed');
       setIsModalShown(false)
     }
   }
@@ -97,7 +93,7 @@ const QuestionList = ({productID}) => {
 
   return (
     <div >
-      {questionsObject && <QuestionListContext.Provider value={[setQuestionsToRender, questionsObject]}>
+      {questionsObject && <QuestionListContext.Provider value={[setQuestionsToRender, questionsObject, toRender]}>
         <SearchQuestions/>
         <MaxHeight onClick={closeModal}>
         {questionsToRender && questionsToRender.map((question) => (
@@ -109,7 +105,6 @@ const QuestionList = ({productID}) => {
         {displayModal()}
         {renderMoreQuestions()}
       </QuestionListContext.Provider>}
-
     </div>
   )
 

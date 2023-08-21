@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {format} from 'date-fns';
 import axios from 'axios';
-
+import Report from './Report.jsx';
 const StyledButton = styled.div`
 display: flex;
 flex-direction: row;
@@ -11,7 +11,7 @@ justify-content: flex-end;
 
 
 
-const Answer = ({answer}) =>{
+const Answer = ({setAddedEntity, answer}) =>{
   //separate date added into mon,day,year components
   const year = answer.date.slice(0,4);
   const month = answer.date.slice(5,7);
@@ -44,7 +44,8 @@ const Answer = ({answer}) =>{
   const reportButton = () => {
     if (!isReported) {
       return (
-        <button className="btn-report">Report</button>
+        // <Report path={'answers'} id={answer.id}/>
+        <button>Report</button>
       )
     } else {
       return (

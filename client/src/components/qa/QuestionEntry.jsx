@@ -1,9 +1,10 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React, {useState, useEffect, createContext, useContext} from 'react';
 import styled from 'styled-components';
 import exampleData from './exampleData.js'
 import Answer from './Answer.jsx';
 import AnswerModal from './AnswerModal.jsx';
 import axios from 'axios';
+// import Report from './Report.jsx';
 
 
 const Border = styled.div`
@@ -37,7 +38,7 @@ justify-content: flex-end;`
 
 
 export const QuestionContext = createContext();
-
+export const AnswerContext = createContext();
 
 
 const QuestionEntry = ({id, qObject}) => {
@@ -52,6 +53,10 @@ const QuestionEntry = ({id, qObject}) => {
   const [addAnswer, setAddAnswer] = useState(true);
   //creates an array of object. contains an array of arrays [0] = id and [1] = answer
   let answers = Object.entries(qObject.answers);
+
+
+
+
   //sorting function to sort by helpfulness with most helpful being at the top/front
   const compareHelpfulness = (a, b) => {
     return b[1].helpfulness - a[1].helpfulness;
@@ -80,7 +85,7 @@ const QuestionEntry = ({id, qObject}) => {
   }
 
 
-  const answersShownButton = () => {
+  const moreAnswersButton = () => {
     if (numberToRender < answersID.length) {
       return (
         <input type="submit" value="see more answers" />
@@ -138,10 +143,7 @@ const QuestionEntry = ({id, qObject}) => {
         }
       </AnswerDesign>
       <form onSubmit={handleSubmit}>
-          {answersShownButton()}
-      </form>
-      <form>
-        <input type="submit" value="add an answer"/>
+          {moreAnswersButton()}
       </form>
     </Border>
 

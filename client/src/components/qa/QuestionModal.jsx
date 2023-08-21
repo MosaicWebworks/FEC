@@ -5,19 +5,20 @@ import {ModalContainer, ModalForm, CloseModal, Product, Question, Warning, Submi
 import {QuestionContext} from './QuestionEntry.jsx';
 
 
-const QuestionModal = ({product_id,setIsModalShown}) => {
+const QuestionModal = ({setAddedEntity, product_id, setIsModalShown}) => {
   const [productName, setProductName] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
 
-
+  // const [addedEntity, setAddedEntity] = useContext(AddEntityContext);
 
   const [isInvalid, setIsInvalid] = useState(false)
+
+  //obtains product name
   useEffect(() => {
     axios.get(`data/products/${product_id}`)
       .then((results) => {
-        console.log('question submitted');
         setProductName(results.data.name);
       })
       .catch((err) => console.log(err));
@@ -38,6 +39,7 @@ const QuestionModal = ({product_id,setIsModalShown}) => {
     })
     .then((results) => {
       setIsModalShown(false);
+      setAddedEntity(true);
       console.log('results posted')
     })
     .catch((err) => {

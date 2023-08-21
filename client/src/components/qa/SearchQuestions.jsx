@@ -1,41 +1,31 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {QuestionListContext} from './QuestionList.jsx';
 
-//needs list of questions objects
-//needs set questions to render
 const SearchQuestions = () => {
   const [query, setQuery] = useState('');
-  const [setQuestionsToRender, questionsObject] = useContext(QuestionListContext)
+  const [setQuestionsToRender, questionsObject, toRender] = useContext(QuestionListContext)
 
   const fullQuestionsList = questionsObject;
 
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     if (query.length >= 3) {
       var results = questionsObject.filter((question) => {
-        console.log('query being searched:', query);
         return question[1].question_body.toLowerCase().includes(query.toLowerCase());
       })
-      setQuestionsToRender(results);
-      console.log('filtered questions:', results)
+      setQuestionsToRender(results.slice(0, toRender));
     } else {
-      setQuestionsToRender(fullQuestionsList);
+      setQuestionsToRender(fullQuestionsList.slice(0, toRender));
     }
-
-
-  }
+  }, [query])
 
   return (
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="search questions" onChange={(e) => setQuery(e.target.value)}></input>
-        {console.log('query:', query)}
-      </form>
-
+      <div>
+        <input type="text" value={query} placeholder="Have a question? Search for answers…" onChange={(e) => {
+          setQuery(e.target.value);
+          }}
+        />
+      </div>
   )
-
-
 
 }
 
