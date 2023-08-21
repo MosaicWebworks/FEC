@@ -6,7 +6,7 @@ import { GalleryOverlay } from './GalleryOverlay.jsx';
 import {ProductInfo} from './ProductInfo.jsx';
 import {ProductDetails} from './ProductDetails.jsx';
 import axios from 'axios';
-
+import {ProductContext} from '../../contexts.js'
 
 
 const Container = styled.div`
@@ -43,6 +43,8 @@ const Details = styled.div`
 `
 
 const Overview = () => {
+  const contextTest = React.useContext(ProductContext);
+  console.log(contextTest);
   const [styles, setStyles] = React.useState(sampleStyles);
   const [selectedStyle, setSelectedStyle] = React.useState(0);
   const [product, setProduct] = React.useState(sampleProduct);
