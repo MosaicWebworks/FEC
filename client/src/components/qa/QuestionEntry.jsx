@@ -4,7 +4,8 @@ import exampleData from './exampleData.js'
 import Answer from './Answer.jsx';
 import AnswerModal from './AnswerModal.jsx';
 import axios from 'axios';
-// import Report from './Report.jsx';
+import Report from './Report.jsx';
+import {StyledButton} from './ButtonStyles.jsx';
 
 
 const Border = styled.div`
@@ -15,7 +16,7 @@ const Border = styled.div`
                        "button";
   border-bottom: solid black;
   height: 210px;
-  max-height: 50%;
+  max-height: 50vh;
 `
 const Question = styled.div`
 grid-area: question;
@@ -54,7 +55,7 @@ const QuestionEntry = ({id, qObject}) => {
   //creates an array of object. contains an array of arrays [0] = id and [1] = answer
   let answers = Object.entries(qObject.answers);
 
-
+  const [isReported, setIsReported] = useState(false);
 
 
   //sorting function to sort by helpfulness with most helpful being at the top/front
@@ -126,14 +127,29 @@ const QuestionEntry = ({id, qObject}) => {
     }
   }
 
-  //onCLick needs to be called on root of index
+  const reportButton = () => {
+    if (!isReported) {
+      return (
+        <Report path={'questions'} id={qObject.question_id} setIsReported={setIsReported}/>
+        // <button>Report</button>
+      )
+    } else {
+      return (
+        <button className="btn-report">Already Reported</button>
+      )
+    }
+  }
+
 
   return (
     <Border onClick={closeModal}>
       <Question>
         <b>Q:</b> {qObject.question_body}
-        <button onClick={toggleModal}>add answer</button>
-        {displayModal()}
+        <StyledButton>
+          <button onClick={toggleModal}>add answer</button>
+          {reportButton()}
+        </StyledButton>
+          {displayModal()}
       </Question>
       <AnswerDesign>
         {

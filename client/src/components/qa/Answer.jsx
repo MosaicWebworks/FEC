@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {format} from 'date-fns';
 import axios from 'axios';
 import Report from './Report.jsx';
-const StyledButton = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: flex-end;
-`
+import {StyledButton} from './ButtonStyles.jsx';
+import Photos from './Photo.jsx';
+import {StyledPhotos} from './ModalStyles.jsx';
+
 
 
 
@@ -20,7 +19,6 @@ const Answer = ({setAddedEntity, answer}) =>{
   const dateAdded = new Date(year, month, day);
   //formats according date according to desired format
   const formattedDate = format(dateAdded, 'MMM-dd-yyyy');
-
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness)
   const [isReported, setIsReported] = useState(false);
@@ -44,8 +42,7 @@ const Answer = ({setAddedEntity, answer}) =>{
   const reportButton = () => {
     if (!isReported) {
       return (
-        // <Report path={'answers'} id={answer.id}/>
-        <button>Report</button>
+        <Report path={'answers'} id={answer.id} setIsReported={setIsReported}/>
       )
     } else {
       return (
@@ -53,6 +50,8 @@ const Answer = ({setAddedEntity, answer}) =>{
       )
     }
   }
+
+
 
 
   const reportAnswer = (e) => {
@@ -63,18 +62,24 @@ const Answer = ({setAddedEntity, answer}) =>{
       console.log('already reported');
     }
   }
-
+  // console.log(answer);
   return (
     <div>
       <div>
       <b>A:</b> {answer.body}
       </div>
-      <div className="username"><b>{answer.answerer_name}</b></div>
-      <small className="data-answered">{formattedDate}</small>
+      <div className="username">by {answer.answerer_name}, <small className="data-answered">{formattedDate}</small></div>
       <StyledButton>
         <button className="btn-helpfulness" onClick={changeHelpful}>Helpful? Yes({helpfulness})</button>
         {reportButton()}
       </StyledButton>
+      <StyledPhotos>
+        {
+          answer.photos && answer.photos.map((photo, index) => (
+            <Photos photo={photo} key={index}/>
+          ))
+        }
+      </StyledPhotos>
     </div>
   )
 }

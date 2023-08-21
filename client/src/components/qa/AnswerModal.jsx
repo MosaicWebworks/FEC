@@ -1,16 +1,28 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, createContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {ModalContainer, ModalForm, CloseModal, Product, Question, Warning, Submit, Photos} from './ModalStyles.jsx';
+import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Photos, AlignContent, StyledPhotos} from './ModalStyles.jsx';
 import {QuestionContext} from './QuestionEntry.jsx';
+import PhotoModal from './PhotoModal.jsx';
+import Photo from './Photo.jsx';
 
+
+
+
+export const PhotoContext = createContext();
 
 const AnswerModal = ({product_id}) => {
   const [productName, setProductName] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
+  const [photos, setPhotos] = useState([]);
 
+  const [isPhotoModalShown, setIsPhotoModalShown] = useState(false);
+  const [displayPhotoModal, setDisplayPhotoModal] = useState(false);
+
+
+  const [shouldAddPhoto, setShouldAddPhoto] = useState(false)
   const [qObject, setIsModalShown] = useContext(QuestionContext)
   const {question_id, question_body} = qObject;
 
@@ -63,29 +75,84 @@ const AnswerModal = ({product_id}) => {
     }
   }
 
+
+  const togglePhoto = () => {
+    // debugger;
+    if (!isPhotoModalShown) {
+      setIsPhotoModalShown(true);
+      console.log('is shown');
+    }
+  }
+
+
+
+
   return (
-    <ModalContainer onClick={(e) => e.stopPropagation()}>
-      <Product>
-        {productName}
-      </Product>
-      <Question>
-        <b>Q:</b>{question_body}
-      </Question>
-      <ModalForm>
-        <form>
-          <label>Answer:<textarea  name="body" placeholder="type answer here..." required onChange={(e) => setBody(e.target.value)}/></label><br/>
-          <label>Username:<input name="name" type="text" placeholder="username" required onChange={(e) => setName(e.target.value)}/></label><br/>
-          <label>email:<input name="email" type="text" placeholder="email@domain.com" required onChange={(e) => setEmail(e.target.value)}/></label>
-        </form>
-        {invalidEntry()}
-      </ModalForm>
-      <Submit>
-        <button onClick={handleSubmit}>submit</button>
-      </Submit>
-      <Photos>
-        <button>photos</button>
-      </Photos>
-    </ModalContainer>
+    <PhotoContext.Provider value={[photos,setPhotos, setIsPhotoModalShown]}>
+      <AlignContent>
+        <ModalContainer onClick={(e) => e.stopPropagation()}>
+
+          <Header>
+            <h1>Submit your question</h1>
+            <b>{productName}:</b> {question_body}
+          </Header>
+          <ModalForm>
+            <form>
+              <label>*Answer:
+                <textarea
+                  name="body"
+                  placeholder="type answer here..."
+                  required
+                  onChange={(e) => setBody(e.target.value)}
+                  rows="5" cols="50"
+                />
+              </label>
+              <br/>
+
+              <label>*Username:
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Example: jack543!"
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
+              <br/>
+              <small>For privacy reasons, do not use your full name or email address</small><br/>
+
+              <label>*email:
+                <input
+                  name="email"
+                  type="text"
+                  placeholder="Example: jack@email.com"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </label>
+              <br/>
+              <small>For authentication reasons, you will not be emailed</small>
+
+            </form>
+            {invalidEntry()}
+            <StyledPhotos>
+              {photos.map((photo, index) => (
+                <Photo photo={photo} key={index}/>
+              ))}
+            </StyledPhotos>
+
+          </ModalForm>
+          <Submit>
+            <button onClick={handleSubmit}>submit</button>
+          </Submit>
+          <Photos>
+            {photos.length < 5 ? <button onClick={togglePhoto}>Photos</button> : <div></div>}
+            {isPhotoModalShown ? <PhotoModal/> : <div></div>}
+          </Photos>
+        </ModalContainer>
+
+      </AlignContent>
+    </PhotoContext.Provider>
   )
 }
 

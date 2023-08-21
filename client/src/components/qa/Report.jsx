@@ -4,19 +4,16 @@ import axios from 'axios';
 
 
 //take in choice
-const Report = ({path, id}) => {
-  const [isReported, setIsReported] = useState(false)
+const Report = ({path, id, setIsReported}) => {
+  // const [isReported, setIsReported] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isReported) {
-      console.log('already reported');
-    } else {
-      setIsReported(true);
-      axios.put(`/data/qa/${path}/${id}/report`)
-        .then((results) => console.log(results))
-        .catch((err) => console.log('err'));
-      }
+    setIsReported(true);
+    axios.put(`/data/qa/${path}/${id}/report`)
+      .then(() => setIsReported(true))
+      .catch((err) => console.log('err'));
+
   }
 
   return (
