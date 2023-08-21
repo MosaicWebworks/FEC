@@ -13,12 +13,15 @@ const StyledOverlay = styled.div`
 const StyledThumbnails = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   background-color: rgba(227, 227, 227, 0.5);
   border-radius: 15px;
   margin: 10px;
   z-index: 1;
+  max-height: 70%;
+  overflow: scroll;
+  overflow-x: hidden;
 `
 
 const Thumbnail = styled.img`
@@ -27,6 +30,7 @@ const Thumbnail = styled.img`
   margin: 10px;
   object-fit: cover;
   border-radius: 5px;
+  flex-shrink: 0;
 `
 const ArrowStyle = styled.div`
   border-left: 0.5rem solid steelBlue;
@@ -46,18 +50,18 @@ const LeftArrow = ({setSelectedThumbnail, selectedThumbnail}) => {
   if (selectedThumbnail === 0) {return <div></div>};
   return <ArrowStyle onClick={(e) => {setSelectedThumbnail(selectedThumbnail - 1)}} style={{transform: "rotate(45deg)"}}/>
 }
-
-const RightArrow = ({setSelectedThumbnail, selectedThumbnail}) => {
-  if (selectedThumbnail === photos.length - 1) {return <div></div>};
+// const photos = sampleStyles.results[0].photos;
+const RightArrow = ({setSelectedThumbnail, selectedThumbnail, styles}) => {
+  if (selectedThumbnail === styles.results[0].photos.length - 1) {return <div></div>};
   return <ArrowStyle onClick={(e) => {setSelectedThumbnail(selectedThumbnail + 1)}} style={{transform: "rotate(225deg)"}}/>
 }
 
-const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail}) => {
+const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles, selectedStyle}) => {
   var index = 0;
   return(
   <StyledThumbnails>
     {
-    photos.map((photo) => {
+    styles.results[selectedStyle].photos.map((photo) => {
       var thumbnailIndex = index;
       var thumbnailBorder = "1px solid white";
       if (thumbnailIndex === selectedThumbnail) {
@@ -70,14 +74,14 @@ const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail}) => {
   </StyledThumbnails>);
 }
 
-const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail} ) => {
+const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail, styles, selectedStyle} ) => {
 
   return(
     <StyledOverlay>
-      <RenderThumbnails setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} />
+      <RenderThumbnails styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle}/>
       <ArrowContainer>
         <LeftArrow setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} />
-        <RightArrow setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail}/>
+        <RightArrow styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail}/>
       </ArrowContainer>
     </StyledOverlay>);
 }
