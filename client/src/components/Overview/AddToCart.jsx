@@ -38,13 +38,6 @@ const Favorite = () => {
   return(<button>Favorite</button>);
 }
 
-{/* <DropDownContainer>
-<DropDownButton onClick={(e) => {(showDropDown === "hidden") ? setShowDropDown("visible") : setShowDropDown("hidden")}}>SELECT SIZE</DropDownButton>
-<DropDownContent style={{visibility: showDropDown}}>
-
-</DropDownContent>
-</DropDownContainer> */}
-
 const AddToCart =
 ({styles, selectedStyle}) => {
   const [sizeDropDown, setSizeDropDown] = React.useState("hidden");
