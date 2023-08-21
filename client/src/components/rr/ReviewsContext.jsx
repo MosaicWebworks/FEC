@@ -8,6 +8,8 @@ export const ReviewsProvider = ({ children }) => {
   const [reviews, setReviews] = useState([]);
   const [reviewMeta, setReviewMeta] = useState({});
   const [loadedReviewsCount, setLoadedReviewsCount] = useState(2); // Initial value is 2
+  //ratingsdetail click filter:
+  const [filteredReviews, setFilteredReviews] = useState([]);
 
   useEffect(() => {
     //Fetch reviews
@@ -32,16 +34,13 @@ export const ReviewsProvider = ({ children }) => {
     setLoadedReviewsCount(prevCount => prevCount + 2);
   };
 
-  const updateReviews = (updatedReviews) => {
-    setReviews(updatedReviews);
-  };
-
-  //ratingsdetail click filter:
-  const [filteredReviews, setFilteredReviews] = useState(reviews);
+  // const updateReviews = (updatedReviews) => {
+  //   setReviews(updatedReviews);
+  // };
 
   const updateFilteredReviews = (rating) => {
     if (Array.isArray(rating) || !rating) {
-      // If an array is passed or no rating is provided, reset the filtered reviews
+      // Reset the filtered reviews to the original reviews
       setFilteredReviews(reviews);
     } else {
       // Filter the reviews by the provided rating
@@ -51,7 +50,7 @@ export const ReviewsProvider = ({ children }) => {
   };
 
   return (
-    <ReviewsContext.Provider value={{ reviews, reviewMeta, loadedReviewsCount, handleLoadMoreReviews, updateReviews, filteredReviews, updateFilteredReviews }}>
+    <ReviewsContext.Provider value={{ reviews, reviewMeta, loadedReviewsCount, handleLoadMoreReviews,  filteredReviews,  setFilteredReviews }}>
       {children}
     </ReviewsContext.Provider>
   );
