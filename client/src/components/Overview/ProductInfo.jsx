@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
+import {AddToCart} from './AddToCart.jsx'
 
 const StyleThumbnail = styled.img`
 height: 45px;
@@ -34,13 +35,17 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
 }
 
 const ProductInfo = ({product, styles, setSelectedStyle, selectedStyle}) => {
+  const [showDropDown, setShowDropDown] = React.useState("hidden");
   return(
     <div style={{margin: "10px"}}>
     <div>{product.category}</div>
     <h1>{product.name}</h1>
-    <div>${product.default_price}</div>
+    {styles.results[selectedStyle].sale_price ? <div>
+      <span style={{color: "red", textDecoration: "line-through"}}>${product.default_price}</span> <span>${styles.results[selectedStyle].sale_price}</span>
+      </div> : <span>${product.default_price}</span>}
     <h3>{styles.results[selectedStyle].name}</h3>
     <RenderStyleThumbnails setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle} styles={styles}/>
+    <AddToCart styles={styles} selectedStyle={selectedStyle}/>
     </div>
   )
 }

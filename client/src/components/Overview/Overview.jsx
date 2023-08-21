@@ -4,6 +4,7 @@ import { sampleProduct, sampleStyles } from './sampleData.js';
 import { ImageGallery } from './ImageGallery.jsx';
 import { GalleryOverlay } from './GalleryOverlay.jsx';
 import {ProductInfo} from './ProductInfo.jsx';
+import {ProductDetails} from './ProductDetails.jsx';
 import axios from 'axios';
 
 
@@ -36,7 +37,7 @@ const Info = styled.div`
   flex-direction: column;
   border: 1px solid blue;
 `
-const Three = styled.div`
+const Details = styled.div`
   grid-area: three;
   border: 1px solid green;
 `
@@ -52,8 +53,12 @@ const Overview = () => {
         <ImageGallery styles={styles} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle} />
         <GalleryOverlay styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle} />
       </Gallery>
-      <Info><ProductInfo product={product} styles={styles} setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle}/></Info>
-      <Three>Product Information details</Three>
+      <Info>
+        <ProductInfo product={product} styles={styles} setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle}/>
+      </Info>
+      <Details>
+        <ProductDetails product={product} />
+      </Details>
       <button onClick={(e) => {
         axios.get(`http://localhost:3000/data/products/403${Math.floor(Math.random() * 10) + 44}/styles`)
         .then((res) => {
