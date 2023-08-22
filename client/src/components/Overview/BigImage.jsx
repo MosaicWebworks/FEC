@@ -14,13 +14,13 @@ const StyledBigImage = styled.div`
   cursor: crosshair;
 `
 
-const BigImage = ({selectedThumbnail, setEnlargeImage, coords, setCoords}) => {
+const BigImage = ({selectedThumbnail, setEnlargeImage, coords, setCoords, styles, selectedStyle}) => {
   const [relativeCoords, setRelativeCoords] = React.useState({x: 0, y: 0});
   const [reallyBig, setReallyBig] = React.useState(false);
   return(<StyledBigImage
     onClick={(e) => {setEnlargeImage(false)}}
     style={
-    {backgroundImage: `url(${sampleStyles.results[0].photos[selectedThumbnail].url})`,
+    {backgroundImage: `url(${styles.results[selectedStyle].photos[selectedThumbnail].url})`,
     backgroundPosition: `${coords.x * 100}% ${coords.y * 100}%`,
   }} onMouseLeave={(e) => {setEnlargeImage(false)}}/>);
 }

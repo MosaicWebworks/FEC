@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import { sampleProduct, sampleStyles } from './sampleData.js';
 import { ImageGallery } from './ImageGallery.jsx';
 import { GalleryOverlay } from './GalleryOverlay.jsx';
+import {ProductInfo} from './ProductInfo.jsx';
+import {ProductDetails} from './ProductDetails.jsx';
+import axios from 'axios';
+import {ProductContext} from '../../contexts.js'
 
-const Text = styled.div`color: red;`
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -12,8 +16,8 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
-  grid-template-areas: "gallery two"
-                       "three three";
+  grid-template-areas: "gallery info"
+                       "three  three";
   column-gap: 15px;
   row-gap: 15px;
 `
@@ -27,23 +31,46 @@ const Gallery = styled.div`
   align-items: center;
   overflow: hidden;
 `
-const Two = styled.div`
-  grid-area: two;
+const Info = styled.div`
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
   border: 1px solid blue;
 `
-const Three = styled.div`
+const Details = styled.div`
   grid-area: three;
   border: 1px solid green;
 `
 
 const Overview = () => {
+  const contextTest = React.useContext(ProductContext);
+  console.log(contextTest);
   const [styles, setStyles] = React.useState(sampleStyles);
+  const [selectedStyle, setSelectedStyle] = React.useState(0);
+  const [product, setProduct] = React.useState(sampleProduct);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
   return(
     <Container>
-      <Gallery><ImageGallery selectedThumbnail={selectedThumbnail} /><GalleryOverlay setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} /></Gallery>
-      <Two>Product Info</Two>
-      <Three>Product Information details</Three>
+      <Gallery>
+        <ImageGallery styles={styles} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle} />
+        <GalleryOverlay styles={styles} setSelectedThumbnail={setSelectedThumbnail} selectedThumbnail={selectedThumbnail} selectedStyle={selectedStyle} setSelectedStyle={setSelectedStyle} />
+      </Gallery>
+      <Info>
+        <ProductInfo product={product} styles={styles} setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle}/>
+      </Info>
+      <Details>
+        <ProductDetails product={product} />
+      </Details>
+      <button onClick={(e) => {
+        axios.get(`http://localhost:3000/data/products/403${Math.floor(Math.random() * 10) + 44}/styles`)
+        .then((res) => {
+          setStyles(res.data);
+          axios.get(`http://localhost:3000/data/products/${res.data.product_id}`)
+          .then((res) => {
+            setProduct(res.data);
+          })
+        });
+        }}>Random Style</button>
     </Container>
 
   )
