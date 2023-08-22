@@ -7,6 +7,7 @@ import RatingsReviews from './components/rr/RatingsReviews.jsx';
 import QuestionList from './components/qa/QuestionList.jsx';
 import { Overview } from './components/Overview/Overview.jsx'
 import {ProductContext} from './contexts.js'
+import {sampleProduct} from './components/Overview/sampleData.js';
 
 const theme = {
   colors: {
@@ -44,7 +45,7 @@ const Heading2 = styled.h2`
 `;
 
 const App = () => {
-  const [product, setProduct] = React.useState();
+  const [product, setProduct] = React.useState(sampleProduct);
   return (
     // <div>
     //   <h1>Hello World</h1>
@@ -58,7 +59,7 @@ const App = () => {
           setProduct(res.data);
         });
         }}>Random Style</button></Heading1>
-          <Overview/>
+          <Overview />
         </Section>
         <Section>
           <Heading2>Questions & Answers</Heading2>
