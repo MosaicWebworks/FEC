@@ -5,9 +5,7 @@ import axios from 'axios';
 import Report from './Report.jsx';
 import {StyledButton} from './ButtonStyles.jsx';
 import Photos from './Photo.jsx';
-import {StyledPhotos} from './ModalStyles.jsx';
-
-
+import {AnswerPhotos} from './ModalStyles.jsx';
 
 
 const Answer = ({setAddedEntity, answer}) =>{
@@ -73,13 +71,13 @@ const Answer = ({setAddedEntity, answer}) =>{
         <button className="btn-helpfulness" onClick={changeHelpful}>Helpful? Yes({helpfulness})</button>
         {reportButton()}
       </StyledButton>
-      <StyledPhotos>
+      <AnswerPhotos>
         {
           answer.photos && answer.photos.map((photo, index) => (
             <Photos photo={photo} key={index}/>
           ))
         }
-      </StyledPhotos>
+      </AnswerPhotos>
     </div>
   )
 }

@@ -1,14 +1,15 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React, {useState, useEffect, useContext, createContext} from 'react';
 import QuestionEntry from './QuestionEntry.jsx'
 import exampleData from './exampleData.js';
 import styled from 'styled-components';
 import axios from 'axios';
 import QuestionModal from './QuestionModal.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
+import {ProductContext} from '../../contexts.js';
 
 const MaxHeight = styled.div`
-max-height: 500px;
-overflow-y: auto`
+max-height: 50vh;
+overflow-y: auto;`
 
 
 
@@ -16,40 +17,39 @@ export const QuestionListContext = createContext();
 export const ReportContext = createContext();
 
 
-const QuestionList = ({productID}) => {
-  //contains an array of question objects  //Object.entries(exampleData.results)
+const QuestionList = ({id}) => {
+
   const [questionsObject, setQuestionsObject] = useState([]);
-  //determines how many questions to render
+
   const [toRender, setToRender] = useState(2);
-  //contains the questions that will be rendered
+
   const [questionsToRender, setQuestionsToRender] = useState([]);
 
   const [isModalShown, setIsModalShown] = useState(false);
+  const product = useContext(ProductContext)
 
-  productID = 40347 || productID;
-  //makes initial api call and stores fetched info into different states
-    //can refactor to use one less state?
+  let productID =  product.id || id;
+
 
   useEffect(() => {
-    axios.get(`data/qa/questions?product_id=${productID}&count=30`)
+    axios.get(`data/qa/questions?product_id=${productID}&count=50`)
       .then((results) => {
+
         setQuestionsObject(Object.entries(results.data.results))
         setQuestionsToRender(Object.entries(results.data.results).slice(0, toRender));
       })
       .catch((err) => {
         console.log(err)});
 
-    }, [])
+    }, [productID])
 
 
-    ////initially renders the questions and re-renders upon button click for more questions
-    useEffect(() => {
-      setQuestionsToRender(questionsObject.slice(0, toRender));
-    }, [toRender])
+  useEffect(() => {
+    setQuestionsToRender(questionsObject.slice(0, toRender));
+  }, [toRender])
 
 
 
-  //will display more buttons when clicked on. Will disappear if no more questions available
   const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
@@ -101,6 +101,7 @@ const QuestionList = ({productID}) => {
           ))
         }
         </MaxHeight>
+        {console.log('number of questions', questionsObject.length)}
         <button onClick={toggleModal}>Ask a question</button>
         {displayModal()}
         {renderMoreQuestions()}

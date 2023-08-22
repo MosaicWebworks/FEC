@@ -3,28 +3,19 @@ import styled from 'styled-components';
 import axios from 'axios';
 import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Photos, Required, AlignContent} from './ModalStyles.jsx';
 import {QuestionContext} from './QuestionEntry.jsx';
+import {ProductContext} from '../../contexts.js';
 
 
 const QuestionModal = ({setAddedEntity, product_id, setIsModalShown}) => {
-  const [productName, setProductName] = useState('');
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
 
-  // const [addedEntity, setAddedEntity] = useContext(AddEntityContext);
-
   const [isInvalid, setIsInvalid] = useState(false)
 
   //obtains product name
-  useEffect(() => {
-    axios.get(`data/products/${product_id}`)
-      .then((results) => {
-        setProductName(results.data.name);
-      })
-      .catch((err) => console.log(err));
-
-  }, [])
-
+  const productName = useContext(ProductContext);
 
   const toggleModal = () => {
     setIsModalShown(false);
@@ -72,7 +63,7 @@ const QuestionModal = ({setAddedEntity, product_id, setIsModalShown}) => {
         <Header>
           <h1>Ask your question</h1>
             <small>
-              About the {productName}
+              About the {productName.name}
               </small>
         </Header>
 

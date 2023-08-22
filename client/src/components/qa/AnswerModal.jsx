@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Photos, AlignContent, StyledPhotos} from './ModalStyles.jsx';
+import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Fotos, AlignContent, StyledPhotos} from './ModalStyles.jsx';
 import {QuestionContext} from './QuestionEntry.jsx';
 import PhotoModal from './PhotoModal.jsx';
 import Photo from './Photo.jsx';
@@ -145,10 +145,10 @@ const AnswerModal = ({product_id}) => {
           <Submit>
             <button onClick={handleSubmit}>submit</button>
           </Submit>
-          <Photos>
+          <Fotos>
             {photos.length < 5 ? <button onClick={togglePhoto}>Photos</button> : <div></div>}
             {isPhotoModalShown ? <PhotoModal/> : <div></div>}
-          </Photos>
+          </Fotos>
         </ModalContainer>
 
       </AlignContent>

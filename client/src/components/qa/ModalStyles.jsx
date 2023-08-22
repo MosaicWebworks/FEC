@@ -52,7 +52,7 @@ max-height: 125px;
 max-width: 200px;
 `
 
-const Photos = styled.div`
+const Fotos = styled.div`
 grid-area: photos;
 max-height: 125px;
 max-width: 200px;
@@ -61,6 +61,14 @@ const StyledPhotos = styled.div`
 display: flex;
 justify-content: center;
 `
+
+
+const AnswerPhotos = styled(StyledPhotos)`
+justify-content: start;
+gap: 25px;
+margin-bottom: 25px;
+`
+
 
 /**--------------------------------------
  *
@@ -83,9 +91,11 @@ const Image = styled.div`
   display: flex;
   height: 100px;
   width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
 `
 export {
-  Photos,
+  Fotos,
   Submit,
   Warning,
   Header,
@@ -97,5 +107,6 @@ export {
   PhotoContainer,
   PhotoHeader,
   Image,
-  StyledPhotos
+  StyledPhotos,
+  AnswerPhotos
 }

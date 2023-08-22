@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Image} from './ModalStyles.jsx';
 
 
-const Photos = ({photo}) => {
+const Photo = ({photo}) => {
 
   return (
 
@@ -20,6 +20,6 @@ const Photos = ({photo}) => {
 
 
 
-export default Photos;
+export default Photo;
 
 //object fit cover
