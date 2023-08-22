@@ -79,7 +79,7 @@ describe('Answer', () => {
     const [firstMoreAnswers, secondMoreAnswers] = screen.getAllByRole('button', {name: 'see more answers'});
     //waits until first button is clicked. this is an async event so await makes sure event is done before moving on
     await user.click(firstMoreAnswers);
-    //counting how many answers are present
+    //counting how many answers
     const answers = screen.getAllByText('A:', {exact: false});
     expect(answers.length).toBe(6);
   })
