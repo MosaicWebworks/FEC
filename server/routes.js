@@ -17,6 +17,13 @@ router.get("/reviews*", function (req, res)
   .catch((err) => console.log(err));
 });
 
+router.post("/reviews", function (req, res) {
+  console.log('Received data:', req.body);
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews`, req.body, {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}})
+    .then((data) => res.send(data.data))
+    .catch((err) => console.log(err));
+});
+
 router.get("/qa*", function (req, res)
 {
   //split the url of the req to get whichever url the client needs

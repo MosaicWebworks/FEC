@@ -43,12 +43,23 @@ const Details = styled.div`
 `
 
 const Overview = () => {
-  const contextTest = React.useContext(ProductContext);
-  console.log(contextTest);
+  const product = React.useContext(ProductContext);
   const [styles, setStyles] = React.useState(sampleStyles);
   const [selectedStyle, setSelectedStyle] = React.useState(0);
-  const [product, setProduct] = React.useState(sampleProduct);
+  //const [product, setProduct] = React.useState(sampleProduct);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
+  React.useEffect(() => {
+    console.log('Overview effect');
+    axios.get(`http://localhost:3000/data/products/${product.id}/styles`)
+    .then((res) => {
+      setStyles(res.data);
+    }).then(() => {
+      axios.get(`http://localhost:3000/data/reviews?product_id=${product.id}`)
+      .then((res) => {
+        console.log('res is ', res.data.rating);
+      })
+    });
+  }, [product]);
   return(
     <Container>
       <Gallery>
@@ -61,16 +72,6 @@ const Overview = () => {
       <Details>
         <ProductDetails product={product} />
       </Details>
-      <button onClick={(e) => {
-        axios.get(`http://localhost:3000/data/products/403${Math.floor(Math.random() * 10) + 44}/styles`)
-        .then((res) => {
-          setStyles(res.data);
-          axios.get(`http://localhost:3000/data/products/${res.data.product_id}`)
-          .then((res) => {
-            setProduct(res.data);
-          })
-        });
-        }}>Random Style</button>
     </Container>
 
   )

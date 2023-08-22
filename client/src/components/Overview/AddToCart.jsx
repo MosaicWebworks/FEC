@@ -1,29 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
+import axios from 'axios';
 
 const DropDownContainer = styled.div`
-  border: 1px solid magenta;
-  display: grid;
   position: relative;
-  margin: 15px;
+  width: 100%
 `
 const DropDownButton = styled.div`
+  display: flex;
+  border: 1px solid green;
+  justify-content: center;
+  align-items: center;
+  padding-top: .75em;
+  padding-bottom: .75em;
   position: absolute;
   width: 100%;
-  background-color: white:
+  cursor: pointer;
 `
 
 const DropDownContent = styled.ul`
   position: absolute;
-  visibility: hidden;
-  width: 100%;
+  top: 1.5em;
+  width: inherit;
   background-color: white;
+  border: 1px solid magenta;
+  list-style: none;
+  padding: 0;
+  cursor: pointer;
 `
+
+const DropDownItem = styled.li`
+  margin: 5px;
+`
+
 const AddToCartLayout = styled.div`
   display: grid;
+  border: 1px solid purple;
+  height: 5em;
   grid-template-columns: 3fr 1fr;
-  grid-tepmlate-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: "size   number"
                        "add    favorite";
   column-gap: 15px;
@@ -58,23 +74,23 @@ const AddToCart =
   }
   return(
     <AddToCartLayout>
-  <DropDownContainer>
-    <DropDownButton onClick={(e) => {(sizeDropDown === "hidden") ? setSizeDropDown("visible") : setSizeDropDown("hidden")}}>
+  <DropDownContainer onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
+    <DropDownButton>
       SELECT SIZE
     </DropDownButton>
     <DropDownContent style={{visibility: sizeDropDown}}>
       {sizes.map((size) => {
         var sizeIndex = index;
         index++;
-      return(<li onClick={(e) => {setSizeIndex(sizeIndex)}}>{size}</li>)})}
+      return(<DropDownItem onClick={(e) => {setSizeIndex(sizeIndex)}}>{size}</DropDownItem>)})}
     </DropDownContent>
   </DropDownContainer>
-  <DropDownContainer>
-    <DropDownButton onClick={(e) => {(quantityDropDown === "hidden") ? setQuantityDropDown("visible") : setQuantityDropDown("hidden")}}>
-      1
+  <DropDownContainer onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
+    <DropDownButton>
+      -
     </DropDownButton>
     <DropDownContent style={{visibility: quantityDropDown}}>
-      {quantity.map((i) => <li>{i}</li>)}
+      {quantity.map((i) => <DropDownItem>{i}</DropDownItem>)}
     </DropDownContent>
   </DropDownContainer>
   <AddToBag />

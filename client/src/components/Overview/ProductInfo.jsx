@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
 import {AddToCart} from './AddToCart.jsx'
+import {ProductContext} from '../../contexts.js'
+import StarRating from '../SharedComponent/StarRating.jsx';
 
 const StyleThumbnail = styled.img`
 height: 45px;

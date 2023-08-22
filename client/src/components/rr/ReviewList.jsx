@@ -6,6 +6,8 @@ import { ReviewsProvider } from './ReviewsContext.jsx';
 import ReviewTile from './ReviewTile.jsx';
 //import exampleDataList from './exampleDataList';
 import RatingBreakdown from './RatingBreakdown.jsx';
+import NewReviewForm from './NewReviewForm.jsx';
+import Modal from 'react-modal';
 
 const Container = styled.div`
 border: 1px solid #ccc;
@@ -30,21 +32,23 @@ const SortingDropdown = ({ selectedSort, onChange }) => {
 };
 
 const ReviewList = () => {
-  const { reviews, loadedReviewsCount, handleLoadMoreReviews, updateReviews, filteredReviews } = useReviews();
+  const { reviews, loadedReviewsCount, handleLoadMoreReviews,  filteredReviews,  setFilteredReviews } = useReviews();
   const [selectedSort, setSelectedSort] = useState('relevant');
+  //window for new review
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Reapply the sorting when reviews or filters change
-  useEffect(() => {
-      handleSortChange({ target: { value: selectedSort } });
-    }, [filteredReviews]);
+  // // Reapply the sorting when reviews or filters change
+  // useEffect(() => {
+  //     handleSortChange({ target: { value: selectedSort } });
+  //   }, [filteredReviews]);
 
-  const handleSortChange = (event) => {
-    const newSelectedSort = event.target.value;
-    setSelectedSort(newSelectedSort);
+  const sortReviews = (reviewsToSort, sortOption) => {
 
-    const sortedReviews = [...reviews];
+    //copy of sorted Reveiws
+    //const sortedReviews = [...filteredReviews];
+    const sortedReviews = [...reviewsToSort];
 
-    if (newSelectedSort === 'helpful') {
+    if (sortOption === 'helpful') {
       sortedReviews.sort ((a, b) => {
         const helpfulA = a.helpfulness;
         const helpfulB = b.helpfulness;
@@ -52,7 +56,7 @@ const ReviewList = () => {
       });
     };
 
-    if (newSelectedSort === 'newest') {
+    if (sortOption === 'newest') {
         sortedReviews.sort ((a, b) => {
           const dateA = new Date(a.date).getTime();
           const dateB = new Date(b.date).getTime();
@@ -60,7 +64,7 @@ const ReviewList = () => {
       });
     };
 
-    if (newSelectedSort === 'relevant') {
+    if (sortOption === 'relevant') {
       sortedReviews.sort((a, b) => {
         const helpfulA = a.helpfulness;
         const helpfulB = b.helpfulness;
@@ -75,8 +79,16 @@ const ReviewList = () => {
     });
   }
 
-    updateReviews(sortedReviews);
+  return sortedReviews;
   }
+
+  const handleSortChange = (e) => {
+    const newSelectedSort = e.target.value;
+    setSelectedSort(newSelectedSort);
+
+    const sortedReviews = sortReviews(filteredReviews, newSelectedSort);
+    setFilteredReviews(sortedReviews);
+  };
 
   return (
     <Container data-testid="reviewList-component">
@@ -89,6 +101,10 @@ const ReviewList = () => {
           See More Reviews
         </Button>
       )}
+      <Button onClick={() => setIsModalOpen(true)}>Write Your Review</Button>
+      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
+        <NewReviewForm />
+      </Modal>
     </Container>
   );
 };
