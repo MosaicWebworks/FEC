@@ -1,28 +1,59 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext, createContext} from 'react';
 import QuestionEntry from './QuestionEntry.jsx'
-import exampleData from './exampleData.js'
+import exampleData from './exampleData.js';
+import styled from 'styled-components';
+import axios from 'axios';
+import QuestionModal from './QuestionModal.jsx';
+import SearchQuestions from './SearchQuestions.jsx';
+import {ProductContext} from '../../contexts.js';
+
+const MaxHeight = styled.div`
+max-height: 50vh;
+overflow-y: auto;`
 
 
 
-const QuestionList = ({productID}) => {
-  //contains an array of question objects
-  const [questionsObject, setQuestionsObject] = useState(Object.entries(exampleData.results));
-  //determines how many questions to render
+export const QuestionListContext = createContext();
+export const ReportContext = createContext();
+
+
+const QuestionList = ({id}) => {
+
+  const [questionsObject, setQuestionsObject] = useState([]);
+
   const [toRender, setToRender] = useState(2);
-  //contains the questions that will be rendered
+
   const [questionsToRender, setQuestionsToRender] = useState([]);
 
-  //initially renders the questions and re-renders upon button click for more questions
+  const [isModalShown, setIsModalShown] = useState(false);
+  const product = useContext(ProductContext)
+
+  let productID =  product.id || id;
+
+
+  useEffect(() => {
+    axios.get(`data/qa/questions?product_id=${productID}&count=50`)
+      .then((results) => {
+
+        setQuestionsObject(Object.entries(results.data.results))
+        setQuestionsToRender(Object.entries(results.data.results).slice(0, toRender));
+      })
+      .catch((err) => {
+        console.log(err)});
+
+    }, [productID])
+
+
   useEffect(() => {
     setQuestionsToRender(questionsObject.slice(0, toRender));
   }, [toRender])
 
-  //will display more buttons when clicked on. Will disappear if no more questions available
-  const moreQuestions = (e) => {
 
+
+  const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
-        <input type="submit" value="see more questions"/>
+        <button onClick={handleSubmit}>More answered questions</button>
       )
     } else {
       return <div></div>
@@ -32,16 +63,49 @@ const QuestionList = ({productID}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setToRender(toRender + 2);
+    console.log(toRender);
   }
-  return (
-    <div>
-      {questionsToRender.map((question) => (
-        <QuestionEntry qaObject={question[1]} key={question[0]}/>
-      ))}
-    <form onSubmit={handleSubmit}>
-        {moreQuestions()}
-    </form>
 
+
+  const toggleModal = () => {
+    if (!isModalShown) {
+      setIsModalShown(true);
+    } else {
+      setIsModalShown(false);
+    }
+  }
+
+  //need to create a useContext for the setIsModalShown
+  const displayModal = () => {
+    if (isModalShown) {
+      return (
+        <QuestionModal product_id={productID} setIsModalShown={setIsModalShown}/>
+      )
+    }
+  }
+  //create context for this that is passed from index
+  const closeModal = () => {
+    if (isModalShown) {
+      setIsModalShown(false)
+    }
+  }
+
+
+  return (
+    <div >
+      {questionsObject && <QuestionListContext.Provider value={[setQuestionsToRender, questionsObject, toRender]}>
+        <SearchQuestions/>
+        <MaxHeight onClick={closeModal}>
+        {questionsToRender && questionsToRender.map((question) => (
+          <QuestionEntry id={productID} qObject={question[1]} key={question[0]}/>
+          ))
+        }
+        </MaxHeight>
+        {console.log('number of questions', questionsObject.length)}
+        <button onClick={toggleModal}>Ask a question</button>
+        {displayModal()}
+        {renderMoreQuestions()}
+      </QuestionListContext.Provider>}
     </div>
   )
 
