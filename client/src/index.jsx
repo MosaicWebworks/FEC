@@ -59,7 +59,7 @@ const App = () => {
           setProduct(res.data);
         });
         }}>Random Style</button></Heading1>
-          <Overview />
+          <Overview/>
         </Section>
         <Section>
           <Heading2>Questions & Answers</Heading2>
