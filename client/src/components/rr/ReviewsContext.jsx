@@ -1,10 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 //import exampleDataList from './exampleDataList';
 import axios from 'axios';
+import { ProductContext } from '../../contexts.js';
+
 
 const ReviewsContext = createContext();
 
 export const ReviewsProvider = ({ children }) => {
+
+  const product = useContext(ProductContext);
+  console.log(product);
   const [reviews, setReviews] = useState([]);
   const [reviewMeta, setReviewMeta] = useState({});
   const [loadedReviewsCount, setLoadedReviewsCount] = useState(2); // Initial value is 2
@@ -12,8 +17,9 @@ export const ReviewsProvider = ({ children }) => {
   const [filteredReviews, setFilteredReviews] = useState([]);
 
   useEffect(() => {
+    console.log('Fetching reviews for product:', product.id);
     //Fetch reviews
-    axios.get('http://localhost:3000/data/reviews?product_id=40350')
+    axios.get(`http://localhost:3000/data/reviews?product_id=${product.id}`)
       .then((response) => {
         setReviews(response.data.results);
         setFilteredReviews(response.data.results);
@@ -21,13 +27,13 @@ export const ReviewsProvider = ({ children }) => {
       .catch((error) => console.error('An error occurred while fetching reviews:', error));
 
     //Fetch review meta
-    axios.get('http://localhost:3000/data/reviews/meta?product_id=40350')
+    axios.get(`http://localhost:3000/data/reviews/meta?product_id=${product.id}`)
       .then((response) =>{
         console.log('Review meta response:', response);
         setReviewMeta(response.data)
       })
       .catch((error) => console.error('An error occurred while fetching review meta:', error));
-  }, []);
+  }, [product.id]);
 
   const handleLoadMoreReviews = () => {
     // Increment the loadedReviewsCount by 2 each time the button is clicked
@@ -50,7 +56,7 @@ export const ReviewsProvider = ({ children }) => {
   };
 
   return (
-    <ReviewsContext.Provider value={{ reviews, reviewMeta, loadedReviewsCount, handleLoadMoreReviews,  filteredReviews,  setFilteredReviews }}>
+    <ReviewsContext.Provider value={{ reviews, reviewMeta, loadedReviewsCount, handleLoadMoreReviews,  filteredReviews,  setFilteredReviews}}>
       {children}
     </ReviewsContext.Provider>
   );

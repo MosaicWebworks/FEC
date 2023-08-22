@@ -36,12 +36,15 @@ const allLabels = {
   Size: ["too small", "too big"],
   Width: ["too narrow", "too wide"],
   Comfort: ["uncomfortable", "comfortable"],
-  Quality: ["poor", "great"]
+  Quality: ["poor", "great"],
+  Fit: ["too small", "too big"],
+  Length: ["too short", "too long"]
 };
 
-function AllRating({ characteristic, minValueLabel, maxValueLabel, average }) {
+function AllRating({ characteristic, minValueLabel , maxValueLabel , average }) {
   const barWidth = 100; // Total width of the bar in percent
-  const iconPosition = (average / 5) * barWidth; // Position of the icon in percent
+  // Position of the icon in percent, ratings out of 5 stars
+  const iconPosition = (average / 5) * barWidth; // Position of the icon in percent, ratings out of 5 star
 
   return (
     <RatingContainer>

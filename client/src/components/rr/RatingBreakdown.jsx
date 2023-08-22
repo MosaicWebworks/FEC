@@ -4,22 +4,23 @@ import styled from 'styled-components';
 import { useReviews} from './ReviewsContext.jsx';
 import { ReviewsProvider } from './ReviewsContext.jsx';
 import StarRating from '../SharedComponent/StarRating.jsx';
+import RatingSummarywithStar from '../SharedComponent/RatingSummarywithStar.jsx'
 
-const RatingSummaryContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
+// const RatingSummaryContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+// `;
 
-const AverageRating = styled.span`
-  font-size: 36px;
-  font-weight: bold;
-  margin: 10px;
+// const AverageRating = styled.span`
+//   font-size: 36px;
+//   font-weight: bold;
+//   margin: 10px;
 
-`;
+// `;
 
-const TotalReviews = styled.span`
-  margin: 10px;
-`;
+// const TotalReviews = styled.span`
+//   margin: 10px;
+// `;
 
 const RecommendationPercentage = styled.div`
   font-size: 18px;
@@ -72,37 +73,32 @@ const Count = styled.span`
 
 
 //calculate average rating
-const calculateRatingSummary = (reviews) => {
-  const totalRating = reviews.map((review) => review.rating).reduce((sum, rating) => sum + rating, 0);
-  const totalReviews = reviews.length;
+const calculateRatingSummary = (ratings, recommended) => {
+  const totalReviews = Object.values(ratings).reduce((sum, count) => sum + Number(count), 0);
+  const totalRating = Object.entries(ratings).reduce((sum, [rating, count]) => sum + Number(rating) * Number(count), 0);
   const averageRating = totalRating / totalReviews;
 
-  const recommendedCount = reviews.filter((review) => review.recommend).length;
+  const recommendedCount = Number(recommended.true);
   const recommendationPercentage = ((recommendedCount / totalReviews) * 100).toFixed(2);
 
-  //console.log(recommendedCount, totalReviews);
+console.log(recommendedCount, totalReviews);
 
   return { averageRating, totalReviews,  recommendationPercentage };
 };
 
 
-const RatingSummary = ({ averageRating, totalReviews,  recommendationPercentage }) => {
-  return (
-    <div>
-      <RatingSummaryContainer>
-        <AverageRating>{averageRating.toFixed(1)}</AverageRating>
-        <StarRating rating={averageRating} />
-        <TotalReviews>({totalReviews} reviews)</TotalReviews>
-      </RatingSummaryContainer>
-      <RecommendationPercentage>{recommendationPercentage}% of reviews recommend this product</RecommendationPercentage>
-    </div>
-  );
-};
+// const RatingSummary = () => {
+//   return (
+//     <div>
+//       <RatingSummarywithStar/>
+//     </div>
+//   );
+// };
 
 //detailed ratings
-const RatingDetails = ({ reviews, filterRatings, appliedFilters }) => {
-  const countRatings = (rating) => reviews.filter((r) => r.rating === rating).length;
-  const totalReviews = reviews.length;
+const RatingDetails = ({ ratings, filterRatings, appliedFilters }) => {
+  const countRatings = (rating) => Number(ratings[rating]);
+  const totalReviews = Object.values(ratings).reduce((sum, count) => sum + Number(count), 0);
 
   return (
     <DetailsContainer>
@@ -126,8 +122,11 @@ const RatingDetails = ({ reviews, filterRatings, appliedFilters }) => {
 };
 
 const RatingBreakdown = () => {
-  const { reviews, updateFilteredReviews, filteredReviews } = useReviews();
-  const { averageRating, totalReviews, recommendationPercentage } = calculateRatingSummary(reviews);
+  const { reviewMeta, updateFilteredReviews } = useReviews();
+  if (!reviewMeta || !reviewMeta.ratings || !reviewMeta.recommended) {
+    return <div>Loading...</div>;
+  }
+  const { averageRating, totalReviews, recommendationPercentage } = calculateRatingSummary(reviewMeta.ratings, reviewMeta.recommended);
   const [appliedFilters, setAppliedFilters] = useState([]);
   //const { updateFilteredReviews } = useReviews();
 
@@ -161,8 +160,9 @@ const RatingBreakdown = () => {
 
   return (
     <div>
-      <RatingSummary averageRating={averageRating} totalReviews={totalReviews} recommendationPercentage = {recommendationPercentage}/>
-      <RatingDetails reviews={filteredReviews} filterRatings={filterRatings} appliedFilters={appliedFilters} />
+      <RatingSummarywithStar/>
+      <RecommendationPercentage>{recommendationPercentage}% of reviews recommend this product</RecommendationPercentage>
+      <RatingDetails ratings={reviewMeta.ratings} filterRatings={filterRatings} appliedFilters={appliedFilters} />
     </div>
   );
 };
