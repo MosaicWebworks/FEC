@@ -60,7 +60,7 @@ const AddToCart =
   const [quantityDropDown, setQuantityDropDown] = React.useState("hidden");
   //const [numberInStock, setNumberInStock] = React.useState(0);
   const [skus, setSkus] = React.useState(styles.results[selectedStyle].skus);
-  const [sizeIndex, setSizeIndex] = React.useState(0);
+  const [sizeIndex, setSizeIndex] = React.useState(-1);
   var sizes = [];
   var numberInStock = [];
   for (let sku in skus) {
@@ -75,14 +75,15 @@ const AddToCart =
   return(
     <AddToCartLayout>
   <DropDownContainer onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
-    <DropDownButton>
-      SELECT SIZE
+    <DropDownButton sizeIndex={sizeIndex}>
+      {sizeIndex < 0 ? 'SELECT SIZE' : sizes[sizeIndex]}
     </DropDownButton>
     <DropDownContent style={{visibility: sizeDropDown}}>
       {sizes.map((size) => {
-        var sizeIndex = index;
+        var selectedIndex = index;
+
         index++;
-      return(<DropDownItem onClick={(e) => {setSizeIndex(sizeIndex)}}>{size}</DropDownItem>)})}
+      return(<DropDownItem onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {}} onMouseLeave={(e) => {}}>{size}</DropDownItem>) })}
     </DropDownContent>
   </DropDownContainer>
   <DropDownContainer onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
