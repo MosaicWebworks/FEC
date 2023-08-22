@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import ReviewList from './ReviewList.jsx';
 import { ReviewsProvider } from './ReviewsContext.jsx';
+// import {ProductContext} from '../../contexts.js';
 
 const Container = styled.div`
   display: flex;
@@ -23,6 +24,7 @@ const RightSection = styled.div`
 
 
 const RatingsReviews = () => {
+  // const product = useContext(ProductContext);
   return (
     <ReviewsProvider>
     <Container>

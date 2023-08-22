@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 //import exampleDataList from './exampleDataList.js';
 import StarRating from '../SharedComponent/StarRating.jsx';
@@ -53,6 +53,25 @@ const ReviewTile = ({ review }) => {
     photos,
   } = review;
 
+  //helpfulness buttons
+  const [hasVoted, setHasVoted] = useState(false);
+  const [yesVotes, setYesVotes] = useState(0);
+  const [noVotes, setNoVotes] = useState(0);
+
+  const handleYesVote = () => {
+    if (!hasVoted) {
+      setYesVotes(yesVotes + 1);
+      setHasVoted(true);
+    }
+  };
+
+  const handleNoVote = () => {
+    if (!hasVoted) {
+      setNoVotes(noVotes + 1);
+      setHasVoted(true);
+    }
+  };
+
   return (
     <Tile>
       <StarRating rating={rating} />
@@ -62,8 +81,12 @@ const ReviewTile = ({ review }) => {
       <Date>Reviewed on {date}</Date>
       <Reviewer>{reviewer_name}</Reviewer>
       <Helpfulness>{helpfulness} people found this helpful</Helpfulness>
+        <div>Was this review helpful?
+          <button onClick={handleYesVote}>Yes ({yesVotes})</button>
+          <button onClick={handleNoVote}>No ({noVotes})</button>
+        </div>
       {photos.map((photo) => (
-        <Photo key={photo.id} src={photo.url} alt="Review Photo" />
+        <Photo key={photo.id} src={photo.url} />
       ))}
     </Tile>
   );
