@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
-
+import {theme} from '../Styles/LayoutStyles.jsx'
 const photos = sampleStyles.results[0].photos;
 
 const StyledOverlay = styled.div`

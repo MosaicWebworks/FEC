@@ -5,7 +5,7 @@ import {AddToCart} from './AddToCart.jsx'
 import {ProductContext} from '../../contexts.js'
 import RatingSummarywithStar from '../SharedComponent/RatingSummarywithStar.jsx';
 import { ReviewsProvider } from '../rr/ReviewsContext.jsx';
-
+import {theme} from '../Styles/LayoutStyles.jsx'
 
 const StyleThumbnail = styled.img`
 height: 45px;

@@ -15,6 +15,7 @@ const theme = {
     secondary: 'steelblue',
     background: '	#f0f8ff',
     text: '#5A5A5A',
+    textSecondary: 'steelblue',
   },
   fonts: {
     main: '"Helvetica Neue", sans-serif',
@@ -37,11 +38,11 @@ const Section = styled.section`
 `;
 
 const Heading1 = styled.h1`
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.textSecondary};
 `;
 
 const Heading2 = styled.h2`
-  color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.textSecondary};
 `;
 
 export {

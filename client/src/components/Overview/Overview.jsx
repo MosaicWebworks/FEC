@@ -7,6 +7,7 @@ import {ProductInfo} from './ProductInfo.jsx';
 import {ProductDetails} from './ProductDetails.jsx';
 import axios from 'axios';
 import {ProductContext} from '../../contexts.js'
+import {theme} from '../Styles/LayoutStyles.jsx'
 
 
 const Container = styled.div`

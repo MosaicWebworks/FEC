@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
 import axios from 'axios';
+import {theme} from '../Styles/LayoutStyles.jsx'
 
 const DropDownContainer = styled.div`
   position: relative;
