@@ -33,8 +33,8 @@ const Thumbnail = styled.img`
   flex-shrink: 0;
 `
 const ArrowStyle = styled.div`
-  border-left: 0.5rem solid steelBlue;
-  border-bottom: 0.5rem solid steelBlue;
+  border-left: 0.5rem solid ${theme.colors.primary};
+  border-bottom: 0.5rem solid ${theme.colors.primary};
   width: 2rem;
   height: 2rem;
   margin: 15px;
@@ -65,7 +65,7 @@ const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles, sele
       var thumbnailIndex = index;
       var thumbnailBorder = "1px solid white";
       if (thumbnailIndex === selectedThumbnail) {
-        thumbnailBorder = "2px solid steelBlue";
+        thumbnailBorder = `2px solid ${theme.colors.secondary}`;
       }
       index++
       return (<Thumbnail key={photo.thumbnail_url + index.toString()} onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: thumbnailBorder}} />)
