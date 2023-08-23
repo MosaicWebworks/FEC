@@ -10,7 +10,6 @@ const DropDownContainer = styled.div`
 `
 const DropDownButton = styled.div`
   display: flex;
-  border: 1px solid green;
   justify-content: center;
   align-items: center;
   padding-top: .75em;
@@ -18,26 +17,25 @@ const DropDownButton = styled.div`
   position: absolute;
   width: 100%;
   cursor: pointer;
+  background-color: ${theme.colors.primary}
 `
 
 const DropDownContent = styled.ul`
   position: absolute;
   top: 1.5em;
   width: inherit;
-  background-color: white;
-  border: 1px solid magenta;
+  background-color: ${theme.colors.primary};
   list-style: none;
   padding: 0;
   cursor: pointer;
 `
 
 const DropDownItem = styled.li`
-  margin: 5px;
+  padding: 5px;
 `
 
 const AddToCartLayout = styled.div`
   display: grid;
-  border: 1px solid purple;
   height: 5em;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -58,11 +56,13 @@ const Favorite = () => {
 const AddToCart =
 ({styles, selectedStyle}) => {
   const [hoverSize, setHoverSize] = React.useState(-1);
+  const [hoverQuantity, setHoverQuantity] = React.useState(-1);
   const [sizeDropDown, setSizeDropDown] = React.useState("hidden");
   const [quantityDropDown, setQuantityDropDown] = React.useState("hidden");
   //const [numberInStock, setNumberInStock] = React.useState(0);
   const [skus, setSkus] = React.useState(styles.results[selectedStyle].skus);
   const [sizeIndex, setSizeIndex] = React.useState(-1);
+  const [quantityIndex, setQuantityIndex] = React.useState(-1);
   var sizes = [];
   var numberInStock = [];
   for (let sku in skus) {
@@ -83,16 +83,20 @@ const AddToCart =
     <DropDownContent data-testid="sizeOptions" style={{visibility: sizeDropDown}}>
       {sizes.map((size) => {
         var selectedIndex = index;
+        var backgroundColor = hoverSize === selectedIndex ? theme.colors.secondary : theme.colors.primary;
         index++;
-      return(<DropDownItem key={'sizeDropDown' + index} onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {}} onMouseLeave={(e) => {}}>{size}</DropDownItem>) })}
+      return(<DropDownItem key={'sizeDropDown' + index} style={{backgroundColor: backgroundColor}} onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {setHoverSize(selectedIndex)}} onMouseLeave={(e) => {setHoverSize(-1)}}>{size}</DropDownItem>) })}
     </DropDownContent>
+
   </DropDownContainer>
   <DropDownContainer data-testid="quantityMenu" onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
     <DropDownButton>
-      -
+      {quantityIndex < 0 ? '-' : quantityIndex}
     </DropDownButton>
     <DropDownContent data-testid="quantityOptions" style={{visibility: quantityDropDown}}>
-      {quantity.map((i) => <DropDownItem key={'dropDownQuantity' + i}>{i}</DropDownItem>)}
+      {quantity.map((i) => {
+        var backgroundColor = hoverQuantity === i ? theme.colors.secondary : theme.colors.primary;
+        return(<DropDownItem key={'dropDownQuantity' + i} style={{backgroundColor: backgroundColor}} onClick={(e) => {setQuantityIndex(i)}} onMouseEnter={(e) => {setHoverQuantity(i)}} onMouseLeave={(e) => {setHoverQuantity(-1)}}>{i}</DropDownItem>)})}
     </DropDownContent>
   </DropDownContainer>
   <AddToBag />
