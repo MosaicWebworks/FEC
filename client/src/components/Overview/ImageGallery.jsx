@@ -38,7 +38,7 @@ const ImageGallery = ({ selectedThumbnail, styles, selectedStyle, setSelectedSty
     return <BigImage styles={styles} selectedThumbnail={selectedThumbnail} setEnlargeImage={setEnlargeImage} coords={coords} setCoords={setCoords} selectedStyle={selectedStyle} />
   }
   return(
-    <StyledImg alt={`image showcasing ${product.name} in ${styles.results[selectedStyle].name}`} data-testid="main-image" onClick={(e) => {console.log('image clicked')
+    <StyledImg alt={`image showcasing ${product.name} in ${styles.results[selectedStyle].name}`} data-testid="main-image" onClick={(e) => {
   setEnlargeImage(true)}} src={styles.results[selectedStyle].photos[selectedThumbnail].url} />
 )
 }
