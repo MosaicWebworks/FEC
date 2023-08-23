@@ -262,24 +262,24 @@ describe('Modals', () => {
     expect(email.value).toBe('email@domain.com');
   })
 
-  it('should return successful response upon posting (WIP)', async () => {
-    const data = {data: {name: '', body: '', email: '', photos:[]}}
-    user.setup();
-    render(<QuestionList/>);
+  // it('should return successful response upon posting (WIP)', async () => {
+  //   const data = {data: {name: '', body: '', email: '', photos:[]}}
+  //   user.setup();
+  //   render(<QuestionList/>);
 
-    const [...addAnswer] = screen.getAllByRole('button', {name: /add answer/i});
-    await user.click(addAnswer[0]);
-
-
-    axios.post.mockResolvedValue(data)
+  //   const [...addAnswer] = screen.getAllByRole('button', {name: /add answer/i});
+  //   await user.click(addAnswer[0]);
 
 
-    await axios.post('/data/qa/questions/646821/answers', data)
-    .then((results) => {
+  //   axios.post.mockResolvedValue({data: 201})
 
-      expect(results).toBe(results);
-    })
-  })
+
+  //   await axios.post('/data/qa/questions/646821/answers', {})
+  //   .then((results) => {
+
+  //     expect(results.data).toBe(201);
+  //   })
+  // })
 
 
 
@@ -303,20 +303,6 @@ describe('Photo modal', () => {
     const photosButton = screen.getByRole('button', {name: /photos/i});
     await user.click(photosButton);
     const displayedText = screen.getByText(/add your photos/i);
-    expect(displayedText).toBeTruthy();
-  })
-
-  it('should have placeholder text of "add photo link" on photo modal', async () => {
-    user.setup();
-    render(<QuestionList/>);
-    const [...button] = screen.getAllByRole('button', {name: /add answer/i});
-    // await user.click(button[0]);
-    await user.click(button[0]);
-    //search for text in modal displayed
-
-    const photosButton = screen.getByRole('button', {name: /photos/i});
-    await user.click(photosButton);
-    const displayedText = screen.getByPlaceholderText(/add photo link/i);
     expect(displayedText).toBeTruthy();
   })
 
@@ -352,9 +338,8 @@ describe('Photo modal', () => {
     user.setup();
     render(<QuestionList/>);
     const [...button] = screen.getAllByRole('button', {name: /add answer/i});
-    // await user.click(button[0]);
+
     await user.click(button[0]);
-    //search for text in modal displayed
 
     const photosButton = screen.getByRole('button', {name: /photos/i});
     await user.click(photosButton);
@@ -364,6 +349,35 @@ describe('Photo modal', () => {
     const displayedText = screen.getByText(/Submit your question/i);
 
     expect(displayedText).toBeTruthy();
+  })
+
+  it('should add photos when clicking add photo button', async () => {
+    user.setup();
+    render(<QuestionList/>);
+    const [...button] = screen.getAllByRole('button', {name: /add answer/i});
+
+    await user.click(button[0]);
+
+
+    const photosButton = screen.getByRole('button', {name: /photos/i});
+    await user.click(photosButton);
+    const addPhotoButton = screen.getByRole('button', {name: /add photo/i});
+    const [...currentPhotos] = screen.getAllByRole('img');
+
+    const photoLink = screen.getByPlaceholderText(/add photo link/i);
+    const link = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=962&q=80'
+    await user.type(photoLink, link )
+    expect(photoLink.value).toBe(link)
+    await user.click(addPhotoButton);
+
+    expect(screen.getAllByRole('img').length - currentPhotos.length).toBe(1);
+
+
+
+
+
+
+
   })
 })
 

@@ -5,7 +5,7 @@ import Answer from './Answer.jsx';
 import AnswerModal from './AnswerModal.jsx';
 import axios from 'axios';
 import Report from './Report.jsx';
-import {StyledButton} from './ButtonStyles.jsx';
+import {StyledButton} from '../Styles/ButtonStyles.jsx';
 
 
 const Border = styled.div`
@@ -15,12 +15,14 @@ const Border = styled.div`
                        "answer"
                        "button";
   border-bottom: solid black;
-  height: 210px;
+
   max-height: 50vh;
 `
 const Question = styled.div`
 grid-area: question;
-margin-bottom: 20px;`
+margin-bottom: 10px;
+text-align:center;
+`
 
 
 const AnswerDesign = styled.div`
