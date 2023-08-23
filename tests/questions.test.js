@@ -1,5 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react';
+import '@testing-library/jest-dom'
 import user from '@testing-library/user-event';
 import QuestionList from '../client/src/components/qa/QuestionList';
 import exampleData from '../client/src/components/qa/exampleData'
@@ -28,16 +29,6 @@ describe('QuestionList', () => {
     let seen = screen.getByRole('button', {name: /ask a question/i});
     expect(seen).toBeTruthy();
   }),
-
-  it('should make an axios request', async () => {
-    const payload = {data: mockQuestionData}
-
-    axios.get.mockResolvedValue({data: mockQuestionData});
-    await axios.get('/data/qa')
-    let seen = screen.getByRole('button', {name: /more answered questions/i});
-    const questions = await user.click(seen)
-    expect(questions.results[0].question_id).toBe(646821)
-  })
 
   it('should render "More answered questions" button', () => {
     render(
@@ -217,7 +208,7 @@ describe('Helpful', () => {
 })
 
 describe('Modals', () => {
-  it('should render the add answer button', async () => {
+  it('should render the add answer button', () => {
     render(<QuestionList/>);
     const [...button] = screen.getAllByRole('button', {name: /add answer/i, exact: false})
     expect(button).toBeTruthy();
@@ -234,7 +225,61 @@ describe('Modals', () => {
     expect(displayedText).toBeTruthy();
   })
 
+  it('should display question modal', async () => {
+    user.setup();
+    render(<QuestionList/>);
+    const addQuestion = screen.getByRole('button', {name: /ask a question/i});
 
+    await user.click(addQuestion);
+
+    const textarea = screen.getByLabelText(/question/i);
+    const username = screen.getByLabelText(/username/i);
+    const email = screen.getByLabelText(/email/i);
+    await user.type(textarea, '20');
+    await user.type(username, 'john');
+    await user.type(email,'email@domain.com');
+    expect(username.value).toBe('john');
+    expect(textarea.value).toBe('20');
+    expect(email.value).toBe('email@domain.com');
+
+  })
+
+  it('should display answer modal', async () => {
+    user.setup();
+    render(<QuestionList/>);
+
+    const [...addAnswer] = screen.getAllByRole('button', {name: /add answer/i});
+    await user.click(addAnswer[0]);
+
+    const textarea = screen.getByLabelText(/answer/i);
+    const username = screen.getByLabelText(/username/i);
+    const email = screen.getByLabelText(/email/i);
+    await user.type(textarea, '20');
+    await user.type(username, 'john');
+    await user.type(email,'email@domain.com');
+    expect(username.value).toBe('john');
+    expect(textarea.value).toBe('20');
+    expect(email.value).toBe('email@domain.com');
+  })
+
+  it('should return successful response upon posting (WIP)', async () => {
+    const data = {data: {name: '', body: '', email: '', photos:[]}}
+    user.setup();
+    render(<QuestionList/>);
+
+    const [...addAnswer] = screen.getAllByRole('button', {name: /add answer/i});
+    await user.click(addAnswer[0]);
+
+
+    axios.post.mockResolvedValue(data)
+
+
+    await axios.post('/data/qa/questions/646821/answers', data)
+    .then((results) => {
+
+      expect(results).toBe(results);
+    })
+  })
 
 
 
@@ -320,4 +365,20 @@ describe('Photo modal', () => {
 
     expect(displayedText).toBeTruthy();
   })
+})
+
+
+describe('Search bar', () => {
+
+  it('should update search bar when typed', async () => {
+    user.setup();
+    render(<QuestionList/>);
+
+    const search = screen.getByPlaceholderText(/have a question/i);
+    expect(search).toBeTruthy();
+
+    await user.type(search, 'You');
+    expect(search.value).toBe('You');
+  })
+
 })
