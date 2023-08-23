@@ -17,9 +17,9 @@ export const QuestionListContext = createContext();
 export const ReportContext = createContext();
 
 
-const QuestionList = ({id}) => {
+const QuestionList = () => {
 
-  const [questionsObject, setQuestionsObject] = useState([]);
+  const [questionsObject, setQuestionsObject] = useState(Object.entries(exampleData.results));
 
   const [toRender, setToRender] = useState(2);
 
@@ -28,7 +28,7 @@ const QuestionList = ({id}) => {
   const [isModalShown, setIsModalShown] = useState(false);
   const product = useContext(ProductContext)
 
-  let productID =  product.id || id;
+  let productID =  product.id || 40346;
 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const QuestionList = ({id}) => {
   }, [toRender])
 
 
-
+//toRender < questionsObject.length
   const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
@@ -63,7 +63,7 @@ const QuestionList = ({id}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setToRender(toRender + 2);
-    console.log(toRender);
+
   }
 
 
@@ -101,7 +101,6 @@ const QuestionList = ({id}) => {
           ))
         }
         </MaxHeight>
-        {console.log('number of questions', questionsObject.length)}
         <button onClick={toggleModal}>Ask a question</button>
         {displayModal()}
         {renderMoreQuestions()}

@@ -20,7 +20,7 @@ const SearchQuestions = () => {
 
   return (
       <div>
-        <input type="text" value={query} placeholder="Have a question? Search for answers…" onChange={(e) => {
+        <input name="search" type="text" value={query} placeholder="Have a question? Search for answers…" onChange={(e) => {
           setQuery(e.target.value);
           }}
         />

@@ -118,7 +118,7 @@ const NewReviewForm = () => {
   return (
     showReviewForm ? (
     <form onSubmit={handleSubmit}>
-      <h1>Write Your Review</h1>
+      <h1 data-testid="new-review-title">Write Your Review</h1>
       <h2>About the product</h2>
       {/* Overall Rating */}
       <label>Overall rating (mandatory)*</label>
@@ -254,3 +254,4 @@ const NewReviewForm = () => {
 };
 
 export default NewReviewForm;
+

@@ -17,7 +17,7 @@ const Report = ({path, id, setIsReported}) => {
   }
 
   return (
-    <button onClick={handleSubmit}>Report</button>
+    <button onClick={handleSubmit}>Report {path.slice(0, path.length -1)}</button>
   )
 
 
