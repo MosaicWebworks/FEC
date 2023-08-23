@@ -32,8 +32,6 @@ const Answer = ({setAddedEntity, answer}) =>{
           setHelpfulness(helpfulness + 1);
       })
         .catch((err) => console.log(err));
-    } else {
-      console.log('already marked as helpful')
     }
   }
 
@@ -50,17 +48,6 @@ const Answer = ({setAddedEntity, answer}) =>{
   }
 
 
-
-
-  const reportAnswer = (e) => {
-    e.preventDefault();
-    if (!isReported) {
-      setIsReported(true);
-    } else {
-      console.log('already reported');
-    }
-  }
-  // console.log(answer);
   return (
     <div>
       <div>
@@ -68,7 +55,7 @@ const Answer = ({setAddedEntity, answer}) =>{
       </div>
       <div className="username">by {answer.answerer_name}, <small className="data-answered">{formattedDate}</small></div>
       <StyledButton>
-        <button className="btn-helpfulness" onClick={changeHelpful}>Helpful? Yes({helpfulness})</button>
+        <button data-testid="answer-helpful" className="btn-helpfulness" onClick={changeHelpful}>Helpful? Yes({helpfulness})</button>
         {reportButton()}
       </StyledButton>
       <AnswerPhotos>

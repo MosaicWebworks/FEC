@@ -19,7 +19,7 @@ export const ReportContext = createContext();
 
 const QuestionList = () => {
 
-  const [questionsObject, setQuestionsObject] = useState([]);
+  const [questionsObject, setQuestionsObject] = useState(Object.entries(exampleData.results));
 
   const [toRender, setToRender] = useState(2);
 
@@ -49,7 +49,7 @@ const QuestionList = () => {
   }, [toRender])
 
 
-
+//toRender < questionsObject.length
   const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
