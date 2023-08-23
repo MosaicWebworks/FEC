@@ -18,7 +18,11 @@ const Recommend = styled.div`
 `;
 
 const Body = styled.div`
-  margin-top: 10px;
+  word-wrap: break-word;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 `;
 
 const Date = styled.div`
@@ -73,7 +77,7 @@ const ReviewTile = ({ review }) => {
   };
 
   return (
-    <Tile>
+    <Tile data-testid='reviewTile-component'>
       <StarRating rating={rating} />
       <Summary>{summary}</Summary>
       <Recommend>{recommend ? 'I recommend this product' : ''}</Recommend>
@@ -85,9 +89,11 @@ const ReviewTile = ({ review }) => {
           <button onClick={handleYesVote}>Yes ({yesVotes})</button>
           <button onClick={handleNoVote}>No ({noVotes})</button>
         </div>
-      {photos.map((photo) => (
-        <Photo key={photo.id} src={photo.url} />
-      ))}
+        {photos && photos.map((photo) => (
+          <Photo key={photo.id} src={photo.url} />
+        ))
+      }
+
     </Tile>
   );
 };
@@ -95,3 +101,4 @@ const ReviewTile = ({ review }) => {
 
 
 export default ReviewTile;
+
