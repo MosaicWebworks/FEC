@@ -94,7 +94,9 @@ const ReviewList = () => {
     <Container data-testid="reviewList-component">
       <SortingDropdown selectedSort={selectedSort} onChange={handleSortChange} />
       {filteredReviews.slice(0, loadedReviewsCount).map((review) => (
+        <Container data-testid="reviewTile-component">
         <ReviewTile key={review.review_id} review={review} />
+        </Container>
       ))}
       {loadedReviewsCount <filteredReviews.length && (
         <Button onClick={handleLoadMoreReviews}>
