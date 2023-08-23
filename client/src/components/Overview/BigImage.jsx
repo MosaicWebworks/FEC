@@ -19,6 +19,8 @@ const BigImage = ({selectedThumbnail, setEnlargeImage, coords, setCoords, styles
   const [reallyBig, setReallyBig] = React.useState(false);
   return(<StyledBigImage
     onClick={(e) => {setEnlargeImage(false)}}
+    data-testid="bigImage"
+    title="enlarged image showcasing product"
     style={
     {backgroundImage: `url(${styles.results[selectedStyle].photos[selectedThumbnail].url})`,
     backgroundPosition: `${coords.x * 100}% ${coords.y * 100}%`,

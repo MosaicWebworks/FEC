@@ -30,7 +30,7 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
         }
         var styleIndex = index;
         index++
-        return(<StyleThumbnail onClick={(e) => setSelectedStyle(styleIndex)} style={{border: styleBorder}} src={style.photos[0].thumbnail_url}/>)
+        return(<StyleThumbnail key={'styleThumbnail' + index} onClick={(e) => setSelectedStyle(styleIndex)} style={{border: styleBorder}} src={style.photos[0].thumbnail_url}/>)
       })}
     </StyleThumbnails>
   );

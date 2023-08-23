@@ -74,24 +74,23 @@ const AddToCart =
   }
   return(
     <AddToCartLayout>
-  <DropDownContainer onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
+  <DropDownContainer data-testid="sizeMenu" onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
     <DropDownButton sizeIndex={sizeIndex}>
       {sizeIndex < 0 ? 'SELECT SIZE' : sizes[sizeIndex]}
     </DropDownButton>
-    <DropDownContent style={{visibility: sizeDropDown}}>
+    <DropDownContent data-testid="sizeOptions" style={{visibility: sizeDropDown}}>
       {sizes.map((size) => {
         var selectedIndex = index;
-
         index++;
-      return(<DropDownItem onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {}} onMouseLeave={(e) => {}}>{size}</DropDownItem>) })}
+      return(<DropDownItem key={'sizeDropDown' + index} onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {}} onMouseLeave={(e) => {}}>{size}</DropDownItem>) })}
     </DropDownContent>
   </DropDownContainer>
-  <DropDownContainer onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
+  <DropDownContainer data-testid="quantityMenu" onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
     <DropDownButton>
       -
     </DropDownButton>
-    <DropDownContent style={{visibility: quantityDropDown}}>
-      {quantity.map((i) => <DropDownItem>{i}</DropDownItem>)}
+    <DropDownContent data-testid="quantityOptions" style={{visibility: quantityDropDown}}>
+      {quantity.map((i) => <DropDownItem key={'dropDownQuantity' + i}>{i}</DropDownItem>)}
     </DropDownContent>
   </DropDownContainer>
   <AddToBag />
