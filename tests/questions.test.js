@@ -29,6 +29,16 @@ describe('QuestionList', () => {
     expect(seen).toBeTruthy();
   }),
 
+  it('should make an axios request', async () => {
+    const payload = {data: mockQuestionData}
+
+    axios.get.mockResolvedValue({data: mockQuestionData});
+    await axios.get('/data/qa')
+    let seen = screen.getByRole('button', {name: /more answered questions/i});
+    const questions = await user.click(seen)
+    expect(questions.results[0].question_id).toBe(646821)
+  })
+
   it('should render "More answered questions" button', () => {
     render(
         <QuestionList/>
@@ -169,14 +179,14 @@ describe('Report', () => {
 describe('Helpful', () => {
 
   it('should render a helpful button', () => {
-    axios.put.mockResolvedValue({data: {status: 204}})
+
     render(<QuestionList/>);
     const [...button] = screen.getAllByRole('button', {name: /helpful/i, exact: false})
     expect(button).toBeTruthy();
   })
 
   it('should allow click of helpfulness btn', async () => {
-    axios.put.mockResolvedValue({data: {status: 204}});
+
     user.setup();
     render(<QuestionList/>);
     const button = screen.getByRole('button', {name: /helpful\? Yes\(18\)/i, exact: false})
@@ -184,14 +194,11 @@ describe('Helpful', () => {
 
     await user.click(button);
     expect(button).toBeTruthy();
-    // const newButton = screen.getByRole('button', {name: /helpful\? Yes\(18\)/i, exact: false})
-
-    // expect(newButton).toBeTruthy()
 
   })
 
   it('should not allow click of helpfulness btn', async () => {
-    axios.put.mockResolvedValue({data: {status: 204}});
+
     user.setup();
     render(<QuestionList/>);
     const button = screen.getByRole('button', {name: /helpful\? Yes\(18\)/i, exact: false})
@@ -203,12 +210,12 @@ describe('Helpful', () => {
     await user.click(clickedButton);
 
     const clickedNewButton = screen.getByRole('button', {name: /helpful\? Yes\(19\)/i})
-    expect(clickedButton).toBeTruthy();
+    expect(clickedNewButton).toBeTruthy();
 
   })
 
 })
-// axios.post.mockResolvedValue({data: {status: 201}});
+
 describe('Modals', () => {
   it('should render the add answer button', async () => {
     render(<QuestionList/>);
