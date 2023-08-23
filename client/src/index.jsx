@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
@@ -43,4 +43,6 @@ const App = () => {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(<App />);
+

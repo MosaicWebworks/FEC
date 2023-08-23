@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { sampleProduct, sampleStyles } from './sampleData.js';
 import {BigImage} from './BigImage.jsx';
 import {ProductContext} from '../../contexts.js'
+import {theme} from '../Styles/LayoutStyles.jsx'
 
 const StyledImg = styled.img`
   max-width: 100%;
