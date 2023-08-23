@@ -2,38 +2,60 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 //import exampleDataList from './exampleDataList.js';
 import StarRating from '../SharedComponent/StarRating.jsx';
+import { ThemeProvider } from 'styled-components';
+import { Container, Section, Heading1, Heading2, theme } from '../Styles/LayoutStyles.jsx';
+import { StyledButton } from '../Styles/ButtonStyles.jsx';
 
 const Tile = styled.div`
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 20px;
   margin-bottom: 20px;
+  background-color: #f9f9f9;
 `;
 
 const Summary = styled.div`
   font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const Recommend = styled.div`
-
+  color: ${props => (props.recommend ? 'green' : 'red')};
+  margin-bottom: 10px;
 `;
 
 const Body = styled.div`
   word-wrap: break-word;
-  width: 100%;
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  margin-bottom: 10px;
 `;
 
-const Date = styled.div`
-
-`;
-
-const Reviewer = styled.div`
-
+const DateReviewer = styled.div`
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 10px;
 `;
 
 const Helpfulness = styled.div`
+  margin-bottom: 10px;
+`;
+
+// const Button = styled.button`
+//   background-color: #e7e7e7;
+//   border: none;
+//   color: black;
+//   padding: 5px 10px;
+//   text-align: center;
+//   text-decoration: none;
+//   display: inline-block;
+//   font-size: 14px;
+//   margin: 5px 2px;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: #ccc;
+//   }
+// `;
+
+const Reviewer = styled.div`
 
 `;
 
@@ -42,6 +64,7 @@ const Photo = styled.img`
   max-height: 100px;
   margin-top: 10px;
   cursor: pointer;
+  border-radius: 5px;
 `;
 
 
@@ -86,8 +109,8 @@ const ReviewTile = ({ review }) => {
       <Reviewer>{reviewer_name}</Reviewer>
       <Helpfulness>{helpfulness} people found this helpful</Helpfulness>
         <div>Was this review helpful?
-          <button onClick={handleYesVote}>Yes ({yesVotes})</button>
-          <button onClick={handleNoVote}>No ({noVotes})</button>
+          <StyledButton onClick={handleYesVote}>Yes ({yesVotes})</StyledButton>
+          <StyledButton onClick={handleNoVote}>No ({noVotes})</StyledButton>
         </div>
         {photos && photos.map((photo) => (
           <Photo key={photo.id} src={photo.url} />

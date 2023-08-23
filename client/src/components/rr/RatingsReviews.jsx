@@ -10,8 +10,8 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border: solid black;
-  width: 100%;
+  // border: solid black;
+  // width: 100%;
 `;
 
 const LeftSection = styled.div`

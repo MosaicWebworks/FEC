@@ -43,7 +43,7 @@ const RatingBar = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: lightgray;
+    background-color: white;
   }
 `;
 
@@ -65,7 +65,7 @@ const GreenBar = styled.div`
 
 const GrayBar = styled.div`
   flex-grow: 1;
-  background-color: gray;
+  background-color: lightgrey;
 `;
 
 const Count = styled.span`
