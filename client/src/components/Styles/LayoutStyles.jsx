@@ -3,17 +3,18 @@ import styled from 'styled-components';
 
 
 const PrimaryText = styled.div`
-
+color:${({theme}) => theme.colors.primary};
 `
 
 const SecondaryText = styled.div`
-
+color:${({theme}) => theme.colors.secondary};
 `
 const theme = {
   colors: {
     primary: 'blue',
     secondary: 'steelblue',
     background: '	#f0f8ff',
+    tertiary: 'green',
     text: '#5A5A5A',
   },
   fonts: {
@@ -30,19 +31,19 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
   font-family: ${(props) => props.theme.fonts.main};
-`;
+  `;
 
 const Section = styled.section`
   margin-bottom: 40px;
 `;
 
 const Heading1 = styled.h1`
-  color: ${(props) => props.theme.colors.primary};
 `;
+// color: ${(props) => props.theme.colors.primary};
 
 const Heading2 = styled.h2`
-  color: ${(props) => props.theme.colors.secondary};
 `;
+// color: ${(props) => props.theme.colors.secondary};
 
 export {
   Container,

@@ -8,7 +8,7 @@ import QuestionList from './components/qa/QuestionList.jsx';
 import { Overview } from './components/Overview/Overview.jsx'
 import {ProductContext} from './contexts.js'
 import {sampleProduct} from './components/Overview/sampleData.js';
-import {Container, Section, Heading1, Heading2, theme} from './components/Styles/LayoutStyles.jsx';
+import {Container, Section, Heading1, Heading2, SecondaryText, theme} from './components/Styles/LayoutStyles.jsx';
 
 
 const App = () => {
@@ -30,7 +30,9 @@ const App = () => {
         </Section>
         <Section>
           {/* secondary color for heading */}
-          <Heading2>Questions & Answers</Heading2>
+          <SecondaryText>
+            <Heading2>Questions & Answers</Heading2>
+          </SecondaryText>
           <QuestionList />
         </Section>
         <Section>
@@ -39,7 +41,7 @@ const App = () => {
         </Section>
       </Container>
     </ProductContext.Provider>
-  </ThemeProvider>
+  // </ThemeProvider>
   );
 }
 
