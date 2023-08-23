@@ -56,6 +56,7 @@ const Favorite = () => {
 
 const AddToCart =
 ({styles, selectedStyle}) => {
+  const [hoverSize, setHoverSize] = React.useState(-1);
   const [sizeDropDown, setSizeDropDown] = React.useState("hidden");
   const [quantityDropDown, setQuantityDropDown] = React.useState("hidden");
   //const [numberInStock, setNumberInStock] = React.useState(0);

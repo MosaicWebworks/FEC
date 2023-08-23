@@ -12,7 +12,6 @@ import {ProductContext} from '../../contexts.js'
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  border: 1px solid red;
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
@@ -35,11 +34,9 @@ const Info = styled.div`
   grid-area: info;
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
 `
 const Details = styled.div`
   grid-area: three;
-  border: 1px solid green;
 `
 
 const Overview = () => {
