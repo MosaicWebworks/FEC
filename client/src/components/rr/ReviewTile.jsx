@@ -3,40 +3,50 @@ import styled from 'styled-components';
 //import exampleDataList from './exampleDataList.js';
 import StarRating from '../SharedComponent/StarRating.jsx';
 import { ThemeProvider } from 'styled-components';
-import { Container, Section, Heading1, Heading2, theme } from '../Styles/LayoutStyles.jsx';
+import { Container, Section, theme } from '../Styles/LayoutStyles.jsx';
 import { StyledButton } from '../Styles/ButtonStyles.jsx';
 
 const Tile = styled.div`
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
 `;
 
 const Summary = styled.div`
+  margin-top: 20px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
 `;
 
 const Recommend = styled.div`
-  color: ${props => (props.recommend ? 'green' : 'red')};
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: '\\2713'; // Unicode for  checkmark
+    color: ${({theme}) => theme.colors.primary}
+    font-size: 20px; // Adjust the size if you want
+    margin-right: 10px; // Space between the checkmark and the text
+  }
 `;
 
 const Body = styled.div`
   word-wrap: break-word;
   max-width: 800px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const DateReviewer = styled.div`
   color: #777;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const Helpfulness = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 // const Button = styled.button`
@@ -56,7 +66,7 @@ const Helpfulness = styled.div`
 // `;
 
 const Reviewer = styled.div`
-
+margin-bottom: 20px;
 `;
 
 const Photo = styled.img`
