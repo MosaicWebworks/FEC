@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import {format} from 'date-fns';
 import axios from 'axios';
 import Report from './Report.jsx';
-import {StyledButton} from './ButtonStyles.jsx';
+import {StyledButton} from '../Styles/ButtonStyles.jsx';
 import Photos from './Photo.jsx';
-import {AnswerPhotos} from './ModalStyles.jsx';
+import {AnswerPhotos} from '../Styles/ModalStyles.jsx';
 
 
 const Answer = ({setAddedEntity, answer}) =>{

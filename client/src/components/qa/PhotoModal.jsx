@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {PhotoContainer, ModalForm, PhotoHeader, Submit, AlignContent} from './ModalStyles.jsx';
+import {PhotoContainer, ModalForm, PhotoHeader, Submit, AlignContent} from '../Styles/ModalStyles.jsx';
 import {PhotoContext} from './AnswerModal.jsx';
 import styled from 'styled-components';
 

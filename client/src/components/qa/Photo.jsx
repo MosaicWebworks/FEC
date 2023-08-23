@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {Image} from './ModalStyles.jsx';
+import {Image} from '../Styles/ModalStyles.jsx';
 
 
-const Photo = ({photo}) => {
+const PhotoEntry = ({photo}) => {
 
   return (
 
@@ -20,6 +20,6 @@ const Photo = ({photo}) => {
 
 
 
-export default Photo;
+export default PhotoEntry;
 
 //object fit cover
