@@ -60,7 +60,7 @@ const AddToCart =
   const [quantityDropDown, setQuantityDropDown] = React.useState("hidden");
   //const [numberInStock, setNumberInStock] = React.useState(0);
   const [skus, setSkus] = React.useState(styles.results[selectedStyle].skus);
-  const [sizeIndex, setSizeIndex] = React.useState(0);
+  const [sizeIndex, setSizeIndex] = React.useState(-1);
   var sizes = [];
   var numberInStock = [];
   for (let sku in skus) {
@@ -74,23 +74,23 @@ const AddToCart =
   }
   return(
     <AddToCartLayout>
-  <DropDownContainer onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
-    <DropDownButton>
-      SELECT SIZE
+  <DropDownContainer data-testid="sizeMenu" onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
+    <DropDownButton sizeIndex={sizeIndex}>
+      {sizeIndex < 0 ? 'SELECT SIZE' : sizes[sizeIndex]}
     </DropDownButton>
-    <DropDownContent style={{visibility: sizeDropDown}}>
+    <DropDownContent data-testid="sizeOptions" style={{visibility: sizeDropDown}}>
       {sizes.map((size) => {
-        var sizeIndex = index;
+        var selectedIndex = index;
         index++;
-      return(<DropDownItem onClick={(e) => {setSizeIndex(sizeIndex)}}>{size}</DropDownItem>)})}
+      return(<DropDownItem key={'sizeDropDown' + index} onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {}} onMouseLeave={(e) => {}}>{size}</DropDownItem>) })}
     </DropDownContent>
   </DropDownContainer>
-  <DropDownContainer onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
+  <DropDownContainer data-testid="quantityMenu" onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
     <DropDownButton>
       -
     </DropDownButton>
-    <DropDownContent style={{visibility: quantityDropDown}}>
-      {quantity.map((i) => <DropDownItem>{i}</DropDownItem>)}
+    <DropDownContent data-testid="quantityOptions" style={{visibility: quantityDropDown}}>
+      {quantity.map((i) => <DropDownItem key={'dropDownQuantity' + i}>{i}</DropDownItem>)}
     </DropDownContent>
   </DropDownContainer>
   <AddToBag />
