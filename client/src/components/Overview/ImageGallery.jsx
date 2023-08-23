@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { sampleProduct, sampleStyles } from './sampleData.js';
 import {BigImage} from './BigImage.jsx';
+import {ProductContext} from '../../contexts.js'
 
 const StyledImg = styled.img`
   max-width: 100%;
@@ -14,6 +15,7 @@ const StyledImg = styled.img`
 `
 
 const ImageGallery = ({ selectedThumbnail, styles, selectedStyle, setSelectedStyle }) => {
+  const product = React.useContext(ProductContext);
   const [enlargeImage, setEnlargeImage] = React.useState(false);
   const [coords, setCoords] = React.useState({x: 0, y: 0});
   React.useEffect(() => {
@@ -35,7 +37,7 @@ const ImageGallery = ({ selectedThumbnail, styles, selectedStyle, setSelectedSty
     return <BigImage styles={styles} selectedThumbnail={selectedThumbnail} setEnlargeImage={setEnlargeImage} coords={coords} setCoords={setCoords} selectedStyle={selectedStyle} />
   }
   return(
-    <StyledImg data-testid="main-image" onClick={(e) => {console.log('image clicked')
+    <StyledImg alt={`image showcasing ${product.name} in ${styles.results[selectedStyle].name}`} data-testid="main-image" onClick={(e) => {console.log('image clicked')
   setEnlargeImage(true)}} src={styles.results[selectedStyle].photos[selectedThumbnail].url} />
 )
 }
