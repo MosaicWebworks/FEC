@@ -16,6 +16,7 @@ const theme = {
     background: '	#f0f8ff',
     tertiary: 'green',
     text: '#5A5A5A',
+    textSecondary: 'steelblue',
   },
   fonts: {
     main: '"Helvetica Neue", sans-serif',
@@ -37,19 +38,9 @@ const Section = styled.section`
   margin-bottom: 40px;
 `;
 
-const Heading1 = styled.h1`
-`;
-// color: ${(props) => props.theme.colors.primary};
-
-const Heading2 = styled.h2`
-`;
-// color: ${(props) => props.theme.colors.secondary};
-
 export {
   Container,
   Section,
-  Heading1,
-  Heading2,
   PrimaryText,
   SecondaryText,
   theme

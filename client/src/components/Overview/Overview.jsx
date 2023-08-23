@@ -7,11 +7,12 @@ import {ProductInfo} from './ProductInfo.jsx';
 import {ProductDetails} from './ProductDetails.jsx';
 import axios from 'axios';
 import {ProductContext} from '../../contexts.js'
+import {theme} from '../Styles/LayoutStyles.jsx'
+
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  border: 1px solid red;
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 3fr) minmax(0, 1fr);
@@ -34,24 +35,27 @@ const Info = styled.div`
   grid-area: info;
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
 `
 const Details = styled.div`
   grid-area: three;
-  border: 1px solid green;
 `
 
 const Overview = () => {
   const product = React.useContext(ProductContext);
   const [styles, setStyles] = React.useState(sampleStyles);
   const [selectedStyle, setSelectedStyle] = React.useState(0);
+  //const [product, setProduct] = React.useState(sampleProduct);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
   React.useEffect(() => {
+    console.log('Overview effect');
     axios.get(`http://localhost:3000/data/products/${product.id}/styles`)
     .then((res) => {
       setStyles(res.data);
-    }).catch((err) => {
-      console.log(err);
+    }).then(() => {
+      axios.get(`http://localhost:3000/data/reviews?product_id=${product.id}`)
+      .then((res) => {
+        console.log('res is ', res.data.rating);
+      })
     });
   }, [product]);
   return(

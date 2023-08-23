@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
 import axios from 'axios';
+import {theme} from '../Styles/LayoutStyles.jsx'
 
 const DropDownContainer = styled.div`
   position: relative;
@@ -56,6 +57,7 @@ const Favorite = () => {
 
 const AddToCart =
 ({styles, selectedStyle}) => {
+  const [hoverSize, setHoverSize] = React.useState(-1);
   const [sizeDropDown, setSizeDropDown] = React.useState("hidden");
   const [quantityDropDown, setQuantityDropDown] = React.useState("hidden");
   //const [numberInStock, setNumberInStock] = React.useState(0);

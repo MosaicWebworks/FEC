@@ -8,14 +8,16 @@ import ReviewTile from './ReviewTile.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import NewReviewForm from './NewReviewForm.jsx';
 import Modal from 'react-modal';
+import { StyledButton } from '../Styles/ButtonStyles.jsx';
+import { Container, Section, Heading1, Heading2, theme } from '../Styles/LayoutStyles.jsx';
 
-const Container = styled.div`
-border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-`;
+// const Container = styled.div`
+// // border: 1px solid #ccc;
+//   padding: 10px;
+//   margin-bottom: 20px;
+//   display: flex;
+//   flex-direction: column;
+// `;
 
 const Button = styled.button`
 `
@@ -99,11 +101,11 @@ const ReviewList = () => {
         </Container>
       ))}
       {loadedReviewsCount <filteredReviews.length && (
-        <Button onClick={handleLoadMoreReviews}>
+        <StyledButton onClick={handleLoadMoreReviews}>
           See More Reviews
-        </Button>
+        </StyledButton>
       )}
-      <Button onClick={() => setIsModalOpen(true)}>Write Your Review</Button>
+      <StyledButton onClick={() => setIsModalOpen(true)}>Write Your Review</StyledButton>
       <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
         <NewReviewForm />
       </Modal>

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
@@ -8,8 +8,15 @@ import QuestionList from './components/qa/QuestionList.jsx';
 import { Overview } from './components/Overview/Overview.jsx'
 import {ProductContext} from './contexts.js'
 import {sampleProduct} from './components/Overview/sampleData.js';
-import {Container, Section, Heading1, Heading2, SecondaryText, theme} from './components/Styles/LayoutStyles.jsx';
+import {Container, Section, theme} from './components/Styles/LayoutStyles.jsx';
 
+const Heading1 = styled.h1`
+  color: ${(props) => props.theme.colors.textSecondary};
+`;
+
+const Heading2 = styled.h2`
+  color: ${(props) => props.theme.colors.textSecondary};
+`;
 
 const App = () => {
   const [product, setProduct] = React.useState(sampleProduct);
@@ -45,4 +52,6 @@ const App = () => {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(<App />);
+
