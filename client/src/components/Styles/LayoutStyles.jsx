@@ -37,19 +37,9 @@ const Section = styled.section`
   margin-bottom: 40px;
 `;
 
-const Heading1 = styled.h1`
-  color: ${(props) => props.theme.colors.textSecondary};
-`;
-
-const Heading2 = styled.h2`
-  color: ${(props) => props.theme.colors.textSecondary};
-`;
-
 export {
   Container,
   Section,
-  Heading1,
-  Heading2,
   PrimaryText,
   SecondaryText,
   theme
