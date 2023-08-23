@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Photos, Required, AlignContent} from './ModalStyles.jsx';
+import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Photos, Required, AlignContent} from '../Styles/ModalStyles.jsx';
 import {QuestionContext} from './QuestionEntry.jsx';
 import {ProductContext} from '../../contexts.js';
 

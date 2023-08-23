@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Fotos, AlignContent, StyledPhotos} from './ModalStyles.jsx';
+import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, Fotos, AlignContent, StyledPhotos} from '../Styles/ModalStyles.jsx';
 import {QuestionContext} from './QuestionEntry.jsx';
 import PhotoModal from './PhotoModal.jsx';
-import Photo from './Photo.jsx';
+import PhotoEntry from './Photo.jsx';
 
 
 
@@ -137,7 +137,7 @@ const AnswerModal = ({product_id}) => {
             {invalidEntry()}
             <StyledPhotos>
               {photos.map((photo, index) => (
-                <Photo photo={photo} key={index}/>
+                <PhotoEntry photo={photo} key={index}/>
               ))}
             </StyledPhotos>
 
