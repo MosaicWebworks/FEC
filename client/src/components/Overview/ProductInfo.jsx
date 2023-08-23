@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
 import {AddToCart} from './AddToCart.jsx'
 import {ProductContext} from '../../contexts.js'
-import StarRating from '../SharedComponent/StarRating.jsx';
+import RatingSummarywithStar from '../SharedComponent/RatingSummarywithStar.jsx';
+import { ReviewsProvider } from '../rr/ReviewsContext.jsx';
+
 
 const StyleThumbnail = styled.img`
 height: 45px;
@@ -36,10 +38,11 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
   );
 }
 
-const ProductInfo = ({product, styles, setSelectedStyle, selectedStyle}) => {
+const ProductInfo = ({ref, product, styles, setSelectedStyle, selectedStyle}) => {
   const [showDropDown, setShowDropDown] = React.useState("hidden");
   return(
     <div style={{margin: "10px"}}>
+    <ReviewsProvider><RatingSummarywithStar /></ReviewsProvider><a to="#ratingsReviews">Reviews</a>
     <div>{product.category}</div>
     <h1>{product.name}</h1>
     {styles.results[selectedStyle].sale_price ? <div>

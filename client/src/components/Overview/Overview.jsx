@@ -8,6 +8,7 @@ import {ProductDetails} from './ProductDetails.jsx';
 import axios from 'axios';
 import {ProductContext} from '../../contexts.js'
 
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -45,13 +46,18 @@ const Overview = () => {
   const product = React.useContext(ProductContext);
   const [styles, setStyles] = React.useState(sampleStyles);
   const [selectedStyle, setSelectedStyle] = React.useState(0);
+  //const [product, setProduct] = React.useState(sampleProduct);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
   React.useEffect(() => {
+    console.log('Overview effect');
     axios.get(`http://localhost:3000/data/products/${product.id}/styles`)
     .then((res) => {
       setStyles(res.data);
-    }).catch((err) => {
-      console.log(err);
+    }).then(() => {
+      axios.get(`http://localhost:3000/data/reviews?product_id=${product.id}`)
+      .then((res) => {
+        console.log('res is ', res.data.rating);
+      })
     });
   }, [product]);
   return(
