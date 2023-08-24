@@ -43,8 +43,9 @@ grid-area: header;
 margin-top: 0;
 margin-bottom: 0;`
 
-const Warning = styled.div`
+const Warning = styled.ul`
 color: red;
+list-style-type: none;
 `
 const Submit = styled.div`
 grid-area: submit;
@@ -52,7 +53,7 @@ max-height: 125px;
 max-width: 200px;
 `
 
-const Fotos = styled.div`
+const PhotoSection = styled.div`
 grid-area: photos;
 max-height: 125px;
 max-width: 200px;
@@ -93,9 +94,10 @@ const Image = styled.div`
   width: 100px;
   margin-left: 10px;
   margin-right: 10px;
-`
+  `
+
 export {
-  Fotos,
+  PhotoSection,
   Submit,
   Warning,
   Header,

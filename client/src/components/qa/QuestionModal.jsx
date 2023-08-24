@@ -72,7 +72,7 @@ const QuestionModal = ({setAddedEntity, product_id, setIsModalShown}) => {
             <label>*Question:
               <textarea
                 name="body"
-                placeholder="type answer here..."
+                placeholder="type question here..."
                 required
                 onChange={(e) => setBody(e.target.value)}
                 rows="5" cols="50"

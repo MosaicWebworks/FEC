@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {PhotoContainer, ModalForm, PhotoHeader, Submit, AlignContent} from '../Styles/ModalStyles.jsx';
-import {PhotoContext} from './AnswerModal.jsx';
+import {PhotoContext} from '../../contexts.js';
 import styled from 'styled-components';
-
+import {Button} from '../Styles/ButtonStyles.jsx'
 
 
 
@@ -32,8 +32,8 @@ const PhotoModal = () => {
             </form>
           </ModalForm>
           <Submit>
-            <button onClick={handleSubmit}>Add Photo</button>
-            <button onClick={() => setIsPhotoModalShown(false)}>Cancel</button>
+            <Button onClick={handleSubmit}>Add Photo</Button>
+            <Button onClick={() => setIsPhotoModalShown(false)}>Cancel</Button>
           </Submit>
       </PhotoContainer>
     </AlignContent>

@@ -10,7 +10,7 @@ import AnswerModal from '../client/src/components/qa/AnswerModal';
 import QuestionModal from '../client/src/components/qa/QuestionModal';
 import PhotoModal from '../client/src/components/qa/PhotoModal';
 import SearchQuestions from '../client/src/components/qa/SearchQuestions';
-import {ProductContext} from '../client/src/contexts';
+import {ProductContext, ModalContext} from '../client/src/contexts';
 import {mockQuestionData} from '../client/src/components/qa/mockQuestionData'
 import axios from 'axios';
 import {theme} from '../client/src/components/Styles/LayoutStyles';
