@@ -20,8 +20,8 @@ left: 50%;
 transform: translate(-50%, -50%);
 width: 70%;
 height: 80%;
-background: white;
-z-index: 1
+background: beige;
+z-index: 7;
 margin-left: auto;
 margin-right: auto;
 `

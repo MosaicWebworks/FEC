@@ -8,16 +8,10 @@ import QuestionList from './components/qa/QuestionList.jsx';
 import { Overview } from './components/Overview/Overview.jsx'
 import {ProductContext, ModalContext, AnswerModalContext} from './contexts.js'
 import {sampleProduct} from './components/Overview/sampleData.js';
-import {Container, Section, theme, SecondaryText, darkTheme, OuterContainer} from './components/Styles/LayoutStyles.jsx';
+import {Container, Section, theme, SecondaryText, darkTheme, OuterContainer, Heading1, Heading2} from './components/Styles/LayoutStyles.jsx';
 
-const Heading1 = styled.h1`
-  color: ${(props) => props.theme.colors.textSecondary};
-`;
 
-const Heading2 = styled.h2`
-  color: ${(props) => props.theme.colors.textSecondary};
-`;
-// document.body.style = `background: ${theme.colors.background};`;
+
 
 const App = () => {
   const [isModalShown, setIsModalShown] = useState(false);
@@ -48,8 +42,8 @@ const App = () => {
     <ProductContext.Provider value={product}>
       <ModalContext.Provider value={[isModalShown, setIsModalShown, closeModal]}>
         <AnswerModalContext.Provider value={[isAnswerModalShown, setIsAnswerModalShown]}>
-          <OuterContainer>
-            <Container onClick={closeModal}>
+          <OuterContainer onClick={closeModal}>
+            <Container >
               <Section>
                 {isDarkMode ? <button onClick={toggleDarkMode}>Switch to light mode</button> : <button onClick={toggleDarkMode}>Switch to dark mode</button>}
                 <Heading1>Overview      <button onClick={(e) => {
@@ -61,7 +55,6 @@ const App = () => {
                 <Overview/>
               </Section>
               <Section>
-                {/* secondary color for heading */}
                 <SecondaryText>
                   <Heading2>Questions & Answers</Heading2>
                 </SecondaryText>

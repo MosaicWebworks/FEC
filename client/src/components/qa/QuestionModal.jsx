@@ -78,7 +78,7 @@ const QuestionModal = ({setAddedEntity, product_id, setIsModalShown}) => {
                 rows="5" cols="50"
               />
             </label>
-            <br/>
+            <br/><br/>
 
             <label>*Username:
               <input name="name"
@@ -89,7 +89,7 @@ const QuestionModal = ({setAddedEntity, product_id, setIsModalShown}) => {
               />
             </label>
             <br/>
-            <small>For privacy reasons, do not use your full name or email address</small><br/>
+            <small>For privacy reasons, do not use your full name or email address</small><br/><br/>
 
             <label>*Email:
               <input

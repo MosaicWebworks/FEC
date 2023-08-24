@@ -12,9 +12,7 @@ const MaxHeight = styled.div`
 max-height: 50vh;
 overflow-y: auto;`
 
-const styledDiv = styled.div`
-color: ${({theme}) => theme.colors.textSecondary};
-`
+
 
 
 export const QuestionListContext = createContext();
