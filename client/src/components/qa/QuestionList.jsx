@@ -20,7 +20,6 @@ color: ${({theme}) => theme.colors.textSecondary};
 export const QuestionListContext = createContext();
 export const ReportContext = createContext();
 
-
 const QuestionList = () => {
 
   const [questionsObject, setQuestionsObject] = useState([]);
@@ -79,7 +78,7 @@ const QuestionList = () => {
     }
   }
 
-  //need to create a useContext for the setIsModalShown
+
   const displayModal = () => {
     if (isModalShown) {
       return (
@@ -100,11 +99,7 @@ const QuestionList = () => {
           ))
         }
         </MaxHeight>
-        {/* <styledDiv> */}
-
-          <Button onClick={toggleModal}>Ask a question</Button>
-        {/* </styledDiv> */}
-
+        <Button onClick={toggleModal}>Ask a question</Button>
         {displayModal()}
         {renderMoreQuestions()}
       </QuestionListContext.Provider>}

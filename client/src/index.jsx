@@ -17,7 +17,7 @@ const Heading1 = styled.h1`
 const Heading2 = styled.h2`
   color: ${(props) => props.theme.colors.textSecondary};
 `;
-document.body.style = `background: ${theme.colors.background};`;
+// document.body.style = `background: ${theme.colors.background};`;
 
 const App = () => {
   const [isModalShown, setIsModalShown] = useState(false);
@@ -36,15 +36,13 @@ const App = () => {
   const toggleDarkMode = () => {
     if (isDarkMode) {
       setIsDarkMode(false);
-      setThemeToUse(theme)
-      console.log('dark mode', isDarkMode);
+      setThemeToUse(theme);
     } else {
       setIsDarkMode(true);
-      setThemeToUse(darkTheme)
-      console.log('dark mode', isDarkMode);
+      setThemeToUse(darkTheme);
     }
   }
-
+  document.body.style = `background: ${themeToUse.colors.background};`;
   return (
   <ThemeProvider theme={themeToUse}>
     <ProductContext.Provider value={product}>
