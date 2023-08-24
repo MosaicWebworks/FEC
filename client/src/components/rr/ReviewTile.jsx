@@ -31,6 +31,12 @@ const HelpfulnessSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  div {
+    display: flex; // make the buttons align in one line
+    align-items: center;
+    // margin-left: 10px;
+  }
 `;
 
 const Summary = styled.div`
@@ -45,12 +51,13 @@ const Recommend = styled.div`
   margin-bottom: 20px;
   display: flex;
   align-items: center;
+  color: ${({theme}) => theme.colors.textContrast};
 
   &:before {
     content: '\\2713'; // Unicode for  checkmark
-    color: ${({theme}) => theme.colors.primary}
-    font-size: 20px; // Adjust the size if you want
-    margin-right: 10px; // Space between the checkmark and the text
+    color: ${({theme}) => theme.colors.textContrast};
+    font-size: 20px;
+    margin-right: 10px;
   }
 `;
 
@@ -61,13 +68,13 @@ const Body = styled.div`
 `;
 
 const ReviewDate = styled.div`
-  color: #777;
+  color: ${({theme}) => theme.colors.text};
   font-size: 14px;
   margin-bottom: 20px;
 `;
 
 const Helpfulness = styled.div`
-  margin-bottom: 20px;
+  margin-top: 10px;
 `;
 
 // const Button = styled.button`
@@ -98,17 +105,6 @@ const Photo = styled.img`
   border-radius: 5px;
 `;
 
-const ThumbUpIcon = styled.svg`
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-`;
-
-const ThumbDownIcon = styled.svg`
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-`;
 
 //date same as qa
 const formatDate = (dateString) => {

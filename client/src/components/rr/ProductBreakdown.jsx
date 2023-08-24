@@ -69,8 +69,6 @@ const ProductBreakdown = () => {
   const { reviewMeta } = useReviews();
   const characteristics = reviewMeta.characteristics;
 
-  console.log('reviewMeta is ',reviewMeta);
-
   if (!characteristics) {
     return <div>Loading...</div>; // or some other placeholder
   }

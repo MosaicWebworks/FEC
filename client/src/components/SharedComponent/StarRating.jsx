@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { theme } from '../Styles/LayoutStyles.jsx';
 
 const StarContainer = styled.div`
   display: inline-block;
@@ -7,23 +8,23 @@ const StarContainer = styled.div`
 `;
 
 const Star = styled.span`
-  color: ${({ isActive }) => (isActive ? 'gold' : 'gray')};
+  color: ${({ isActive, theme }) => (isActive ? theme.colors.textContrast : theme.colors.secondary)};
 `;
 
 const FullStar = styled(Star)`
-  color: gold;
+  color: ${({theme}) => theme.colors.textContrast};
 `;
 
 const HalfStar = styled(Star)`
   position: relative;
-  color: gray;
+  // color:  ${({theme}) => theme.colors.secondary}
 
   &::before {
     content: '\2605';
     position: absolute;
     width: 50%;
     overflow: hidden;
-    color: gold;
+    color: ${({theme}) => theme.colors.textContrast};
     z-index: 1;
     left: 0;
     top: 0;
