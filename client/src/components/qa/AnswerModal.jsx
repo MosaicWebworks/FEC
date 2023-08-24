@@ -80,6 +80,8 @@ const AnswerModal = ({product_id}) => {
 
 
 
+
+
   return (
     <PhotoContext.Provider value={[photos,setPhotos, setIsPhotoModalShown]}>
       <AlignContent>
@@ -99,8 +101,7 @@ const AnswerModal = ({product_id}) => {
                   rows="5" cols="50"
                 />
               </label>
-              <br/>
-
+              <br/><br/>
               <label>*Username:
                 <input
                   name="name"
@@ -111,8 +112,7 @@ const AnswerModal = ({product_id}) => {
                 />
               </label>
               <br/>
-              <small>For privacy reasons, do not use your full name or email address</small><br/>
-
+              <small>For privacy reasons, do not use your full name or email address</small><br/><br/>
               <label>*email:
                 <input
                   name="email"
@@ -123,7 +123,7 @@ const AnswerModal = ({product_id}) => {
                 />
               </label>
               <br/>
-              <small>For authentication reasons, you will not be emailed</small>
+              <small>For authentication reasons, you will not be emailed</small><br/><br/>
 
             </form>
             {invalidEntry()}
@@ -134,11 +134,11 @@ const AnswerModal = ({product_id}) => {
             </StyledPhotos>
           </ModalForm>
           <Submit>
+            {photos.length < 5 ? <Button onClick={togglePhoto}>Photos</Button> : <div></div>}
+            {isPhotoModalShown ? <PhotoModal/> : <div></div>}
             <Button onClick={handleSubmit}>submit</Button>
           </Submit>
           <PhotoSection>
-            {photos.length < 5 ? <Button onClick={togglePhoto}>Photos</Button> : <div></div>}
-            {isPhotoModalShown ? <PhotoModal/> : <div></div>}
           </PhotoSection>
         </ModalContainer>
 

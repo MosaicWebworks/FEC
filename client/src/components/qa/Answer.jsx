@@ -23,7 +23,6 @@ const Answer = ({setAddedEntity, answer}) =>{
 
   //create button to increment helpful on button Click
   const changeHelpful = () => {
-    // e.preventDefault();
     if (!isHelpful) {
       setIsHelpful(true);
       axios.put(`data/qa/answers/${answer.id}/helpful`)

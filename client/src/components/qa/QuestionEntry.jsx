@@ -57,7 +57,6 @@ const QuestionEntry = ({id, qObject}) => {
     if (numberToRender === 2) {
       setNumberToRender(answersID.length);
     } else {
-      console.log('number to render', numberToRender)
       setNumberToRender(2)
     }
   }
@@ -81,15 +80,13 @@ const QuestionEntry = ({id, qObject}) => {
 
   const toggleModal = () => {
     if (!isAnswerModalShown) {
-      console.log('modal now shown');
       setIsAnswerModalShown(true);
     } else {
-      console.log('modal no longer being shown');
       setIsAnswerModalShown(false);
     }
   }
 
-  //need to create a useContext for the setIsModalShown
+
   const displayModal = () => {
     if (isAnswerModalShown) {
       return (
