@@ -9,7 +9,13 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import NewReviewForm from './NewReviewForm.jsx';
 import Modal from 'react-modal';
 import { StyledButton } from '../Styles/ButtonStyles.jsx';
-import { Section,  theme } from '../Styles/LayoutStyles.jsx';
+import { Section, theme } from '../Styles/LayoutStyles.jsx';
+
+const zIndexStyle = {
+  overlay: {
+    zIndex: 1000
+  }
+};
 
 const Container = styled.div`
   padding: 10px;
@@ -135,6 +141,11 @@ const ReviewList = () => {
       <WriteReviewButtonContainer>
         <Button onClick={() => setIsModalOpen(true)}>Write Your Review</Button>
       </WriteReviewButtonContainer>
+      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} style={zIndexStyle}>
+      <StyledModal>
+        <NewReviewForm />
+      </StyledModal>
+      </Modal>
       <Section>
       <SortContainer>
         <span>Sort by: </span>
@@ -155,11 +166,7 @@ const ReviewList = () => {
       )}
       </Section>
       </MoreReviewButtonContainer>
-      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
-      <StyledModal>
-        <NewReviewForm />
-      </StyledModal>
-      </Modal>
+
     </Container>
   );
 };
