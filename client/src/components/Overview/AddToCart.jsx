@@ -16,15 +16,16 @@ const DropDownButton = styled.div`
   padding-bottom: .75em;
   position: absolute;
   width: 100%;
-  background-color: ${theme.colors.primary};
-  color: ${theme.colors.textContrast};
+  background-color: ${theme.colors.secondary};
+  color: ${theme.colors.text
+  };
 `
 
 const DropDownContent = styled.ul`
   position: absolute;
   top: 1.5em;
   width: inherit;
-  background-color: ${theme.colors.primary};
+  background-color: ${theme.colors.secondary};
   list-style: none;
   padding: 0;
   cursor: pointer;
@@ -67,9 +68,12 @@ const AddToCart =
   var sizes = [];
   var numberInStock = [];
   for (let sku in skus) {
-    sizes.push(skus[sku].size);
-    numberInStock.push(skus[sku].quantity);
+    if (skus[sku].quantity > 0) {
+      sizes.push(skus[sku].size);
+      numberInStock.push(skus[sku].quantity);
+    }
   }
+  var sizePlaceholder = sizes.length > 0 ? 'SELECT SIZE' : 'OUT OF STOCK';
   var quantity = [];
   var index = 0;
   for (let i = 1; i <= (numberInStock[sizeIndex] > 15 ? 15 : numberInStock[sizeIndex]); i++){
@@ -78,17 +82,16 @@ const AddToCart =
   return(
     <AddToCartLayout>
   <DropDownContainer data-testid="sizeMenu" onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
-    <DropDownButton sizeIndex={sizeIndex}>
-      {sizeIndex < 0 ? 'SELECT SIZE' : sizes[sizeIndex]}
+    <DropDownButton>
+      {sizeIndex < 0 ? sizePlaceholder : sizes[sizeIndex]}
     </DropDownButton>
     <DropDownContent data-testid="sizeOptions" style={{visibility: sizeDropDown}}>
       {sizes.map((size) => {
         var selectedIndex = index;
-        var backgroundColor = hoverSize === selectedIndex ? theme.colors.secondary : theme.colors.primary;
+        var backgroundColor = hoverSize === selectedIndex ? theme.colors.primary : theme.colors.secondary;
         index++;
       return(<DropDownItem key={'sizeDropDown' + index} style={{backgroundColor: backgroundColor}} onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {setHoverSize(selectedIndex)}} onMouseLeave={(e) => {setHoverSize(-1)}}>{size}</DropDownItem>) })}
     </DropDownContent>
-
   </DropDownContainer>
   <DropDownContainer data-testid="quantityMenu" onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
     <DropDownButton>
