@@ -8,7 +8,7 @@ import QuestionList from './components/qa/QuestionList.jsx';
 import { Overview } from './components/Overview/Overview.jsx'
 import {ProductContext} from './contexts.js'
 import {sampleProduct} from './components/Overview/sampleData.js';
-import {Container, Section, theme} from './components/Styles/LayoutStyles.jsx';
+import {Container, Section, theme, SecondaryText} from './components/Styles/LayoutStyles.jsx';
 
 const Heading1 = styled.h1`
   color: ${(props) => props.theme.colors.textSecondary};

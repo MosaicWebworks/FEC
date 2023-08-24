@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import {format} from 'date-fns';
 import axios from 'axios';
 import Report from './Report.jsx';
-import {StyledButton} from '../Styles/ButtonStyles.jsx';
-import Photos from './Photo.jsx';
+import {StyledButton, Button} from '../Styles/ButtonStyles.jsx';
+import PhotoEntry from './Photo.jsx';
 import {AnswerPhotos} from '../Styles/ModalStyles.jsx';
 
 
@@ -42,7 +42,7 @@ const Answer = ({setAddedEntity, answer}) =>{
       )
     } else {
       return (
-        <button className="btn-report">Already Reported</button>
+        <Button >Already Reported</Button>
       )
     }
   }
@@ -55,13 +55,13 @@ const Answer = ({setAddedEntity, answer}) =>{
       </div>
       <div className="username">by {answer.answerer_name}, <small className="data-answered">{formattedDate}</small></div>
       <StyledButton>
-        <button data-testid="answer-helpful" className="btn-helpfulness" onClick={changeHelpful}>Helpful? Yes({helpfulness})</button>
+        <Button  onClick={changeHelpful}>Helpful? Yes({helpfulness})</Button>
         {reportButton()}
       </StyledButton>
       <AnswerPhotos>
         {
           answer.photos && answer.photos.map((photo, index) => (
-            <Photos photo={photo} key={index}/>
+            <PhotoEntry photo={photo} key={index}/>
           ))
         }
       </AnswerPhotos>

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 
 const PrimaryText = styled.div`
-color:${({theme}) => theme.colors.primary};
+color:${({theme}) => theme.colors.text};
 `
 
 const SecondaryText = styled.div`
-color:${({theme}) => theme.colors.secondary};
+color:${({theme}) => theme.colors.textsecondary};
 `
 const theme = {
   colors: {
