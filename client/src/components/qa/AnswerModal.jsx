@@ -80,6 +80,8 @@ const AnswerModal = ({product_id}) => {
 
 
 
+
+
   return (
     <PhotoContext.Provider value={[photos,setPhotos, setIsPhotoModalShown]}>
       <AlignContent>
