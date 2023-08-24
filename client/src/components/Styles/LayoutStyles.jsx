@@ -28,9 +28,9 @@ const darkTheme = {
     primary: '#353535',
     secondary: '#353535',
     background: '#353535',
-    text: 'yellow',
-    textSecondary: 'yellow',
-    textContrast: 'yellow'
+    text: '#FFFFFF',
+    textSecondary: '#FFFFFF',
+    textContrast: '#FFFFFF'
   },
   fonts: {
     main: '"Helvetica Neue", sans-serif',
