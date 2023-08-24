@@ -11,11 +11,11 @@ const SecondaryText = styled.div`
 `
 const theme = {
   colors: {
-    primary: 'blue',
-    secondary: 'steelblue',
-    background: '	#f0f8ff',
-    text: '#5A5A5A',
-    textSecondary: 'steelblue',
+    primary: '#219ebc',
+    secondary: '#ffb703',
+    background: '#8ecae6',
+    text: '#023047',
+    textSecondary: '#fb8500',
   },
   fonts: {
     main: '"Helvetica Neue", sans-serif',

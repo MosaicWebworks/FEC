@@ -8,10 +8,11 @@ import { ReviewsProvider } from '../rr/ReviewsContext.jsx';
 import {theme} from '../Styles/LayoutStyles.jsx'
 
 const StyleThumbnail = styled.img`
-height: 45px;
-width: 45px;
+height: 60px;
+width: 60px;
 object-fit: cover;
-border-radius: 45px;
+border-radius: 60px;
+cursor: pointer;
 margin: 10px
 `
 
@@ -40,9 +41,17 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
 
 const ProductInfo = ({ref, product, styles, setSelectedStyle, selectedStyle}) => {
   const [showDropDown, setShowDropDown] = React.useState("hidden");
+  const handleClickScroll = () => {
+    const element = document.getElementById('reviews');
+    console.log('clicked ratings', element);
+    if (element) {
+      console.log('there do be element');
+      element.scrollIntoView({behavior: 'smooth'});
+    }
+  };
   return(
     <div style={{margin: "10px"}}>
-    <ReviewsProvider><RatingSummarywithStar /></ReviewsProvider><a to="#ratingsReviews">Reviews</a>
+    <ReviewsProvider><RatingSummarywithStar /></ReviewsProvider><div onClick={handleClickScroll}>Reviews</div>
     <div>{product.category}</div>
     <h1>{product.name}</h1>
     {styles.results[selectedStyle].sale_price ? <div>

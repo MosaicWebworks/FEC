@@ -41,7 +41,7 @@ const App = () => {
           <QuestionList />
         </Section>
         <Section>
-          <Heading2>Ratings & Reviews</Heading2>
+          <Heading2 id="reviews">Ratings & Reviews</Heading2>
           <RatingsReviews />
         </Section>
       </Container>
