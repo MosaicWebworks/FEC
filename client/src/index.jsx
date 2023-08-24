@@ -17,7 +17,7 @@ const Heading1 = styled.h1`
 const Heading2 = styled.h2`
   color: ${(props) => props.theme.colors.textSecondary};
 `;
-
+document.body.style = `background: ${theme.colors.background};`;
 const App = () => {
   const [product, setProduct] = React.useState(sampleProduct);
   return (
@@ -43,7 +43,7 @@ const App = () => {
           <QuestionList />
         </Section>
         <Section>
-          <Heading2>Ratings & Reviews</Heading2>
+          <Heading2 id="reviews">Ratings & Reviews</Heading2>
           <RatingsReviews />
         </Section>
       </Container>

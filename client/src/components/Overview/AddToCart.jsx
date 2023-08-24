@@ -16,7 +16,6 @@ const DropDownButton = styled.div`
   padding-bottom: .75em;
   position: absolute;
   width: 100%;
-  cursor: pointer;
   background-color: ${theme.colors.primary}
 `
 

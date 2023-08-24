@@ -27,6 +27,7 @@ const StyledThumbnails = styled.div`
 const Thumbnail = styled.img`
   height: 48px;
   width: 48px;
+  cursor: pointer;
   margin: 10px;
   object-fit: cover;
   border-radius: 5px;
@@ -68,7 +69,7 @@ const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles, sele
         thumbnailBorder = `2px solid ${theme.colors.secondary}`;
       }
       index++
-      return (<Thumbnail key={photo.thumbnail_url + index.toString()} onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: thumbnailBorder}} />)
+      return (<Thumbnail key={photo.thumbnail_url + index.toString()} alt="click to display different product image" onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: thumbnailBorder}} />)
     }
       )}
   </StyledThumbnails>);
