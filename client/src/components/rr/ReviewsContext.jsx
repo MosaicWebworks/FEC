@@ -19,7 +19,7 @@ export const ReviewsProvider = ({ children }) => {
   useEffect(() => {
     console.log('Fetching reviews for product:', product.id);
     //Fetch reviews
-    axios.get(`http://localhost:3000/data/reviews?product_id=${product.id}`)
+    axios.get(`/data/reviews?product_id=${product.id}`)
       .then((response) => {
         setReviews(response.data.results);
         setFilteredReviews(response.data.results);
@@ -27,7 +27,7 @@ export const ReviewsProvider = ({ children }) => {
       .catch((error) => console.error('An error occurred while fetching reviews:', error));
 
     //Fetch review meta
-    axios.get(`http://localhost:3000/data/reviews/meta?product_id=${product.id}`)
+    axios.get(`/data/reviews/meta?product_id=${product.id}`)
       .then((response) =>{
         console.log('Review meta response:', response);
         setReviewMeta(response.data)
