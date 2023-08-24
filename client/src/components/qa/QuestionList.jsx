@@ -5,7 +5,7 @@ import styled, {ThemeProvider} from 'styled-components';
 import axios from 'axios';
 import QuestionModal from './QuestionModal.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
-import {ProductContext} from '../../contexts.js';
+import {ProductContext, ModalContext} from '../../contexts.js';
 import {StyledButton, Button} from '../Styles/ButtonStyles.jsx';
 
 const MaxHeight = styled.div`
@@ -23,14 +23,13 @@ export const ReportContext = createContext();
 
 const QuestionList = () => {
 
-  const [questionsObject, setQuestionsObject] = useState(Object.entries(exampleData.results));
-
+  const [questionsObject, setQuestionsObject] = useState([]);
   const [toRender, setToRender] = useState(2);
-
   const [questionsToRender, setQuestionsToRender] = useState([]);
 
-  const [isModalShown, setIsModalShown] = useState(false);
-  const product = useContext(ProductContext)
+
+  const product = useContext(ProductContext);
+  const [isModalShown,setIsModalShown, closeModal] = useContext(ModalContext);
 
   let productID =  product.id || 40346;
 
@@ -87,12 +86,7 @@ const QuestionList = () => {
       )
     }
   }
-  //create context for this that is passed from index
-  const closeModal = () => {
-    if (isModalShown) {
-      setIsModalShown(false)
-    }
-  }
+
 
 
   return (

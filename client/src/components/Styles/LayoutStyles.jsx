@@ -23,6 +23,20 @@ const theme = {
   },
 };
 
+const darkTheme = {
+  colors: {
+    primary: '#353535',
+    secondary: '#353535',
+    background: '#353535',
+    text: 'yellow',
+    textSecondary: 'yellow',
+    textContrast: 'yellow'
+  },
+  fonts: {
+    main: '"Helvetica Neue", sans-serif',
+  },
+};
+
 const Container = styled.div`
   display: grid;
   width: 100%;
@@ -32,7 +46,11 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
   font-family: ${(props) => props.theme.fonts.main};
-  `;
+`;
+
+const OuterContainer = styled(Container)`
+max-width: 100%;
+padding: 0 auto;`
 
 const Section = styled.section`
   margin-bottom: 40px;
@@ -43,5 +61,7 @@ export {
   Section,
   PrimaryText,
   SecondaryText,
-  theme
+  theme,
+  darkTheme,
+  OuterContainer
 }

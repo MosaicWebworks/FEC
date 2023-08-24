@@ -28,7 +28,6 @@ const Answer = ({setAddedEntity, answer}) =>{
       setIsHelpful(true);
       axios.put(`data/qa/answers/${answer.id}/helpful`)
         .then(() => {
-          console.log('marked as helpful');
           setHelpfulness(helpfulness + 1);
       })
         .catch((err) => console.log(err));
