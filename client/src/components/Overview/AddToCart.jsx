@@ -82,7 +82,7 @@ const AddToCart =
   return(
     <AddToCartLayout>
   <DropDownContainer data-testid="sizeMenu" onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
-    <DropDownButton sizeIndex={sizeIndex}>
+    <DropDownButton>
       {sizeIndex < 0 ? sizePlaceholder : sizes[sizeIndex]}
     </DropDownButton>
     <DropDownContent data-testid="sizeOptions" style={{visibility: sizeDropDown}}>

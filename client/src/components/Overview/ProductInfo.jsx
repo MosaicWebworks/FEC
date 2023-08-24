@@ -11,6 +11,10 @@ import twitter from '../../public/twitter.png';
 import pinterest from '../../public/pinterest.png';
 import checkmark from '../../public/checkmark.png';
 
+const ShareLink = styled.img`
+cursor: pointer;
+`
+
 const StyleThumbnail = styled.img`
 height: 60px;
 width: 60px;
@@ -39,9 +43,9 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
         var styleIndex = index;
         index++
         return(
-        <span style={{margin: '10px'}}>
+        <span key={'styleThumbnail' + index} style={{margin: '10px'}}>
 
-          <StyleThumbnail key={'styleThumbnail' + index} onClick={(e) => setSelectedStyle(styleIndex)} style={{border: styleBorder}} src={style.photos[0].thumbnail_url}/>
+          <StyleThumbnail onClick={(e) => setSelectedStyle(styleIndex)} style={{border: styleBorder}} src={style.photos[0].thumbnail_url}/>
           {selectedStyle === index - 1 ? <img style={{position: 'absolute', marginLeft: '-20px'}} src={checkmark}/> : null}
         </span>)
       })}
@@ -69,7 +73,7 @@ const ProductInfo = ({ref, product, styles, setSelectedStyle, selectedStyle}) =>
       <span style={{color: "red", textDecoration: "line-through"}}>${product.default_price}</span> <span>${styles.results[selectedStyle].sale_price}</span>
       </div> : <span>${product.default_price}</span>}
     <h3>{styles.results[selectedStyle].name}</h3>
-    <span>Share: <img src={facebook}/> <img src={twitter}/> <img src={pinterest}/></span>
+    <span>Share: <ShareLink src={facebook}/> <ShareLink src={twitter}/> <ShareLink src={pinterest}/></span>
     <RenderStyleThumbnails setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle} styles={styles}/>
     <AddToCart styles={styles} selectedStyle={selectedStyle}/>
     </div>
