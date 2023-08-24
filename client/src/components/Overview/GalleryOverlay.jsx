@@ -49,12 +49,12 @@ const ArrowContainer = styled.div`
 
 const LeftArrow = ({setSelectedThumbnail, selectedThumbnail}) => {
   if (selectedThumbnail === 0) {return <div></div>};
-  return <ArrowStyle data-testid="leftArrow" onClick={(e) => {setSelectedThumbnail(selectedThumbnail - 1)}} style={{transform: "rotate(45deg)"}}/>
+  return <ArrowStyle data-testid="leftArrow" onClick={(e) => {setSelectedThumbnail(selectedThumbnail - 1)}} style={{transform: "rotate(45deg)", cursor: "pointer"}}/>
 }
 // const photos = sampleStyles.results[0].photos;
 const RightArrow = ({setSelectedThumbnail, selectedThumbnail, styles}) => {
   if (selectedThumbnail === styles.results[0].photos.length - 1) {return <div></div>};
-  return <ArrowStyle data-testid="rightArrow" onClick={(e) => {setSelectedThumbnail(selectedThumbnail + 1)}} style={{transform: "rotate(225deg)"}}/>
+  return <ArrowStyle data-testid="rightArrow" onClick={(e) => {setSelectedThumbnail(selectedThumbnail + 1)}} style={{transform: "rotate(225deg)", cursor: "pointer"}}/>
 }
 
 const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles, selectedStyle}) => {
