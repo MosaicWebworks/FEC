@@ -11,11 +11,12 @@ color:${({theme}) => theme.colors.textsecondary};
 `
 const theme = {
   colors: {
-    primary: '#219ebc',
-    secondary: '#ffb703',
-    background: '#8ecae6',
-    text: '#023047',
-    textSecondary: '#fb8500',
+    primary: '#284B63',
+    secondary: '#D9D9D9',
+    background: '#FFFFFF',
+    text: '#353535',
+    textSecondary: '#3C6E71',
+    textContrast: '#fca311'
   },
   fonts: {
     main: '"Helvetica Neue", sans-serif',

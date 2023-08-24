@@ -28,7 +28,7 @@ const Icon = styled.div`
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 15px solid blue;
+  border-top: 15px solid ${({theme}) => theme.colors.primary};
   left: ${props => props.position}%;
 `;
 
