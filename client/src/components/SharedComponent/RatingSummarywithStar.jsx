@@ -14,7 +14,7 @@ const AverageRating = styled.span`
   font-size: 36px;
   font-weight: bold;
   margin: 10px;
-
+  color: ${({theme}) => theme.colors.primary};
 `;
 
 const TotalReviews = styled.span`
@@ -30,8 +30,6 @@ const calculateRatingSummary = (ratings, recommended) => {
 
   const recommendedCount = Number(recommended.true);
   const recommendationPercentage = ((recommendedCount / totalReviews) * 100).toFixed(2);
-
-  //console.log(recommendedCount, totalReviews);
 
   return { averageRating, totalReviews,  recommendationPercentage };
 };

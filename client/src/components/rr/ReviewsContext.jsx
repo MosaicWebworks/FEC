@@ -9,7 +9,7 @@ const ReviewsContext = createContext();
 export const ReviewsProvider = ({ children }) => {
 
   const product = useContext(ProductContext);
-  console.log(product);
+  //console.log(product);
   const [reviews, setReviews] = useState([]);
   const [reviewMeta, setReviewMeta] = useState({});
   const [loadedReviewsCount, setLoadedReviewsCount] = useState(2); // Initial value is 2

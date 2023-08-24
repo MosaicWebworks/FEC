@@ -9,14 +9,22 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import NewReviewForm from './NewReviewForm.jsx';
 import Modal from 'react-modal';
 import { StyledButton } from '../Styles/ButtonStyles.jsx';
-import { Section,  theme } from '../Styles/LayoutStyles.jsx';
+import { Section, theme } from '../Styles/LayoutStyles.jsx';
+
+const zIndexStyle = {
+  overlay: {
+    zIndex: 1000
+  }
+};
 
 const Container = styled.div`
-// border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 20px;
   display: flex;
+  // justify-content: center;
   flex-direction: column;
+  // align-items: center;
+
 `;
 
 const SortContainer = styled.div`
@@ -26,24 +34,38 @@ const SortContainer = styled.div`
   justify-content: flex-end;
 `;
 
-// const Container = styled.div`
-//   display: grid;
-//   width: 100%;
-//   max-width: 1200px;
-//   margin: 0 auto;
-//   padding: 20px;
-//   background-color: ${(props) => props.theme.colors.background};
-//   color: ${(props) => props.theme.colors.text};
-//   font-family: ${(props) => props.theme.fonts.main};
-// `;
+const MoreReviewButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
 
-const Button = styled.div`
-  color: ${({theme}) => theme.colors.textSecondary};
-  border: 2px solid ${({theme}) => theme.colors.textSecondary};
-  padding: 5px;
-  border-radius: 5px;
-`
-;
+const WriteReviewButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px;
+`;
+
+
+const Button = styled.button`
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.background};
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.textContrast};
+  }
+`;
+
+const StyledModal = styled.div`
+  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.text};
+  font-family: ${({ theme }) => theme.fonts.main};
+
+`;
 
 const SortingDropdown = ({ selectedSort, onChange }) => {
   return (
@@ -116,24 +138,35 @@ const ReviewList = () => {
 
   return (
     <Container data-testid="reviewList-component">
+      <WriteReviewButtonContainer>
+        <Button onClick={() => setIsModalOpen(true)}>Write Your Review</Button>
+      </WriteReviewButtonContainer>
+      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} style={zIndexStyle}>
+      <StyledModal>
+        <NewReviewForm />
+      </StyledModal>
+      </Modal>
+      <Section>
       <SortContainer>
         <span>Sort by: </span>
         <SortingDropdown selectedSort={selectedSort} onChange={handleSortChange} />
       </SortContainer>
+      </Section>
       {filteredReviews.slice(0, loadedReviewsCount).map((review) => (
         <Section data-testid="reviewTile-component">
         <ReviewTile key={review.review_id} review={review} />
         </Section>
       ))}
+      <MoreReviewButtonContainer>
+      <Section>
       {loadedReviewsCount <filteredReviews.length && (
         <Button onClick={handleLoadMoreReviews}>
           See More Reviews
         </Button>
       )}
-      <Button onClick={() => setIsModalOpen(true)}>Write Your Review</Button>
-      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
-        <NewReviewForm />
-      </Modal>
+      </Section>
+      </MoreReviewButtonContainer>
+
     </Container>
   );
 };

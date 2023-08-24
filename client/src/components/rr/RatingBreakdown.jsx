@@ -12,7 +12,7 @@ const RecommendationPercentage = styled.div`
   font-size: 18px;
   font-weight: bold;
   margin: 15px 5px;
-  color: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.textSecondary};
 `;
 
 const DetailsContainer = styled.div`
@@ -38,7 +38,7 @@ const RatingBar = styled.div`
 `;
 
 const Label = styled.span`
-  font-weight: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   // width: 40px;
 `;
 
@@ -76,19 +76,10 @@ const calculateRatingSummary = (ratings, recommended) => {
   const recommendedCount = Number(recommended.true);
   const recommendationPercentage = ((recommendedCount / totalReviews) * 100).toFixed(2);
 
-console.log(recommendedCount, totalReviews);
+//console.log(recommendedCount, totalReviews);
 
   return { averageRating, totalReviews,  recommendationPercentage };
 };
-
-
-// const RatingSummary = () => {
-//   return (
-//     <div>
-//       <RatingSummarywithStar/>
-//     </div>
-//   );
-// };
 
 //detailed ratings
 const RatingDetails = ({ ratings, filterRatings, appliedFilters }) => {

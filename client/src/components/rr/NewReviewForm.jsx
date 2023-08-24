@@ -1,6 +1,43 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {PhotoContainer, ModalForm, PhotoHeader, Submit, AlignContent} from '../Styles/ModalStyles.jsx';
+import styled from 'styled-components';
+import { PhotoContainer, ModalForm, PhotoHeader, Submit, AlignContent } from '../Styles/ModalStyles.jsx';
+import { ThemeProvider } from 'styled-components';
+import { Container,Section,PrimaryText,SecondaryText, theme } from '../Styles/LayoutStyles.jsx';
+
+const Button = styled.button`
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.background};
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.textContrast};
+  }
+`;
+
+const Label = styled.label`
+  margin-bottom: 10px;
+`;
+
+const InputGroup = styled.div`
+  margin-bottom: 20px;
+`;
+
+const RadioButtonGroup = styled.div`
+  margin-bottom: 20px;
+`;
+
+const ErrorMessages = styled.div`
+  margin-top: 20px;
+  color: red;
+`;
+
+const Messages = styled.div`
+  margin-top: 20px;
+  color: ${({ theme }) => theme.colors.textContrast};
+`;
 
 const NewReviewForm = () => {
 
@@ -102,7 +139,6 @@ const NewReviewForm = () => {
     };
 
     // Send POST request to the server
-    console.log('Sending data:', data);
     axios.post('/data/reviews', data)
       .then((response) => {
         console.log('Data sent successfully:', response);
@@ -120,51 +156,56 @@ const NewReviewForm = () => {
     showReviewForm ? (
     <form onSubmit={handleSubmit}>
       <h1 data-testid="new-review-title">Write Your Review</h1>
-      {/* <h2>About the product</h2> */}
       {/* Overall Rating */}
-      <label>Overall rating (mandatory)*</label>
+      <InputGroup>
+      <Label>Overall rating (mandatory)*</Label>
       <div>
         {[1, 2, 3, 4, 5].map((star, index) => (
           <span
             key={index}
             onClick={() => handleRatingClick(index)}
-            style={{ cursor: 'pointer', color: index < rating ? 'gold' : 'gray' }}
+            style={{ cursor: 'pointer', color: index < rating ? '#fca311' : 'gray' }}
           >
             ★
           </span>
         ))}
         {rating > 0 && <span> - {ratingText[rating - 1]}</span>}
       </div>
+      </InputGroup>
       {/* Recommend*/}
-      <label>Do you recommend this product? (mandatory)*</label>
+      <RadioButtonGroup>
+      <Label>Do you recommend this product? (mandatory)*</Label>
       <div>
-        <label>
+        <Label>
           <input
             type="radio"
             value="Yes"
             checked={recommend === 'Yes'}
             onChange={handleChange}
           /> Yes
-        </label>
-        <label>
+        </Label>
+        <Label>
           <input
             type="radio"
             value="No"
             checked={recommend === 'No'}
             onChange={handleChange}
           /> No
-        </label>
+        </Label>
       </div>
+      </RadioButtonGroup>
+
       {/* Characteristics  */}
       {/* <label>{characteristics}</label> */}
+      <RadioButtonGroup>
       <div>
       {characteristicsList.map((item, index) => (
         <div key={index}>
-          <label>{item.name}</label>
+          <Label>{item.name}</Label>
           <p>{characteristics[item.id] !== undefined ? item.scale[characteristics[item.id]] : "none selected"}</p>
           <div>
             {item.scale.map((scaleItem, scaleIndex) => (
-              <label key={scaleIndex}>
+              <Label key={scaleIndex}>
                 <input
                   type="radio"
                   value={scaleIndex}
@@ -172,14 +213,16 @@ const NewReviewForm = () => {
                   onChange={(e) => handleCharacteristicChange(item.id, e)}
                 />
                 {scaleIndex + 1}
-              </label>
+              </Label>
             ))}
           </div>
         </div>
       ))}
     </div>
+    </RadioButtonGroup>
       {/* Review Summary */}
-      <label>Review summary</label>
+      <InputGroup>
+      <Label>Review summary</Label>
       <input
         type="text"
         maxLength="60"
@@ -187,21 +230,24 @@ const NewReviewForm = () => {
         value={summary}
         onChange={(e) => setSummary(e.target.value)}
       />
-
+      </InputGroup>
       {/* Review Body */}
-      <label>Review body (mandatory)*</label>
+      <InputGroup>
+      <Label>Review body (mandatory)*</Label>
       <textarea
         maxLength="1000"
         placeholder="Why did you like the product or not?"
         value={body}
         onChange={(e) => setBody(e.target.value)}
       />
-      <div>
+       <Messages>
         {body.length < 50 ? `Minimum required characters left: ${50 - body.length}` : 'Minimum reached'}
-      </div>
+      </Messages>
+      </InputGroup>
 
       {/* Upload Photos */}
-      <label>Upload your photos</label>
+      <RadioButtonGroup>
+      <Label>Upload your photos</Label>
       {images.length < 5 && (
         <input type="file" accept="image/*" onChange={handleImageUpload} />
       )}
@@ -210,9 +256,11 @@ const NewReviewForm = () => {
           <img key={index} src={image} alt="uploaded preview" width="50" />
         ))}
       </div>
+      </RadioButtonGroup>
 
       {/* Nickname */}
-      <label>What is your nickname (mandatory)*</label>
+      <InputGroup>
+      <Label>What is your nickname (mandatory)*</Label>
       <input
         type="text"
         maxLength="60"
@@ -220,10 +268,12 @@ const NewReviewForm = () => {
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
       />
-      <div>For privacy reasons, do not use your full name or email address</div>
+      <Messages>For privacy reasons, do not use your full name or email address</Messages>
+      </InputGroup>
 
       {/* Email */}
-      <label>Your email (mandatory)*</label>
+      <InputGroup>
+      <Label>Your email (mandatory)*</Label>
       <input
         type="email"
         maxLength="60"
@@ -231,12 +281,14 @@ const NewReviewForm = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <div>For authentication reasons, you will not be emailed</div>
+      <Messages>For authentication reasons, you will not be emailed</Messages>
+      </InputGroup>
 
       {/* Submit Button */}
-      <button type="submit">Submit review</button>
+      <Button type="submit">Submit review</Button>
 
       {/* Error Messages */}
+      <ErrorMessages>
       {errors.length > 0 && (
         <div>
           <h3>You must enter the following:</h3>
@@ -247,6 +299,7 @@ const NewReviewForm = () => {
           </ul>
         </div>
       )}
+      </ErrorMessages>
     </form>
   ) : (
     <div>Thanks for submitting your review!</div>
