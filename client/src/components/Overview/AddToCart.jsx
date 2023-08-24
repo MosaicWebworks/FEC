@@ -16,7 +16,8 @@ const DropDownButton = styled.div`
   padding-bottom: .75em;
   position: absolute;
   width: 100%;
-  background-color: ${theme.colors.primary}
+  background-color: ${theme.colors.primary};
+  color: ${theme.colors.textContrast};
 `
 
 const DropDownContent = styled.ul`
@@ -31,6 +32,7 @@ const DropDownContent = styled.ul`
 
 const DropDownItem = styled.li`
   padding: 5px;
+  color: ${theme.colors.textContrast};
 `
 
 const AddToCartLayout = styled.div`

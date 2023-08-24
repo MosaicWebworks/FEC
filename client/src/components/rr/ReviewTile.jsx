@@ -7,9 +7,30 @@ import { Container, Section, theme } from '../Styles/LayoutStyles.jsx';
 import { StyledButton } from '../Styles/ButtonStyles.jsx';
 
 const Tile = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid #ccc;
+`;
+
+const TopSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ReviewerAndDate = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 14px;
+`;
+
+const HelpfulnessSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Summary = styled.div`
@@ -39,7 +60,7 @@ const Body = styled.div`
   margin-bottom: 20px;
 `;
 
-const DateReviewer = styled.div`
+const ReviewDate = styled.div`
   color: #777;
   font-size: 14px;
   margin-bottom: 20px;
@@ -77,6 +98,27 @@ const Photo = styled.img`
   border-radius: 5px;
 `;
 
+const ThumbUpIcon = styled.svg`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`;
+
+const ThumbDownIcon = styled.svg`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`;
+
+//date same as qa
+const formatDate = (dateString) => {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const inputDate = new Date(dateString);
+  const month = months[inputDate.getMonth()];
+  const day = String(inputDate.getDate()).padStart(2, '0');
+  const year = inputDate.getFullYear();
+  return `${month}-${day}-${year}`;
+};
 
 const ReviewTile = ({ review }) => {
   const {
@@ -89,6 +131,8 @@ const ReviewTile = ({ review }) => {
     helpfulness,
     photos,
   } = review;
+
+  const formattedDate = formatDate(date);
 
   //helpfulness buttons
   const [hasVoted, setHasVoted] = useState(false);
@@ -111,22 +155,31 @@ const ReviewTile = ({ review }) => {
 
   return (
     <Tile data-testid='reviewTile-component'>
-      <StarRating rating={rating} />
-      <Summary>{summary}</Summary>
-      <Recommend>{recommend ? 'I recommend this product' : ''}</Recommend>
-      <Body>{body}</Body>
-      <Date>Reviewed on {date}</Date>
-      <Reviewer>{reviewer_name}</Reviewer>
-      <Helpfulness>{helpfulness} people found this helpful</Helpfulness>
-        <div>Was this review helpful?
-          <StyledButton onClick={handleYesVote}>Yes ({yesVotes})</StyledButton>
-          <StyledButton onClick={handleNoVote}>No ({noVotes})</StyledButton>
+      <TopSection>
+        <div>
+          <StarRating rating={rating} />
+          <Summary>{summary}</Summary>
+          <Recommend>{recommend ? 'I recommend this product' : ''}</Recommend>
+          <Body>{body}</Body>
         </div>
+        <ReviewerAndDate>
+          <ReviewDate>Reviewed on {formattedDate}</ReviewDate>
+          <Reviewer>{reviewer_name}</Reviewer>
+        </ReviewerAndDate>
+      </TopSection>
+
         {photos && photos.map((photo) => (
           <Photo key={photo.id} src={photo.url} />
         ))
       }
 
+      <HelpfulnessSection>
+        <Helpfulness>{helpfulness} people found this helpful</Helpfulness>
+        <div>Was this review helpful?
+          <StyledButton onClick={handleYesVote}>Yes ({yesVotes})</StyledButton>
+          <StyledButton onClick={handleNoVote}>No ({noVotes})</StyledButton>
+        </div>
+      </HelpfulnessSection>
     </Tile>
   );
 };
