@@ -51,13 +51,14 @@ const ProductInfo = ({ref, product, styles, setSelectedStyle, selectedStyle}) =>
   };
   return(
     <div style={{margin: "10px"}}>
-    <ReviewsProvider><RatingSummarywithStar /></ReviewsProvider><div onClick={handleClickScroll}>Reviews</div>
+    <ReviewsProvider><RatingSummarywithStar /></ReviewsProvider><div style={{cursor: 'pointer', marginBottom: '10px'}} onClick={handleClickScroll}>Show all Reviews</div>
     <div>{product.category}</div>
     <h1>{product.name}</h1>
     {styles.results[selectedStyle].sale_price ? <div>
       <span style={{color: "red", textDecoration: "line-through"}}>${product.default_price}</span> <span>${styles.results[selectedStyle].sale_price}</span>
       </div> : <span>${product.default_price}</span>}
     <h3>{styles.results[selectedStyle].name}</h3>
+    <span>Social Media links <img src="facebook.png"/></span>
     <RenderStyleThumbnails setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle} styles={styles}/>
     <AddToCart styles={styles} selectedStyle={selectedStyle}/>
     </div>

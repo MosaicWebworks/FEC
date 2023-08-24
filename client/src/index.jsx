@@ -17,7 +17,7 @@ const Heading1 = styled.h1`
 const Heading2 = styled.h2`
   color: ${(props) => props.theme.colors.textSecondary};
 `;
-
+document.body.style = `background: ${theme.colors.background};`;
 const App = () => {
   const [product, setProduct] = React.useState(sampleProduct);
   return (
