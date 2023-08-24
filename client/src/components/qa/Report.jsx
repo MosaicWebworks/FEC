@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-
+import {StyledButton, Button} from '../Styles/ButtonStyles.jsx'
 
 
 //take in choice
@@ -17,7 +17,9 @@ const Report = ({path, id, setIsReported}) => {
   }
 
   return (
-    <button onClick={handleSubmit}>Report {path.slice(0, path.length -1)}</button>
+    <StyledButton>
+      <Button onClick={handleSubmit}>Report {path.slice(0, path.length -1)}</Button>
+    </StyledButton>
   )
 
 

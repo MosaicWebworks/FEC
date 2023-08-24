@@ -35,6 +35,7 @@ router.get("/qa*", function (req, res)
 });
 
 router.put("/qa*", (req, res) => {
+
   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa${req.url.split('/qa')[1]}`, {}, {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}} )
     .then(() => {
       res.sendStatus(204);
@@ -46,7 +47,7 @@ router.put("/qa*", (req, res) => {
 })
 
 router.post("/qa*", (req, res) => {
-  console.log(req.body);
+  console.log('reqbody', req.body);
 
   axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa${req.url.split('/qa')[1]}`, req.body , {headers: {Authorization: `${process.env.REACT_APP_API_KEY}`}} )
     .then(() => {

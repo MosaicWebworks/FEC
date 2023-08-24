@@ -3,19 +3,20 @@ import styled from 'styled-components';
 
 
 const PrimaryText = styled.div`
-
+color:${({theme}) => theme.colors.text};
 `
 
 const SecondaryText = styled.div`
-
+color:${({theme}) => theme.colors.textsecondary};
 `
 const theme = {
   colors: {
-    primary: '#219ebc',
-    secondary: '#ffb703',
-    background: '#8ecae6',
-    text: '#023047',
-    textSecondary: '#fb8500',
+    primary: 'blue',
+    secondary: 'steelblue',
+    background: '	#f0f8ff',
+    tertiary: 'green',
+    text: '#5A5A5A',
+    textSecondary: 'steelblue',
   },
   fonts: {
     main: '"Helvetica Neue", sans-serif',
@@ -31,7 +32,7 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
   font-family: ${(props) => props.theme.fonts.main};
-`;
+  `;
 
 const Section = styled.section`
   margin-bottom: 40px;

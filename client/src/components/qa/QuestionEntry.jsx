@@ -1,44 +1,13 @@
 import React, {useState, useEffect, createContext, useContext} from 'react';
-import styled from 'styled-components';
+import styled, {ThemeProvider} from 'styled-components';
 import exampleData from './exampleData.js'
 import Answer from './Answer.jsx';
 import AnswerModal from './AnswerModal.jsx';
 import axios from 'axios';
 import Report from './Report.jsx';
-import {StyledButton} from '../Styles/ButtonStyles.jsx';
-
-
-const Border = styled.div`
-  display: grid;
-  grid-template-areas: "question"
-                       "answer"
-                       "answer"
-                       "button";
-  border-bottom: solid black;
-
-  max-height: 50vh;
-`
-const Question = styled.div`
-grid-area: question;
-margin-bottom: 10px;
-text-align:center;
-`
-
-
-const AnswerDesign = styled.div`
-grid-area: answer;
-display: flex;
-flex-direction: column;
-overflow-y: auto;`
-
-
-const Button = styled.form`
-grid-area: button;
-display: flex;
-justify-content: flex-end;`
-
-
-
+import {StyledButton, Button, InputSubmit} from '../Styles/ButtonStyles.jsx';
+import {theme} from '../Styles/LayoutStyles.jsx';
+import {Question, Border, AnswerDesign} from './QuestionEntryStyles.jsx';
 
 export const QuestionContext = createContext();
 export const AnswerContext = createContext();
@@ -91,11 +60,11 @@ const QuestionEntry = ({id, qObject}) => {
   const moreAnswersButton = () => {
     if (numberToRender < answersID.length) {
       return (
-        <input type="submit" value="see more answers" />
+        <InputSubmit type="submit" value="see more answers" />
         )
       } else {
         return(
-          <input type="submit" value="collapse answers" />
+          <InputSubmit type="submit" value="collapse answers" />
         )
     }
   }
@@ -124,7 +93,6 @@ const QuestionEntry = ({id, qObject}) => {
   //create context for this that is passed from index
   const closeModal = () => {
     if (isModalShown) {
-      console.log('modal being closed');
       setIsModalShown(false)
     }
   }
@@ -133,22 +101,27 @@ const QuestionEntry = ({id, qObject}) => {
     if (!isReported) {
       return (
         <Report path={'questions'} id={qObject.question_id} setIsReported={setIsReported}/>
-        // <button>Report</button>
       )
     } else {
       return (
-        <button className="btn-report">Already Reported</button>
+        <Button className="btn-report">Already Reported</Button>
       )
     }
   }
 
 
   return (
+    <ThemeProvider theme={theme}>
     <Border onClick={closeModal}>
       <Question>
-        <b>Q:</b> {qObject.question_body}
+        <b>Q: {qObject.question_body}</b>
         <StyledButton>
-          <button onClick={toggleModal}>add answer</button>
+          <Button onClick={toggleModal}>
+          {/* <button onClick={toggleModal}> */}
+
+            add answer
+          {/* </button> */}
+          </Button>
           {reportButton()}
         </StyledButton>
           {displayModal()}
@@ -164,6 +137,7 @@ const QuestionEntry = ({id, qObject}) => {
           {moreAnswersButton()}
       </form>
     </Border>
+    </ThemeProvider>
 
   )
 }

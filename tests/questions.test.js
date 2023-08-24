@@ -13,7 +13,8 @@ import SearchQuestions from '../client/src/components/qa/SearchQuestions';
 import {ProductContext} from '../client/src/contexts';
 import {mockQuestionData} from '../client/src/components/qa/mockQuestionData'
 import axios from 'axios';
-
+import {theme} from '../client/src/components/Styles/LayoutStyles';
+import {ThemeProvider} from 'styled-components';
 
 jest.mock('axios');
 
@@ -24,7 +25,9 @@ describe('QuestionList', () => {
     axios.get.mockResolvedValue({data: mockQuestionData});
 
     render(
+      <ThemeProvider theme={theme}>
         <QuestionList/>
+      </ThemeProvider>
       );
     let seen = screen.getByRole('button', {name: /ask a question/i});
     expect(seen).toBeTruthy();
@@ -32,14 +35,20 @@ describe('QuestionList', () => {
 
   it('should render "More answered questions" button', () => {
     render(
+      <ThemeProvider theme={theme}>
         <QuestionList/>
+      </ThemeProvider>
       );
     let seen = screen.getByRole('button', {name: /More answered questions/i});
     expect(seen).toBeTruthy();
   }),
 
   it('should render intial questions to screen', () => {
-    render(<QuestionList />);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const displayedQuestions = screen.getAllByText('Q:', {exact: false})
     expect(displayedQuestions.length).toBe(2);
 
@@ -47,14 +56,22 @@ describe('QuestionList', () => {
 
   it('should click "ask a question" button ', async () => {
     user.setup();
-    render(<QuestionList/>)
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const questionButton = screen.getByRole('button', {name: /ask a question/i});
     await user.click(questionButton);
   }),
 
   it('should not render button after clicking multiple times', async () => {
     user.setup();
-    await render(<QuestionList />);
+    await render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const questionButton = screen.getByRole('button', {name: /more answered questions/i});
     await user.click(questionButton);
     await user.click(questionButton);
@@ -68,7 +85,11 @@ describe('QuestionList', () => {
 
   it('should render all questions upon clicks to screen', async () => {
     user.setup();
-    render(<QuestionList />);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const questionButton = screen.getByRole('button', {name: /more answered questions/i});
     await user.click(questionButton);
     await user.click(questionButton);
@@ -82,7 +103,11 @@ describe('QuestionList', () => {
   it('should render 4 questions on on clicking "more answered questions" button once', async () => {
 
     user.setup();
-    render(<QuestionList />);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const button = screen.getByRole('button', {name: /more answered questions/i});
     await user.click(button);
     const answers = screen.getAllByText('Q:', {exact: false});
@@ -93,14 +118,22 @@ describe('QuestionList', () => {
 
 describe('Answer', () => {
   it('should display date', () => {
-    render(<QuestionList />);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
 
     const date = screen.getAllByRole('generic');
     expect(date).toBeTruthy();
   }),
 
   it('should contain 4 answers on intial rendering of example data', () => {
-    render(<QuestionList />);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
 
     const answers = screen.getAllByText('A:', {exact: false});
     expect(answers.length).toBe(4);
@@ -108,7 +141,11 @@ describe('Answer', () => {
   it('should render 7 answers(all thats present in example data) on on clicking "more answered questions" button once', async () => {
 
     user.setup();
-    render(<QuestionList />);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const button = screen.getByRole('button', {name: /more answered questions/i});
     await user.click(button);
     const answers = screen.getAllByText('A:', {exact: false});
@@ -119,19 +156,31 @@ describe('Answer', () => {
 
 describe('Report', () => {
   it('should render a report question button', () => {
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /report question/i})
     expect(button).toBeTruthy();
   })
   it('should render a report answer button', () => {
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /report answer/i})
     expect(button).toBeTruthy();
   })
   it('should change to "already reported" upon clicking report question button', async () => {
     axios.put.mockResolvedValue({data: {status: 204}})
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [firstButton, secondButton] = screen.getAllByRole('button', {name: /report question/i})
     await user.click(firstButton);
 
@@ -143,7 +192,11 @@ describe('Report', () => {
   it('should change to "already reported" upon clicking report answer button', async () => {
     axios.put.mockResolvedValue({data: {status: 204}})
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /report answer/i})
     await user.click(button[0]);
 
@@ -154,7 +207,11 @@ describe('Report', () => {
 
   it('should change answer attribute to reported', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /report answer/i})
     await user.click(button[0]);
 
@@ -171,7 +228,11 @@ describe('Helpful', () => {
 
   it('should render a helpful button', () => {
 
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /helpful/i, exact: false})
     expect(button).toBeTruthy();
   })
@@ -179,7 +240,11 @@ describe('Helpful', () => {
   it('should allow click of helpfulness btn', async () => {
 
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const button = screen.getByRole('button', {name: /helpful\? Yes\(18\)/i, exact: false})
 
 
@@ -191,7 +256,11 @@ describe('Helpful', () => {
   it('should not allow click of helpfulness btn', async () => {
 
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const button = screen.getByRole('button', {name: /helpful\? Yes\(18\)/i, exact: false})
 
 
@@ -209,14 +278,22 @@ describe('Helpful', () => {
 
 describe('Modals', () => {
   it('should render the add answer button', () => {
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /add answer/i, exact: false})
     expect(button).toBeTruthy();
   })
 
   it('should open answer modal upon click', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [firstButton, secondButton] = screen.getAllByRole('button', {name: /add answer/i, exact: false})
     await user.click(firstButton);
     //search for text in modal displayed
@@ -227,7 +304,11 @@ describe('Modals', () => {
 
   it('should display question modal', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const addQuestion = screen.getByRole('button', {name: /ask a question/i});
 
     await user.click(addQuestion);
@@ -246,7 +327,11 @@ describe('Modals', () => {
 
   it('should display answer modal', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
 
     const [...addAnswer] = screen.getAllByRole('button', {name: /add answer/i});
     await user.click(addAnswer[0]);
@@ -294,7 +379,11 @@ describe('Modals', () => {
 describe('Photo modal', () => {
   it('should display a photomodal upon clicking photos button on answer modal', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /add answer/i});
     // await user.click(button[0]);
     await user.click(button[0]);
@@ -308,7 +397,11 @@ describe('Photo modal', () => {
 
   it('should render "add photo" button on photo modal', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /add answer/i});
     // await user.click(button[0]);
     await user.click(button[0]);
@@ -322,7 +415,11 @@ describe('Photo modal', () => {
 
   it('should render "cancel" button on photo modal', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /add answer/i});
     // await user.click(button[0]);
     await user.click(button[0]);
@@ -336,7 +433,11 @@ describe('Photo modal', () => {
 
   it('should close "add photo" modal upon clicking cancel', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /add answer/i});
 
     await user.click(button[0]);
@@ -353,7 +454,11 @@ describe('Photo modal', () => {
 
   it('should add photos when clicking add photo button', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
     const [...button] = screen.getAllByRole('button', {name: /add answer/i});
 
     await user.click(button[0]);
@@ -386,7 +491,11 @@ describe('Search bar', () => {
 
   it('should update search bar when typed', async () => {
     user.setup();
-    render(<QuestionList/>);
+    render(
+      <ThemeProvider theme={theme}>
+        <QuestionList/>
+      </ThemeProvider>
+      );
 
     const search = screen.getByPlaceholderText(/have a question/i);
     expect(search).toBeTruthy();

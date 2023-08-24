@@ -1,16 +1,20 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
 import QuestionEntry from './QuestionEntry.jsx'
 import exampleData from './exampleData.js';
-import styled from 'styled-components';
+import styled, {ThemeProvider} from 'styled-components';
 import axios from 'axios';
 import QuestionModal from './QuestionModal.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
 import {ProductContext} from '../../contexts.js';
+import {StyledButton, Button} from '../Styles/ButtonStyles.jsx';
 
 const MaxHeight = styled.div`
 max-height: 50vh;
 overflow-y: auto;`
 
+const styledDiv = styled.div`
+color: ${({theme}) => theme.colors.textSecondary};
+`
 
 
 export const QuestionListContext = createContext();
@@ -49,11 +53,11 @@ const QuestionList = () => {
   }, [toRender])
 
 
-//toRender < questionsObject.length
+
   const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
-        <button onClick={handleSubmit}>More answered questions</button>
+        <Button onClick={handleSubmit}>More answered questions</Button>
       )
     } else {
       return <div></div>
@@ -101,7 +105,11 @@ const QuestionList = () => {
           ))
         }
         </MaxHeight>
-        <button onClick={toggleModal}>Ask a question</button>
+        {/* <styledDiv> */}
+
+          <Button onClick={toggleModal}>Ask a question</Button>
+        {/* </styledDiv> */}
+
         {displayModal()}
         {renderMoreQuestions()}
       </QuestionListContext.Provider>}
