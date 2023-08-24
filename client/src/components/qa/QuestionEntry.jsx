@@ -8,7 +8,7 @@ import Report from './Report.jsx';
 import {StyledButton, Button, InputSubmit} from '../Styles/ButtonStyles.jsx';
 import {theme} from '../Styles/LayoutStyles.jsx';
 import {Question, Border, AnswerDesign} from './QuestionEntryStyles.jsx';
-
+import {ModalContext, AnswerModalContext} from '../../contexts.js'
 export const QuestionContext = createContext();
 export const AnswerContext = createContext();
 
@@ -21,8 +21,13 @@ const QuestionEntry = ({id, qObject}) => {
   //how many answers will be rendered
   const [numberToRender, setNumberToRender] = useState(2);
 
-  const [isModalShown, setIsModalShown] = useState(false);
+
+  const [isAnswerModalShown, setIsAnswerModalShown] = useContext(AnswerModalContext);
+  const [isModalShown, setIsModalShown, closeModal] = useContext(ModalContext);
+
+
   const [addAnswer, setAddAnswer] = useState(true);
+
   //creates an array of object. contains an array of arrays [0] = id and [1] = answer
   let answers = Object.entries(qObject.answers);
 
@@ -52,17 +57,22 @@ const QuestionEntry = ({id, qObject}) => {
     if (numberToRender === 2) {
       setNumberToRender(answersID.length);
     } else {
+      console.log('number to render', numberToRender)
       setNumberToRender(2)
     }
   }
 
 
   const moreAnswersButton = () => {
-    if (numberToRender < answersID.length) {
+    if (answersID.length < 2) {
+      return (
+        <div></div>
+      )
+    } else if (numberToRender < answersID.length) {
       return (
         <InputSubmit type="submit" value="see more answers" />
         )
-      } else {
+      } else if (numberToRender > 2) {
         return(
           <InputSubmit type="submit" value="collapse answers" />
         )
@@ -70,30 +80,24 @@ const QuestionEntry = ({id, qObject}) => {
   }
 
   const toggleModal = () => {
-    if (!isModalShown) {
+    if (!isAnswerModalShown) {
       console.log('modal now shown');
-      setIsModalShown(true);
+      setIsAnswerModalShown(true);
     } else {
       console.log('modal no longer being shown');
-      setIsModalShown(false);
+      setIsAnswerModalShown(false);
     }
   }
 
   //need to create a useContext for the setIsModalShown
   const displayModal = () => {
-    if (isModalShown) {
+    if (isAnswerModalShown) {
       return (
-        <QuestionContext.Provider value={[qObject, setIsModalShown]}>
+        <QuestionContext.Provider value={[qObject]}>
           <AnswerModal product_id={id}/>
         </QuestionContext.Provider>
 
       )
-    }
-  }
-  //create context for this that is passed from index
-  const closeModal = () => {
-    if (isModalShown) {
-      setIsModalShown(false)
     }
   }
 
@@ -111,16 +115,13 @@ const QuestionEntry = ({id, qObject}) => {
 
 
   return (
-    <ThemeProvider theme={theme}>
+
     <Border onClick={closeModal}>
       <Question>
         <b>Q: {qObject.question_body}</b>
         <StyledButton>
           <Button onClick={toggleModal}>
-          {/* <button onClick={toggleModal}> */}
-
             add answer
-          {/* </button> */}
           </Button>
           {reportButton()}
         </StyledButton>
@@ -137,7 +138,7 @@ const QuestionEntry = ({id, qObject}) => {
           {moreAnswersButton()}
       </form>
     </Border>
-    </ThemeProvider>
+
 
   )
 }

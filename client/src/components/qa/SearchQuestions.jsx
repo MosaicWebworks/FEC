@@ -1,5 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {QuestionListContext} from './QuestionList.jsx';
+import styled from 'styled-components';
+
+const Search = styled.input`
+width: 300px;`
+
 
 const SearchQuestions = () => {
   const [query, setQuery] = useState('');
@@ -20,7 +25,7 @@ const SearchQuestions = () => {
 
   return (
       <div>
-        <input name="search" type="text" value={query} placeholder="Have a question? Search for answers…" onChange={(e) => {
+        <Search name="search" type="text" value={query} placeholder="Have a question? Search for answers…" onChange={(e) => {
           setQuery(e.target.value);
           }}
         />
