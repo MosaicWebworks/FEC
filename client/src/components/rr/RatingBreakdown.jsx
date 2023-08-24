@@ -4,19 +4,30 @@ import styled from 'styled-components';
 import { useReviews} from './ReviewsContext.jsx';
 import { ReviewsProvider } from './ReviewsContext.jsx';
 import StarRating from '../SharedComponent/StarRating.jsx';
-import RatingSummarywithStar from '../SharedComponent/RatingSummarywithStar.jsx';
-import { Section,theme } from '../Styles/LayoutStyles.jsx';
+import RatingSummarywithStar from '../SharedComponent/RatingSummarywithStar.jsx'
 
+// const RatingSummaryContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+// `;
+
+// const AverageRating = styled.span`
+//   font-size: 36px;
+//   font-weight: bold;
+//   margin: 10px;
+
+// `;
+
+// const TotalReviews = styled.span`
+//   margin: 10px;
+// `;
 
 const RecommendationPercentage = styled.div`
   font-size: 18px;
-  font-weight: bold;
-  margin: 15px 5px;
-  color: ${(props) => props.theme.colors.secondary};
+  margin: 5px;
 `;
 
 const DetailsContainer = styled.div`
-  padding: 10px;
 `;
 
 const FilterMessage = styled.div`
@@ -29,41 +40,35 @@ const RemoveFilters = styled.a`
 const RatingBar = styled.div`
   display: flex;
   align-items: center;
-  margin: 8px 0;
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: white;
   }
 `;
 
 const Label = styled.span`
-  font-weight: ${(props) => props.theme.colors.text};
-  // width: 40px;
+
 `;
 
 const BarContainer = styled.div`
-  width: 100%;
+  width: 100px;
   display: flex;
-  height: 15px;
+  height: 10px;
   overflow: hidden;
-  background-color: ${(props) => props.theme.colors.secondary};
-  margin: 0 10px;
 `;
 
 const GreenBar = styled.div`
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: green;
   flex-basis: ${({ percentage }) => percentage}%;
 `;
 
 const GrayBar = styled.div`
   flex-grow: 1;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: lightgrey;
 `;
 
 const Count = styled.span`
-  font-size:  ${(props) => props.theme.fonts.main};
-  color: ${(props) => props.theme.colors.text};
 `;
 
 
@@ -154,11 +159,11 @@ const RatingBreakdown = () => {
 
 
   return (
-    <Section>
+    <div>
       <RatingSummarywithStar/>
       <RecommendationPercentage>{recommendationPercentage}% of reviews recommend this product</RecommendationPercentage>
       <RatingDetails ratings={reviewMeta.ratings} filterRatings={filterRatings} appliedFilters={appliedFilters} />
-    </Section>
+    </div>
   );
 };
 

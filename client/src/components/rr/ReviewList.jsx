@@ -9,39 +9,17 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import NewReviewForm from './NewReviewForm.jsx';
 import Modal from 'react-modal';
 import { StyledButton } from '../Styles/ButtonStyles.jsx';
-import { Section,  theme } from '../Styles/LayoutStyles.jsx';
-
-const Container = styled.div`
-// border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const SortContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  justify-content: flex-end;
-`;
+import { Container, Section, Heading1, Heading2, theme } from '../Styles/LayoutStyles.jsx';
 
 // const Container = styled.div`
-//   display: grid;
-//   width: 100%;
-//   max-width: 1200px;
-//   margin: 0 auto;
-//   padding: 20px;
-//   background-color: ${(props) => props.theme.colors.background};
-//   color: ${(props) => props.theme.colors.text};
-//   font-family: ${(props) => props.theme.fonts.main};
+// // border: 1px solid #ccc;
+//   padding: 10px;
+//   margin-bottom: 20px;
+//   display: flex;
+//   flex-direction: column;
 // `;
 
-const Button = styled.div`
-  color: ${({theme}) => theme.colors.textSecondary};
-  border: 2px solid ${({theme}) => theme.colors.textSecondary};
-  padding: 5px;
-  border-radius: 5px;
+const Button = styled.button`
 `
 ;
 
@@ -116,21 +94,18 @@ const ReviewList = () => {
 
   return (
     <Container data-testid="reviewList-component">
-      <SortContainer>
-        <span>Sort by: </span>
-        <SortingDropdown selectedSort={selectedSort} onChange={handleSortChange} />
-      </SortContainer>
+      <SortingDropdown selectedSort={selectedSort} onChange={handleSortChange} />
       {filteredReviews.slice(0, loadedReviewsCount).map((review) => (
-        <Section data-testid="reviewTile-component">
+        <Container data-testid="reviewTile-component">
         <ReviewTile key={review.review_id} review={review} />
-        </Section>
+        </Container>
       ))}
       {loadedReviewsCount <filteredReviews.length && (
-        <Button onClick={handleLoadMoreReviews}>
+        <StyledButton onClick={handleLoadMoreReviews}>
           See More Reviews
-        </Button>
+        </StyledButton>
       )}
-      <Button onClick={() => setIsModalOpen(true)}>Write Your Review</Button>
+      <StyledButton onClick={() => setIsModalOpen(true)}>Write Your Review</StyledButton>
       <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
         <NewReviewForm />
       </Modal>

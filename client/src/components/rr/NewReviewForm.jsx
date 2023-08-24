@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {PhotoContainer, ModalForm, PhotoHeader, Submit, AlignContent} from '../Styles/ModalStyles.jsx';
 
 const NewReviewForm = () => {
 
@@ -120,7 +119,7 @@ const NewReviewForm = () => {
     showReviewForm ? (
     <form onSubmit={handleSubmit}>
       <h1 data-testid="new-review-title">Write Your Review</h1>
-      {/* <h2>About the product</h2> */}
+      <h2>About the product</h2>
       {/* Overall Rating */}
       <label>Overall rating (mandatory)*</label>
       <div>

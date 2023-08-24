@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useReviews} from './ReviewsContext.jsx';
 import { ReviewsProvider } from './ReviewsContext.jsx';
-import { Section, theme } from '../Styles/LayoutStyles.jsx';
 
 const RatingContainer = styled.div`
   margin: 10px 0;
@@ -17,7 +16,7 @@ const RatingBar = styled.div`
   position: relative;
   width: 100%;
   height: 10px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: lightgrey;
 `;
 
 
@@ -76,7 +75,7 @@ const ProductBreakdown = () => {
   }
 
   return (
-    <Section>
+    <div>
       {Object.entries(characteristics).map(([characteristic, { value }]) => (
         <AllRating
           key={characteristic}
@@ -86,7 +85,7 @@ const ProductBreakdown = () => {
           maxValueLabel={allLabels[characteristic][1]}
         />
       ))}
-    </Section>
+    </div>
   );
 
 }
