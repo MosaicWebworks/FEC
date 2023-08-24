@@ -47,11 +47,11 @@ const Overview = () => {
   //const [product, setProduct] = React.useState(sampleProduct);
   const [selectedThumbnail, setSelectedThumbnail] = React.useState(0);
   React.useEffect(() => {
-    axios.get(`http://localhost:3000/data/products/${product.id}/styles`)
+    axios.get(`/data/products/${product.id}/styles`)
     .then((res) => {
       setStyles(res.data);
     }).then(() => {
-      axios.get(`http://localhost:3000/data/reviews?product_id=${product.id}`)
+      axios.get(`/data/reviews?product_id=${product.id}`)
       .then((res) => {
       }).catch((err) => console.log(err));
     });
