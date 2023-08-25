@@ -16,10 +16,13 @@ const Container = styled.div`
 
 const LeftSection = styled.div`
   flex: 1;
+  flex-shrink: 0;   //prevents the container from shrinking
 `;
 
 const RightSection = styled.div`
   flex: 2;
+  flex-shrink: 0;
+  overflow: auto;
 `;
 
 
