@@ -6,7 +6,7 @@ import axios from 'axios';
 import QuestionModal from './QuestionModal.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
 import {ProductContext, ModalContext} from '../../contexts.js';
-import {StyledButton, Button} from '../Styles/ButtonStyles.jsx';
+import {StyledButton, QuestionListButton} from '../Styles/ButtonStyles.jsx';
 
 const MaxHeight = styled.div`
 max-height: 50vh;
@@ -54,7 +54,7 @@ const QuestionList = () => {
   const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
-        <Button onClick={handleSubmit}>More answered questions</Button>
+        <QuestionListButton onClick={handleSubmit}>More answered questions</QuestionListButton>
       )
     } else {
       return <div></div>
@@ -97,7 +97,7 @@ const QuestionList = () => {
           ))
         }
         </MaxHeight>
-        <Button onClick={toggleModal}>Ask a question</Button>
+        <QuestionListButton onClick={toggleModal}>Ask a question</QuestionListButton>
         {displayModal()}
         {renderMoreQuestions()}
       </QuestionListContext.Provider>}
