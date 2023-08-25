@@ -47,7 +47,7 @@ const App = () => {
               <Section>
                 {isDarkMode ? <button onClick={toggleDarkMode}>Switch to light mode</button> : <button onClick={toggleDarkMode}>Switch to dark mode</button>}
                 <Heading1>Overview      <button onClick={(e) => {
-              axios.get(`http://localhost:3000/data/products/403${Math.floor(Math.random() * 10) + 44}`)
+              axios.get(`/data/products/403${Math.floor(Math.random() * 10) + 44}`)
               .then((res) => {
                 setProduct(res.data);
               });
