@@ -23,7 +23,7 @@ const DropDownButton = styled.div`
 
 const DropDownContent = styled.ul`
   position: absolute;
-  top: 1.5em;
+  top: 35px;
   width: inherit;
   background-color: ${theme.colors.secondary};
   list-style: none;
@@ -51,6 +51,7 @@ const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.background};
   padding: 10px 20px;
+  margin-top: 15px;
   border: none;
   cursor: pointer;
   transition: 0.3s;
@@ -101,7 +102,7 @@ const AddToCart =
     <DropDownContent data-testid="sizeOptions" style={{visibility: sizeDropDown}}>
       {sizes.map((size) => {
         var selectedIndex = index;
-        var backgroundColor = hoverSize === selectedIndex ? theme.colors.primary : theme.colors.secondary;
+        var backgroundColor = hoverSize === selectedIndex ? theme.colors.secondary : theme.colors.primary;
         index++;
       return(<DropDownItem key={'sizeDropDown' + index} style={{backgroundColor: backgroundColor}} onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {setHoverSize(selectedIndex)}} onMouseLeave={(e) => {setHoverSize(-1)}}>{size}</DropDownItem>) })}
     </DropDownContent>

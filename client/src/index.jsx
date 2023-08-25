@@ -9,7 +9,7 @@ import { Overview } from './components/Overview/Overview.jsx'
 import {ProductContext, ModalContext, AnswerModalContext} from './contexts.js'
 import {sampleProduct} from './components/Overview/sampleData.js';
 import {Container, Section, theme, SecondaryText, darkTheme, OuterContainer, Heading1, Heading2} from './components/Styles/LayoutStyles.jsx';
-
+import Button from './components/Styles/OverviewStyles.jsx';
 
 
 
@@ -45,13 +45,13 @@ const App = () => {
           <OuterContainer onClick={closeModal}>
             <Container >
               <Section>
-                {isDarkMode ? <button onClick={toggleDarkMode}>Switch to light mode</button> : <button onClick={toggleDarkMode}>Switch to dark mode</button>}
-                <Heading1>Overview      <button onClick={(e) => {
+                {isDarkMode ? <Button onClick={toggleDarkMode}>Switch to light mode</Button> : <Button onClick={toggleDarkMode}>Switch to dark mode</Button>} <Button onClick={(e) => {
               axios.get(`/data/products/403${Math.floor(Math.random() * 10) + 44}`)
               .then((res) => {
                 setProduct(res.data);
               });
-              }}>Random Style</button></Heading1>
+              }}>Random Style</Button>
+                <Heading1>Overview      </Heading1>
                 <Overview/>
               </Section>
               <Section>

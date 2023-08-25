@@ -19,7 +19,7 @@ const theme = {
     textContrast: '#fca311'
   },
   fonts: {
-    main: '"Helvetica Neue", sans-serif',
+    main: '"Space Mono", monospace',
   },
 };
 
@@ -33,7 +33,7 @@ const darkTheme = {
     textContrast: '#FFFFFF'
   },
   fonts: {
-    main: '"Helvetica Neue", sans-serif',
+    main: '"Space Mono", monospace',
   },
 };
 
