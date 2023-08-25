@@ -39,8 +39,8 @@ const darkTheme = {
 
 const Container = styled.div`
   display: grid;
-  width: 100%;
-  max-width: 1200px;
+
+  max-width: 70%;
   margin: 0 auto;
   padding: 20px;
   background-color: ${(props) => props.theme.colors.background};
@@ -64,6 +64,10 @@ const Heading2 = styled.h2`
   color: ${(props) => props.theme.colors.textSecondary};
 `;
 
+const MaxHeight = styled.div`
+max-height: 50vh;
+overflow-y: auto;`
+
 
 export {
   Container,
@@ -74,5 +78,6 @@ export {
   darkTheme,
   OuterContainer,
   Heading1,
-  Heading2
+  Heading2,
+  MaxHeight
 }

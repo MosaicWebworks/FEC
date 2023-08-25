@@ -17,7 +17,7 @@ const SearchQuestions = () => {
       var results = questionsObject.filter((question) => {
         return question[1].question_body.toLowerCase().includes(query.toLowerCase());
       })
-      setQuestionsToRender(results.slice(0, toRender));
+      setQuestionsToRender(results.slice(0, results.length));
     } else {
       setQuestionsToRender(fullQuestionsList.slice(0, toRender));
     }
