@@ -36,7 +36,7 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
     <StyleThumbnails>
       {styles.results.map((style) => {
         if (selectedStyle === index) {
-          styleBorder = `2px solid ${theme.colors.secondary}`;
+          styleBorder = `2px solid ${theme.colors.textContrast}`;
         } else {
           styleBorder = "";
         }
