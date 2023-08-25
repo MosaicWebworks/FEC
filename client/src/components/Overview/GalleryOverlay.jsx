@@ -66,7 +66,7 @@ const RenderThumbnails = ({setSelectedThumbnail, selectedThumbnail, styles, sele
       var thumbnailIndex = index;
       var thumbnailBorder = "1px solid white";
       if (thumbnailIndex === selectedThumbnail) {
-        thumbnailBorder = `2px solid ${theme.colors.secondary}`;
+        thumbnailBorder = `2px solid ${theme.colors.textContrast}`;
       }
       index++
       return (<Thumbnail key={photo.thumbnail_url + index.toString()} alt="click to display different product image" onClick={(e) => {setSelectedThumbnail(thumbnailIndex)}} src={photo.thumbnail_url} style={{border: thumbnailBorder}} />)
