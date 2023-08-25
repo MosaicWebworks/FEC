@@ -25,8 +25,8 @@ const theme = {
 
 const darkTheme = {
   colors: {
-    primary: '#353535',
-    secondary: '#353535',
+    primary: '#D9D9D9',
+    secondary: '#284B63',
     background: '#353535',
     text: '#FFFFFF',
     textSecondary: '#FFFFFF',
