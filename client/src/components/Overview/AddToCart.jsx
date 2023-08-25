@@ -23,7 +23,7 @@ const DropDownButton = styled.div`
 
 const DropDownContent = styled.ul`
   position: absolute;
-  top: 35px;
+  top: 32px;
   width: inherit;
   background-color: ${theme.colors.secondary};
   list-style: none;
