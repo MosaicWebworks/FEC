@@ -9,18 +9,22 @@ justify-content: flex-end;
 `
 
 export const Button = styled.button`
-color: ${({theme}) => theme.colors.textSecondary};
-background-color: ${({theme}) => theme.colors.background};
-border-radius: 10px;
-height: 25px;
-border: solid 1px grey;
-margin-right: 10px;
-cursor: pointer;
+background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.background};
+  height: 40px;
+  border-radius: 5px;
+  text-align: center;
+  vertical-align: middle;
+
+  margin: 10px;
+  border: none;
+  cursor: pointer;
   transition: 0.3s;
   &:hover {
     background-color: ${({ theme }) => theme.colors.textContrast};
   }
 `
+
 export const QuestionListButton = styled.button`
 background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.background};
@@ -32,10 +36,12 @@ background-color: ${({ theme }) => theme.colors.primary};
   &:hover {
     background-color: ${({ theme }) => theme.colors.textContrast};
   }`
+
 export const photoLinkButton = styled(Button)`
 display:flex;
-justify-content: flex-end;`
-// color: ${(props) => props.theme.colors.primary};
+justify-content: flex-end;
+`
+
 
 export const InputSubmit = styled.input`
 background-color: ${({ theme }) => theme.colors.primary};

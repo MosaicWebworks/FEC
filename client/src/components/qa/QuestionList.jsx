@@ -7,10 +7,8 @@ import QuestionModal from './QuestionModal.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
 import {ProductContext, ModalContext} from '../../contexts.js';
 import {StyledButton, QuestionListButton} from '../Styles/ButtonStyles.jsx';
+import {MaxHeight} from '../Styles/LayoutStyles.jsx'
 
-const MaxHeight = styled.div`
-max-height: 50vh;
-overflow-y: auto;`
 
 
 
