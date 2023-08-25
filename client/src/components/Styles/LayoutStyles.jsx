@@ -39,8 +39,8 @@ const darkTheme = {
 
 const Container = styled.div`
   display: grid;
-  width: 100%;
-  max-width: 1200px;
+
+  max-width: 70%;
   margin: 0 auto;
   padding: 20px;
   background-color: ${(props) => props.theme.colors.background};

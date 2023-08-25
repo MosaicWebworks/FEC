@@ -29,7 +29,7 @@ const QuestionList = () => {
   const product = useContext(ProductContext);
   const [isModalShown,setIsModalShown, closeModal] = useContext(ModalContext);
 
-  let productID =  product.id || 40346;
+  let productID =  product.id;
 
 
   useEffect(() => {

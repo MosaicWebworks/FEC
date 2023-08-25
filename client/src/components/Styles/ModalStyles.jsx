@@ -55,13 +55,16 @@ max-width: 200px;
 
 const PhotoSection = styled.div`
 grid-area: photos;
+display: flex;
 max-height: 125px;
-max-width: 200px;
+max-width: 100px;
 `
 const StyledPhotos = styled.div`
 display: flex;
 justify-content: center;
+gap: 20px;
 `
+
 
 
 const AnswerPhotos = styled(StyledPhotos)`
@@ -91,10 +94,20 @@ const Image = styled.div`
   grid-area: photo;
   display: flex;
   height: 100px;
+  max-height: auto;
+
   width: 100px;
-  margin-left: 10px;
-  margin-right: 10px;
+  max-width: 100%;
+  object-fit: cover;
+  margin-left: 15px;
+  margin-right: 15px;
+  position: relative;
+
+
+
+
   `
+
 
 export {
   PhotoSection,
