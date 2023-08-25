@@ -19,6 +19,7 @@ const AverageRating = styled.span`
 
 const TotalReviews = styled.span`
   margin: 10px;
+  color: ${({theme}) => theme.colors.primary};
 `;
 
 

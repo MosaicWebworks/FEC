@@ -18,7 +18,10 @@ const Button = styled.button`
 `;
 
 const Label = styled.label`
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
+  font-weight: bold;
+  margin: 10px;
+  color: ${({theme}) => theme.colors.primary};
 `;
 
 const InputGroup = styled.div`
@@ -30,14 +33,25 @@ const RadioButtonGroup = styled.div`
 `;
 
 const ErrorMessages = styled.div`
-  margin-top: 20px;
+  margin : 20px;
   color: red;
 `;
 
 const Messages = styled.div`
-  margin-top: 20px;
+  margin-left: 10px;
   color: ${({ theme }) => theme.colors.textContrast};
 `;
+
+const CharacteristicItem = styled.div`
+  margin-bottom: 20px;
+
+`;
+
+const OverallRatingContainer = styled.div`
+  margin-left: 10px;
+`;
+
+
 
 const NewReviewForm = () => {
 
@@ -139,6 +153,7 @@ const NewReviewForm = () => {
     };
 
     // Send POST request to the server
+
     axios.post('/data/reviews', data)
       .then((response) => {
         console.log('Data sent successfully:', response);
@@ -159,7 +174,7 @@ const NewReviewForm = () => {
       {/* Overall Rating */}
       <InputGroup>
       <Label>Overall rating (mandatory)*</Label>
-      <div>
+      <OverallRatingContainer>
         {[1, 2, 3, 4, 5].map((star, index) => (
           <span
             key={index}
@@ -170,7 +185,7 @@ const NewReviewForm = () => {
           </span>
         ))}
         {rating > 0 && <span> - {ratingText[rating - 1]}</span>}
-      </div>
+        </OverallRatingContainer>
       </InputGroup>
       {/* Recommend*/}
       <RadioButtonGroup>
@@ -200,9 +215,9 @@ const NewReviewForm = () => {
       <RadioButtonGroup>
       <div>
       {characteristicsList.map((item, index) => (
-        <div key={index}>
+        <CharacteristicItem key={index}>
           <Label>{item.name}</Label>
-          <p>{characteristics[item.id] !== undefined ? item.scale[characteristics[item.id]] : "none selected"}</p>
+          <OverallRatingContainer>{characteristics[item.id] !== undefined ? item.scale[characteristics[item.id]] : "none selected"}</OverallRatingContainer>
           <div>
             {item.scale.map((scaleItem, scaleIndex) => (
               <Label key={scaleIndex}>
@@ -216,7 +231,7 @@ const NewReviewForm = () => {
               </Label>
             ))}
           </div>
-        </div>
+        </CharacteristicItem>
       ))}
     </div>
     </RadioButtonGroup>

@@ -10,9 +10,10 @@ const Star = styled.span`
   color: ${({ type, theme }) => {
     if (type === 'full') return theme.colors.textContrast;
     if (type === 'partial') return theme.colors.textContrast;
-    if (type === 'empty') return theme.colors.secondary;
-  }};
-
+    if (type='empty') return theme.colors.secondary;
+  }
+};
+  font-size: '2rem';
   &::before {
     content: '★';
     display: inline-block;
@@ -28,7 +29,7 @@ const StarRating = ({ rating }) => {
           const width = rating - index > 1 ? 100 : (rating - index) * 100;
           return <Star key={index} type={width === 100 ? 'full' : 'partial'} width={width} />;
         }
-        return <Star key={index} type="empty" width={0} />;
+        return <Star key={index} type='empty' width={0} />;
       })}
     </StarContainer>
   );
