@@ -9,7 +9,6 @@ const ReviewsContext = createContext();
 export const ReviewsProvider = ({ children }) => {
 
   const product = useContext(ProductContext);
-  //console.log(product);
   const [reviews, setReviews] = useState([]);
   const [reviewMeta, setReviewMeta] = useState({});
   const [loadedReviewsCount, setLoadedReviewsCount] = useState(2); // Initial value is 2
@@ -17,7 +16,6 @@ export const ReviewsProvider = ({ children }) => {
   const [filteredReviews, setFilteredReviews] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching reviews for product:', product.id);
     //Fetch reviews
     axios.get(`/data/reviews?product_id=${product.id}`)
       .then((response) => {
@@ -29,7 +27,6 @@ export const ReviewsProvider = ({ children }) => {
     //Fetch review meta
     axios.get(`/data/reviews/meta?product_id=${product.id}`)
       .then((response) =>{
-        console.log('Review meta response:', response);
         setReviewMeta(response.data)
       })
       .catch((error) => console.error('An error occurred while fetching review meta:', error));

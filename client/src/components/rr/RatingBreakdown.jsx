@@ -39,7 +39,8 @@ const RatingBar = styled.div`
 
 const Label = styled.span`
   color: ${(props) => props.theme.colors.text};
-  // width: 40px;
+  font-size:  ${(props) => props.theme.fonts.main};
+  white-space: nowrap;
 `;
 
 const BarContainer = styled.div`
