@@ -1,50 +1,50 @@
-# GIT Collaborative Workflow:
-## Working on a Single Repository (No Forks):
+# MosaicWebworks
+## Overview
+### About
+A contemporary front-end design that replicates the shopping experience of leading online marketplaces.
 
-### Initial Setup:
-1. Clone the Repository:
-Clone the main repository to your local machine.
+### Main Features
+- **Dark Mode Toggle**: Switch to a visually appealing dark theme for a more comfortable browsing experience during the night or in low light.
+- **Interactive Q&A Section**: Engage with the community by posting questions and receiving answers about products you're interested in.
+- **Review System**: Share your thoughts on products by writing detailed reviews, aiding fellow shoppers in their purchasing decisions.
 
-### Sync with the Main Repository:
-1. Checkout the Main Branch:
-- git checkout main
-This ensures you're working off the latest version.
+### Components
+- Product Overview
+- Questions and Answers
+- Ratings and Reviews
+## Installation
+### 1. Install the dependencies
+```bash
+npm install
+```
 
-2. Pull the Latest Changes:
-- git pull
-Always pull the latest changes from the main branch before starting new work to avoid conflicts later.
+### 2. Follow the instruction in example.env
 
-### Feature Development:
-1. Create a Feature Branch:
-- git checkout -b feature/FEATURE_NAME
-Always work on a new branch for each feature or module(A feature per ticket). This keeps work isolated and organized.
+### 3. Start the server
+```bash
+npm run server-dev
+```
 
-2. Coding:
-- git add .
-- git commit -m "Detailed description of the changes made."
-Make your code changes. Remember to frequently commit your changes with meaningful commit messages.
+### 4. Start the client
+open another terminal, run:
+```bash
+npm run client-dev
+```
 
-3. Push the Feature Branch to the Main Repository:
-- git push -u origin feature/FEATURE_NAME
-Once the feature is complete and tested locally, push your branch to the main repository.
+### 5. Access the application
+Open browser and navigate to http://localhost:3000
 
-### Create a Pull Request (PR):
-1. Navigate to the Main Repository on GitHub
-2. Initiate a Pull Request
-3. Request Reviews by inviting reviewers
+## Build with
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)
+![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![Axios](https://img.shields.io/badge/Axios-5A29E4.svg?style=for-the-badge&logo=Axios&logoColor=white)
 
-### Code Review & Merging:
-1. Reviewing
-2. Merging:
-Once the PR is approved, it gets merged into the main branch.
 
-### Syncing Post-Merge:
-1. Checkout Main & Pull:
-- git checkout main
-- git pull
-After your feature has been merged, or when any other feature is merged, ensure you sync your local main branch.
-
-### other issues may encounter:
-message when add .: fatal:  CRLF would be replaced by LF in node_modules/@babel/code-frame/node_modules/color-name/.npmignore
-solution: $ git config --global core.autocrlf false
-
+## Team Members
+- [Jack Tobin](https://github.com/luckynumberthirteen)
+- [Frank Soto](https://github.com/frankasoto)
+- [Paula Yang](https://github.com/Paula-Yang)
