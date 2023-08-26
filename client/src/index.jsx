@@ -9,7 +9,7 @@ import { Overview } from './components/Overview/Overview.jsx'
 import {ProductContext, ModalContext, AnswerModalContext} from './contexts.js'
 import {sampleProduct} from './components/Overview/sampleData.js';
 import {Container, Section, theme, SecondaryText, darkTheme, OuterContainer, Heading1, Heading2} from './components/Styles/LayoutStyles.jsx';
-import Button from './components/Styles/OverviewStyles.jsx';
+import {Button} from './components/Styles/OverviewStyles.jsx';
 
 
 
