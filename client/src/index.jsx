@@ -21,7 +21,6 @@ const App = () => {
   const [themeToUse, setThemeToUse] = useState(theme);
   const closeModal = () => {
     if (isModalShown || isAnswerModalShown) {
-      console.log('clicked off');
       setIsModalShown(false);
       setIsAnswerModalShown(false);
     }

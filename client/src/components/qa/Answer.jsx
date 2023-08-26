@@ -1,25 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {format} from 'date-fns';
+
 import axios from 'axios';
 import Report from './Report.jsx';
 import {StyledButton, Button} from '../Styles/ButtonStyles.jsx';
 import PhotoEntry from './Photo.jsx';
 import {AnswerPhotos} from '../Styles/ModalStyles.jsx';
-
+import moment from 'moment';
 
 const Answer = ({setAddedEntity, answer}) =>{
-  //separate date added into mon,day,year components
-  const year = answer.date.slice(0,4);
-  const month = answer.date.slice(5,7);
-  const day = answer.date.slice(8,10);
-  //converts time into date object
-  const dateAdded = new Date(year, month, day);
-  //formats according date according to desired format
-  const formattedDate = format(dateAdded, 'MMM-dd-yyyy');
+
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness)
   const [isReported, setIsReported] = useState(false);
+
+
+  //take date answer was submitted, and format according to Month, Day, year
+  const formattedDate = moment(answer.date).format( 'MMM Do,yyyy')
 
   //create button to increment helpful on button Click
   const changeHelpful = () => {

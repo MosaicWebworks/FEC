@@ -5,6 +5,8 @@ A contemporary front-end design that replicates the shopping experience of leadi
 
 ### Main Features
 - **Dark Mode Toggle**: Switch to a visually appealing dark theme for a more comfortable browsing experience during the night or in low light.
+- **Random Style**: Intended to simulate user selecting product from a catalog of products.
+- **Product zoom**: Has the ability to zoom in on any currently displayed product.
 - **Interactive Q&A Section**: Engage with the community by posting questions and receiving answers about products you're interested in.
 - **Review System**: Share your thoughts on products by writing detailed reviews, aiding fellow shoppers in their purchasing decisions.
 
@@ -12,27 +14,51 @@ A contemporary front-end design that replicates the shopping experience of leadi
 - Product Overview
 - Questions and Answers
 - Ratings and Reviews
+
 ## Installation
+
 ### 1. Install the dependencies
 ```bash
-npm install
+ Use npm install to install all necessary dependencies
 ```
 
 ### 2. Follow the instruction in example.env
+Rename the example.env file to .env
 
-### 3. Start the server
-```bash
-npm run server-dev
-```
+### 3. Obtain a gitub api key
+paste it into the .env file where it says REACT_APP_API_KEY
+
+Make sure your api key has the following permissions (at minimum):
+- read:org
+- read:user
+- user
+- user:email
+- user:follow
+
 
 ### 4. Start the client
-open another terminal, run:
+Use npm run build to build the webpack for the site
 ```bash
-npm run client-dev
+npm run build
+```
+### 5. Start the server
+Use npm start to begin the server
+```bash
+npm start
 ```
 
+
 ### 5. Access the application
-Open browser and navigate to http://localhost:3000
+Go to http://localhost:3000 (if desired, you can change the desired port in the .env file)
+
+
+## Product Components
+
+### Product Overview
+
+
+
+
 
 ## Build with
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
