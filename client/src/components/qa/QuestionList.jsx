@@ -52,7 +52,10 @@ const QuestionList = () => {
   const renderMoreQuestions = () => {
     if (toRender < questionsObject.length) {
       return (
-        <QuestionListButton onClick={handleSubmit}>More answered questions</QuestionListButton>
+        <QuestionListButton
+          onClick={handleSubmit}>
+            More answered questions
+        </QuestionListButton>
       )
     } else {
       return <div></div>
@@ -84,14 +87,21 @@ const QuestionList = () => {
   }
 
 
-
+  let list = [];
+  let index = 0;
   return (
     <div >
       {questionsObject && <QuestionListContext.Provider value={[setQuestionsToRender, questionsObject, toRender]}>
         <SearchQuestions/>
         <MaxHeight onClick={closeModal}>
         {questionsToRender && questionsToRender.map((question) => (
-          <QuestionEntry id={productID} qObject={question[1]} key={question[0]}/>
+          <QuestionEntry
+          id={productID}
+          qObject={question[1]}
+          key={question[0]}
+          list={[...list, question]}
+          index={index++}
+          />
           ))
         }
         </MaxHeight>

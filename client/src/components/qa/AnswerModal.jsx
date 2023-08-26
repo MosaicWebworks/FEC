@@ -3,33 +3,32 @@ import styled from 'styled-components';
 import axios from 'axios';
 import {ModalContainer, ModalForm, CloseModal, Product, Header, Warning, Submit, PhotoSection, AlignContent, StyledPhotos} from '../Styles/ModalStyles.jsx';
 import {Button} from '../Styles/ButtonStyles.jsx';
-import {QuestionContext} from './QuestionEntry.jsx';
 import {PhotoContext} from '../../contexts.js';
 import PhotoModal from './PhotoModal.jsx';
 import PhotoEntry from './Photo.jsx';
 
 
+export const IdContext = createContext();
 
-
-
-
-const AnswerModal = ({product_id}) => {
+const AnswerModal = ({product_id, setIsAnswerModalShown, info}) => {
   const [productName, setProductName] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [body, setBody] = useState('');
   const [photos, setPhotos] = useState([]);
 
+  const [question_id, setQuestionID] = useState(0);
+  const [question_body, setQuestionBody] = useState('...Loading');
+
   const [isPhotoModalShown, setIsPhotoModalShown] = useState(false);
-
-
-
-  const [shouldAddPhoto, setShouldAddPhoto] = useState(false)
-  const [qObject] = useContext(QuestionContext)
-  const {question_id, question_body} = qObject;
 
   const [isInvalid, setIsInvalid] = useState(false)
   useEffect( () => {
+    if (info) {
+      setQuestionID(info[1].question_id);
+      setQuestionBody(info[1].question_body);
+    }
+
     axios.get(`data/products/${product_id}`)
       .then((results) => {
         setProductName(results.data.name);
@@ -46,8 +45,7 @@ const AnswerModal = ({product_id}) => {
       photos: []
     })
     .then((results) => {
-      setIsModalShown(false);
-      console.log('answer submitted')
+      setIsAnswerModalShown(false);
     })
     .catch(() => {
       setIsInvalid(true);
@@ -84,6 +82,7 @@ const AnswerModal = ({product_id}) => {
 
   return (
     <PhotoContext.Provider value={[photos,setPhotos, setIsPhotoModalShown]}>
+      {info &&
       <AlignContent>
         <ModalContainer onClick={(e) => e.stopPropagation()}>
           <Header>
@@ -143,6 +142,7 @@ const AnswerModal = ({product_id}) => {
         </ModalContainer>
 
       </AlignContent>
+      }
     </PhotoContext.Provider>
   )
 }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext, useContext} from 'react';
+import React, {useState, useEffect, createContext, useContext, useMemo} from 'react';
 import styled, {ThemeProvider} from 'styled-components';
 import exampleData from './exampleData.js'
 import Answer from './Answer.jsx';
@@ -11,9 +11,8 @@ import {Question, Border, AnswerDesign} from './QuestionEntryStyles.jsx';
 import {ModalContext, AnswerModalContext} from '../../contexts.js'
 export const QuestionContext = createContext();
 export const AnswerContext = createContext();
-
-
-const QuestionEntry = ({id, qObject}) => {
+export const IdContext = createContext();
+const QuestionEntry = ({id, qObject, list, index}) => {
   //converts answer id object into array. will help with determining how many answers exist
   const [answersID, setAnswersID] = useState(Object.keys(qObject.answers))
   //answers that will be rendered. initially empty
@@ -22,36 +21,30 @@ const QuestionEntry = ({id, qObject}) => {
   const [numberToRender, setNumberToRender] = useState(2);
 
 
+
   const [isAnswerModalShown, setIsAnswerModalShown] = useContext(AnswerModalContext);
   const [isModalShown, setIsModalShown, closeModal] = useContext(ModalContext);
 
 
   const [addAnswer, setAddAnswer] = useState(true);
-
-  //creates an array of object. contains an array of arrays [0] = id and [1] = answer
   let answers = Object.entries(qObject.answers);
-
   const [isReported, setIsReported] = useState(false);
 
 
-  //sorting function to sort by helpfulness with most helpful being at the top/front
+
   const compareHelpfulness = (a, b) => {
     return b[1].helpfulness - a[1].helpfulness;
   }
 
 
-  //calls sort function on array while sorting
+
   answers.sort(compareHelpfulness);
 
-
-  //intiailly renders 2 answers for the question
   useEffect(() => {
     setAnswersToRender(answers.slice(0, numberToRender));
   }, [numberToRender])
 
 
-
-  //handle submit of clicking on see more answers
   const handleSubmit = (e) => {
     e.preventDefault();
     if (numberToRender === 2) {
@@ -60,7 +53,6 @@ const QuestionEntry = ({id, qObject}) => {
       setNumberToRender(2)
     }
   }
-
 
   const moreAnswersButton = () => {
     if (answersID.length < 2) {
@@ -79,7 +71,7 @@ const QuestionEntry = ({id, qObject}) => {
   }
 
   const toggleModal = () => {
-    if (!isAnswerModalShown) {
+    if ( !isAnswerModalShown) {
       setIsAnswerModalShown(true);
     } else {
       setIsAnswerModalShown(false);
@@ -90,10 +82,10 @@ const QuestionEntry = ({id, qObject}) => {
   const displayModal = () => {
     if (isAnswerModalShown) {
       return (
-        <QuestionContext.Provider value={[qObject]}>
-          <AnswerModal product_id={id}/>
-        </QuestionContext.Provider>
-
+          <AnswerModal
+          product_id={id}
+          setIsAnswerModalShown={setIsAnswerModalShown}
+          info={list[index]}/>
       )
     }
   }
@@ -110,9 +102,7 @@ const QuestionEntry = ({id, qObject}) => {
     }
   }
 
-
   return (
-
     <Border onClick={closeModal}>
       <Question>
         <b>Q: {qObject.question_body}</b>
@@ -127,7 +117,9 @@ const QuestionEntry = ({id, qObject}) => {
       <AnswerDesign>
         {
           answersToRender.map((answer,index) => (
-            <Answer answer={answer[1]} key={answersID[index]}/>
+            <Answer
+              answer={answer[1]}
+              key={answersID[index]}/>
           ))
         }
       </AnswerDesign>
@@ -135,10 +127,7 @@ const QuestionEntry = ({id, qObject}) => {
           {moreAnswersButton()}
       </form>
     </Border>
-
-
   )
 }
-
 
 export default QuestionEntry;
