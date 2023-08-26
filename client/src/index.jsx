@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import styled from 'styled-components';
-import { ThemeProvider } from 'styled-components';
+import {ThemeProvider} from 'styled-components';
 import RatingsReviews from './components/rr/RatingsReviews.jsx';
 import QuestionList from './components/qa/QuestionList.jsx';
-import { Overview } from './components/Overview/Overview.jsx'
+import Overview from './components/Overview/Overview.jsx'
 import {ProductContext, ModalContext, AnswerModalContext} from './contexts.js'
 import {sampleProduct} from './components/Overview/sampleData.js';
 import {Container, Section, theme, SecondaryText, darkTheme, OuterContainer, Heading1, Heading2} from './components/Styles/LayoutStyles.jsx';
-import Button from './components/Styles/OverviewStyles.jsx';
+import {Button} from './components/Styles/OverviewStyles.jsx';
 
 
 

@@ -53,7 +53,7 @@ export const ReviewsProvider = ({ children }) => {
   };
 
   return (
-    <ReviewsContext.Provider value={{ reviews, reviewMeta, loadedReviewsCount, handleLoadMoreReviews,  filteredReviews,  setFilteredReviews}}>
+    <ReviewsContext.Provider value={{ reviews, reviewMeta, loadedReviewsCount, handleLoadMoreReviews,  filteredReviews,  setFilteredReviews, updateFilteredReviews}}>
       {children}
     </ReviewsContext.Provider>
   );
