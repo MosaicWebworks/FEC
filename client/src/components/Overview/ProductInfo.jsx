@@ -45,7 +45,7 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
         return(
         <span key={'styleThumbnail' + index} style={{margin: '10px'}}>
 
-          <StyleThumbnail onClick={(e) => setSelectedStyle(styleIndex)} style={{border: styleBorder}} src={style.photos[0].thumbnail_url}/>
+          <StyleThumbnail alt={`Click to change selected style to ${style.name}`} onClick={(e) => setSelectedStyle(styleIndex)} style={{border: styleBorder}} src={style.photos[0].thumbnail_url}/>
           {selectedStyle === index - 1 ? <img style={{position: 'absolute', marginLeft: '-20px'}} src={checkmark}/> : null}
         </span>)
       })}
