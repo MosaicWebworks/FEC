@@ -15,6 +15,11 @@ A contemporary front-end design that replicates the shopping experience of leadi
 - Questions and Answers
 - Ratings and Reviews
 
+### Preview
+![Overview](https://github.com/MosaicWebworks/FEC/assets/41026993/3dea642c-d494-44b6-8f4d-1c175ca89511)
+![QA](https://github.com/MosaicWebworks/FEC/assets/41026993/17d17092-6bfb-4656-b9ba-3c0030708277)
+![Reviews](https://github.com/MosaicWebworks/FEC/assets/41026993/cb644fd7-fc22-42f8-9b07-443a7daff65d)
+
 ## Installation
 
 ### 1. Install the dependencies
