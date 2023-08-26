@@ -77,8 +77,6 @@ const calculateRatingSummary = (ratings, recommended) => {
   const recommendedCount = Number(recommended.true);
   const recommendationPercentage = ((recommendedCount / totalReviews) * 100).toFixed(2);
 
-//console.log(recommendedCount, totalReviews);
-
   return { averageRating, totalReviews,  recommendationPercentage };
 };
 
@@ -109,7 +107,7 @@ const RatingDetails = ({ ratings, filterRatings, appliedFilters }) => {
 };
 
 const RatingBreakdown = () => {
-  const { reviewMeta, updateFilteredReviews } = useReviews();
+  const { reviewMeta, updateFilteredReviews, reviews } = useReviews();
   if (!reviewMeta || !reviewMeta.ratings || !reviewMeta.recommended) {
     return <div>Loading...</div>;
   }

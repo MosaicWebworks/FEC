@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import styled from 'styled-components';
 //import exampleDataList from './exampleDataList.js';
 import StarRating from '../SharedComponent/StarRating.jsx';
@@ -24,7 +25,7 @@ const ReviewerAndDate = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  font-size: 14px;
+  font-size: 12px;
 `;
 
 const HelpfulnessSection = styled.div`
@@ -69,7 +70,7 @@ const Body = styled.div`
 
 const ReviewDate = styled.div`
   color: ${({theme}) => theme.colors.text};
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 20px;
 `;
 
@@ -107,14 +108,16 @@ const Photo = styled.img`
 
 
 //date same as qa
-const formatDate = (dateString) => {
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const inputDate = new Date(dateString);
-  const month = months[inputDate.getMonth()];
-  const day = String(inputDate.getDate()).padStart(2, '0');
-  const year = inputDate.getFullYear();
-  return `${month}-${day}-${year}`;
-};
+// const formatDate = (dateString) => {
+//   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+//   const inputDate = new Date(dateString);
+//   const month = months[inputDate.getMonth()];
+//   const day = String(inputDate.getDate()).padStart(2, '0');
+//   const year = inputDate.getFullYear();
+//   return `${month}-${day}-${year}`;
+// };
+
+// moment(answer.date).format( 'MMM Do,yyyy')
 
 const ReviewTile = ({ review }) => {
   const {
@@ -128,7 +131,8 @@ const ReviewTile = ({ review }) => {
     photos,
   } = review;
 
-  const formattedDate = formatDate(date);
+  //const formattedDate = formatDate(date);
+  const formattedDate = moment(date).format( 'MMM Do,yyyy')
 
   //helpfulness buttons
   const [hasVoted, setHasVoted] = useState(false);
