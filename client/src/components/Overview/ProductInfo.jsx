@@ -31,7 +31,14 @@ const RenderStyleThumbnails = ({styles, setSelectedStyle, selectedStyle}) => {
               style={{border: styleBorder}}
               src={style.photos[0].thumbnail_url}
             />
-          {selectedStyle === index - 1 ? <img style={{position: 'absolute', marginLeft: '-20px'}} src={checkmark}/> : null}
+          {selectedStyle === index - 1 ?
+            <img style={{position: 'absolute', marginLeft: '-20px'}}
+              src={checkmark}
+              alt="checkmark indicating selected image"
+              />
+            :
+            null
+          }
         </span>)
       })}
     </StyleThumbnails>
@@ -70,9 +77,30 @@ const ProductInfo = ({ref, product, styles, setSelectedStyle, selectedStyle}) =>
         <span>${product.default_price}</span>
       }
       <h3>{styles.results[selectedStyle].name}</h3>
-      <span>Share: <ShareLink src={facebook}/> <ShareLink src={twitter}/> <ShareLink src={pinterest}/></span>
-      <RenderStyleThumbnails setSelectedStyle={setSelectedStyle} selectedStyle={selectedStyle} styles={styles}/>
-      <AddToCart styles={styles} selectedStyle={selectedStyle}/>
+      <span>
+        Share:
+        <ShareLink
+          src={facebook}
+          alt="facebook icon"
+        />
+        <ShareLink
+          src={twitter}
+          alt="twitter icon"
+        />
+        <ShareLink
+          src={pinterest}
+          alt="pinterest icon"
+        />
+      </span>
+      <RenderStyleThumbnails
+        setSelectedStyle={setSelectedStyle}
+        selectedStyle={selectedStyle}
+        styles={styles}
+      />
+      <AddToCart
+        styles={styles}
+        selectedStyle={selectedStyle}
+      />
     </div>
   )
 }
