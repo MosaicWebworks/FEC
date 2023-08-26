@@ -64,7 +64,6 @@ const StyledModal = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.fonts.main};
-
 `;
 
 const SortingDropdown = ({ selectedSort, onChange }) => {
@@ -83,50 +82,51 @@ const ReviewList = () => {
   //window for new review
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // // Reapply the sorting when reviews or filters change
-  // useEffect(() => {
-  //     handleSortChange({ target: { value: selectedSort } });
-  //   }, [filteredReviews]);
-
   const sortReviews = (reviewsToSort, sortOption) => {
 
     //copy of sorted Reveiws
     //const sortedReviews = [...filteredReviews];
     const sortedReviews = [...reviewsToSort];
 
-    if (sortOption === 'helpful') {
-      sortedReviews.sort ((a, b) => {
-        const helpfulA = a.helpfulness;
-        const helpfulB = b.helpfulness;
-        return helpfulB - helpfulA;
-      });
-    };
+    switch(sortOption) {
+      case 'helpful':
+        sortedReviews.sort((a, b) => {
+          const helpfulA = a.helpfulness;
+          const helpfulB = b.helpfulness;
+          return helpfulB - helpfulA;
+        });
+        break;
 
-    if (sortOption === 'newest') {
-        sortedReviews.sort ((a, b) => {
+      case 'newest':
+        sortedReviews.sort((a, b) => {
           const dateA = new Date(a.date).getTime();
           const dateB = new Date(b.date).getTime();
           return dateB - dateA;
-      });
-    };
+        });
+        break;
 
-    if (sortOption === 'relevant') {
-      sortedReviews.sort((a, b) => {
-        const helpfulA = a.helpfulness;
-        const helpfulB = b.helpfulness;
-        const dateA = new Date(a.date).getTime();
-        const dateB = new Date(b.date).getTime();
+      case 'relevant':
+        sortedReviews.sort((a, b) => {
+          const helpfulA = a.helpfulness;
+          const helpfulB = b.helpfulness;
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
 
         //relevance score is calculated by taking into account two main factors: helpful and datetime submitted
         //more helpful(larger helpful number) and more recent the date(larger timestamps), more relevant
-        const relevanceA = helpfulA + dateA;
-        const relevanceB = helpfulB + dateB;
-        return relevanceB - relevanceA;
-    });
+          const relevanceA = helpfulA + dateA;
+          const relevanceB = helpfulB + dateB;
+          return relevanceB - relevanceA;
+        });
+        break;
+
+      default:
+        break;
+    }
+
+    return sortedReviews;
   }
 
-  return sortedReviews;
-  }
 
   const handleSortChange = (e) => {
     const newSelectedSort = e.target.value;
