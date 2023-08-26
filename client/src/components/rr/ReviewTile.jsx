@@ -107,18 +107,6 @@ const Photo = styled.img`
 `;
 
 
-//date same as qa
-// const formatDate = (dateString) => {
-//   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-//   const inputDate = new Date(dateString);
-//   const month = months[inputDate.getMonth()];
-//   const day = String(inputDate.getDate()).padStart(2, '0');
-//   const year = inputDate.getFullYear();
-//   return `${month}-${day}-${year}`;
-// };
-
-// moment(answer.date).format( 'MMM Do,yyyy')
-
 const ReviewTile = ({ review }) => {
   const {
     rating,
