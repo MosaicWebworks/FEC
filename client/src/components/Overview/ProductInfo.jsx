@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
-import {AddToCart} from './AddToCart.jsx'
+import AddToCart from './AddToCart.jsx'
 import {ProductContext} from '../../contexts.js'
 import RatingSummarywithStar from '../SharedComponent/RatingSummarywithStar.jsx';
 import { ReviewsProvider } from '../rr/ReviewsContext.jsx';
@@ -58,13 +58,16 @@ const ProductInfo = ({ref, product, styles, setSelectedStyle, selectedStyle}) =>
       </div>
       <div>{product.category}</div>
       <h1>{product.name}</h1>
-      {styles.results[selectedStyle].sale_price ? <div>
-        <span
-          style={{color: "red", textDecoration: "line-through"}}>
-          ${product.default_price}
-        </span>
-        <span>${styles.results[selectedStyle].sale_price}</span>
-        </div> : <span>${product.default_price}</span>
+      {styles.results[selectedStyle].sale_price ?
+        <div>
+          <span
+            style={{color: "red", textDecoration: "line-through"}}>
+            ${product.default_price}
+          </span>
+          <span>${styles.results[selectedStyle].sale_price}</span>
+        </div>
+        :
+        <span>${product.default_price}</span>
       }
       <h3>{styles.results[selectedStyle].name}</h3>
       <span>Share: <ShareLink src={facebook}/> <ShareLink src={twitter}/> <ShareLink src={pinterest}/></span>
@@ -74,4 +77,4 @@ const ProductInfo = ({ref, product, styles, setSelectedStyle, selectedStyle}) =>
   )
 }
 
-export { ProductInfo };
+export default ProductInfo;

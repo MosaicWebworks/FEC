@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { sampleProduct, sampleStyles } from './sampleData.js';
-import { ImageGallery } from './ImageGallery.jsx';
-import { GalleryOverlay } from './GalleryOverlay.jsx';
-import {ProductInfo} from './ProductInfo.jsx';
-import {ProductDetails} from './ProductDetails.jsx';
+import {sampleProduct, sampleStyles} from './sampleData.js';
+import ImageGallery from './ImageGallery.jsx';
+import GalleryOverlay from './GalleryOverlay.jsx';
+import ProductInfo from './ProductInfo.jsx';
+import ProductDetails from './ProductDetails.jsx';
 import axios from 'axios';
 import {ProductContext} from '../../contexts.js';
 import {theme} from '../Styles/LayoutStyles.jsx';
@@ -56,8 +56,7 @@ const Overview = () => {
         />
       </Details>
     </Container>
-
   )
 }
 
-export { Overview };
+export default Overview;

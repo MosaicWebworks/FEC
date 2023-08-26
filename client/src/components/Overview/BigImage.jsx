@@ -18,4 +18,4 @@ const BigImage = ({selectedThumbnail, setEnlargeImage, coords, setCoords, styles
     onMouseLeave={(e) => {setEnlargeImage(false)}}/>);
 }
 
-export {BigImage};
+export default BigImage;

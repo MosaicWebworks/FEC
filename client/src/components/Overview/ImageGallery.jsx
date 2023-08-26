@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { sampleProduct, sampleStyles } from './sampleData.js';
-import {BigImage} from './BigImage.jsx';
+import BigImage from './BigImage.jsx';
 import {ProductContext} from '../../contexts.js';
 import {theme} from '../Styles/LayoutStyles.jsx';
 import {StyledImg} from '../Styles/OverviewStyles.jsx';
@@ -12,11 +12,11 @@ const ImageGallery = ({ selectedThumbnail, styles, selectedStyle, setSelectedSty
   const [coords, setCoords] = React.useState({x: 0, y: 0});
   React.useEffect(() => {
     //image moves based on mouse movement
-    const handleWindowMouseMove = (e) => {
+    const handleWindowMouseMove = () => {
       setCoords({
         //set x, y coords as a percent of where the mouse is in the div
-        x: (event.clientX - e.target.getBoundingClientRect().x) / e.target.getBoundingClientRect().width,
-        y: (event.clientY - e.target.getBoundingClientRect().y) / e.target.getBoundingClientRect().height,
+        x: (event.clientX - event.target.getBoundingClientRect().x) / event.target.getBoundingClientRect().width,
+        y: (event.clientY - event.target.getBoundingClientRect().y) / event.target.getBoundingClientRect().height,
       });
     };
     window.addEventListener('mousemove', handleWindowMouseMove);
@@ -27,8 +27,8 @@ const ImageGallery = ({ selectedThumbnail, styles, selectedStyle, setSelectedSty
       );
     };
   }, []);
-  if (enlargeImage) {
-    return(
+  return (
+    enlargeImage ?
       <BigImage
         styles={styles}
         selectedThumbnail={selectedThumbnail}
@@ -37,16 +37,14 @@ const ImageGallery = ({ selectedThumbnail, styles, selectedStyle, setSelectedSty
         setCoords={setCoords}
         selectedStyle={selectedStyle}
       />
-    )
-  }
-  return(
-    <StyledImg
+      :
+      <StyledImg
       alt={`image showcasing ${product.name} in ${styles.results[selectedStyle].name}`}
       data-testid="main-image"
-      onClick={(e) => {setEnlargeImage(true)}}
+      onClick={() => {setEnlargeImage(true)}}
       src={styles.results[selectedStyle].photos[selectedThumbnail].url}
     />
   )
 }
 
-export { ImageGallery };
+export default ImageGallery;

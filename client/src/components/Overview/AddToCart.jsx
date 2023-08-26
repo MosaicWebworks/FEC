@@ -5,9 +5,6 @@ import axios from 'axios';
 import {theme} from '../Styles/LayoutStyles.jsx'
 import {DropDownContainer, DropDownButton, DropDownContent, DropDownItem, AddToCartLayout, Button} from '../Styles/OverviewStyles.jsx'
 
-
-
-
 const AddToBag = () => {
   return(<Button>Add to Cart</Button>);
 }
@@ -92,4 +89,4 @@ const AddToCart =
   )
 }
 
-export {AddToCart};
+export default AddToCart;

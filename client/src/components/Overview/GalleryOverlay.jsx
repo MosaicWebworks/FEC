@@ -69,4 +69,4 @@ const GalleryOverlay = ( {setSelectedThumbnail, selectedThumbnail, styles, selec
     </StyledOverlay>);
 }
 
-export {GalleryOverlay};
+export default GalleryOverlay;
