@@ -3,63 +3,7 @@ import styled from 'styled-components';
 import {sampleProduct, sampleStyles} from './sampleData.js';
 import axios from 'axios';
 import {theme} from '../Styles/LayoutStyles.jsx'
-
-const DropDownContainer = styled.div`
-  position: relative;
-  width: 100%
-`
-const DropDownButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: .75em;
-  padding-bottom: .75em;
-  position: absolute;
-  width: 100%;
-  background-color: ${theme.colors.secondary};
-  color: ${theme.colors.text
-  };
-`
-
-const DropDownContent = styled.ul`
-  position: absolute;
-  top: 32px;
-  width: inherit;
-  background-color: ${theme.colors.secondary};
-  list-style: none;
-  padding: 0;
-  cursor: pointer;
-`
-
-const DropDownItem = styled.li`
-  padding: 5px;
-  color: ${theme.colors.textContrast};
-`
-
-const AddToCartLayout = styled.div`
-  display: grid;
-  height: 5em;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: "size   number"
-                       "add    favorite";
-  column-gap: 15px;
-  row-gap: 15px;
-`
-
-const Button = styled.button`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.background};
-  padding: 10px 20px;
-  margin-top: 15px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.textContrast};
-  }
-`;
-
+import {DropDownContainer, DropDownButton, DropDownContent, DropDownItem, AddToCartLayout, Button} from '../Styles/OverviewStyles.jsx'
 
 const AddToBag = () => {
   return(<Button>Add to Cart</Button>);
@@ -95,7 +39,10 @@ const AddToCart =
   }
   return(
     <AddToCartLayout>
-  <DropDownContainer data-testid="sizeMenu" onMouseEnter={(e) => {setSizeDropDown("visible")}} onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
+  <DropDownContainer
+    data-testid="sizeMenu"
+    onMouseEnter={(e) => {setSizeDropDown("visible")}}
+    onMouseLeave={(e) => {setSizeDropDown("hidden")}}>
     <DropDownButton>
       {sizeIndex < 0 ? sizePlaceholder : sizes[sizeIndex]}
     </DropDownButton>
@@ -104,17 +51,36 @@ const AddToCart =
         var selectedIndex = index;
         var backgroundColor = hoverSize === selectedIndex ? theme.colors.secondary : theme.colors.primary;
         index++;
-      return(<DropDownItem key={'sizeDropDown' + index} style={{backgroundColor: backgroundColor}} onClick={(e) => {setSizeIndex(selectedIndex)}} onMouseEnter={(e) => {setHoverSize(selectedIndex)}} onMouseLeave={(e) => {setHoverSize(-1)}}>{size}</DropDownItem>) })}
+      return(
+      <DropDownItem
+        key={'sizeDropDown' + index}
+        style={{backgroundColor: backgroundColor}}
+        onClick={(e) => {setSizeIndex(selectedIndex)}}
+        onMouseEnter={(e) => {setHoverSize(selectedIndex)}}
+        onMouseLeave={(e) => {setHoverSize(-1)}}>
+          {size}
+      </DropDownItem>) })}
     </DropDownContent>
   </DropDownContainer>
-  <DropDownContainer data-testid="quantityMenu" onMouseEnter={(e) => {setQuantityDropDown("visible")}} onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
+  <DropDownContainer
+    data-testid="quantityMenu"
+    onMouseEnter={(e) => {setQuantityDropDown("visible")}}
+    onMouseLeave={(e) => {setQuantityDropDown("hidden")}}>
     <DropDownButton>
       {quantityIndex < 0 ? '-' : quantityIndex}
     </DropDownButton>
     <DropDownContent data-testid="quantityOptions" style={{visibility: quantityDropDown}}>
       {quantity.map((i) => {
         var backgroundColor = hoverQuantity === i ? theme.colors.secondary : theme.colors.primary;
-        return(<DropDownItem key={'dropDownQuantity' + i} style={{backgroundColor: backgroundColor}} onClick={(e) => {setQuantityIndex(i)}} onMouseEnter={(e) => {setHoverQuantity(i)}} onMouseLeave={(e) => {setHoverQuantity(-1)}}>{i}</DropDownItem>)})}
+        return(
+        <DropDownItem
+          key={'dropDownQuantity' + i}
+          style={{backgroundColor: backgroundColor}}
+          onClick={(e) => {setQuantityIndex(i)}}
+          onMouseEnter={(e) => {setHoverQuantity(i)}}
+          onMouseLeave={(e) => {setHoverQuantity(-1)}}>
+            {i}
+          </DropDownItem>)})}
     </DropDownContent>
   </DropDownContainer>
   <AddToBag />
@@ -123,4 +89,4 @@ const AddToCart =
   )
 }
 
-export {AddToCart};
+export default AddToCart;
